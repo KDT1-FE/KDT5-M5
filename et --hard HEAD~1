@@ -1,0 +1,32 @@
+[33mcommit b680970a670018977f42154cc847a478dbe98497[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/KDT5_NamKiHun[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Nam Ki Hun <bye0651@naver.com>
+Date:   Thu Jun 1 15:29:52 2023 +0900
+
+    test2 (#2)
+
+[33mcommit 8b5ec0287cdf61ef8df0aaad39feb9880ff65937[m
+Merge: 750c087 88416c3
+Author: Kim Jinu <105920346+jinu6262@users.noreply.github.com>
+Date:   Thu Jun 1 15:20:33 2023 +0900
+
+    Merge pull request #1 from BearHumanS/KDT5_NamKiHun
+    
+    test
+
+[33mcommit 88416c318b199ad1f3e5e26508682261dabc75de[m
+Author: BearHumanS <bye0651@naver.com>
+Date:   Thu Jun 1 15:17:52 2023 +0900
+
+    test
+
+[33mcommit 750c0871c4b8e13c02abc233d0be0e652fd1cba7[m
+Author: Heropy <thesecon@gmail.com>
+Date:   Mon May 8 10:39:43 2023 +0900
+
+    Update README.md
+
+[33mcommit a4ed77dd09ef94c15969a802441850efd23657de[m
+Author: Heropy <thesecon@gmail.com>
+Date:   Mon May 8 10:39:04 2023 +0900
+
+    Initial commit
