@@ -8,6 +8,7 @@ import Payment from "./pages/Payment";
 import Sign from "./pages/Sign";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Test from "../Test"
 
 const Layout = () => {
     return (
@@ -25,7 +26,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
-                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/cart" element={<Test />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="mypage" element={<MyPage />} />
                     <Route path="payment" element={<Payment />} />
