@@ -1,7 +1,8 @@
 import React from "react";
+import Sign from "../../components/sign/Sign";
 
-const Sign = () => {
-    return <div>Sign!</div>;
+const index = () => {
+    return <Sign />;
 };
 
-export default Sign;
+export default index;
