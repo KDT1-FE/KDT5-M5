@@ -8,6 +8,7 @@ const HEADERS = {
 
 const AUTH = `${BASE_URL}/auth`
 
+// 제품 검색
 export const searchProducts = async requestBody => {
   try {
     const res = await fetch(`${PRODUCT}/search`, {
@@ -32,6 +33,7 @@ export const searchProducts = async requestBody => {
   }
 }
 
+// 회원 가입
 export const signUp = async UserSignUpData => {
   const res = await fetch(`${AUTH}/signup`, {
     method: 'POST',
@@ -61,6 +63,7 @@ export const signUp = async UserSignUpData => {
   }
 }
 
+// 로그인
 export const logIn = async UserLogInData => {
   const res = await fetch(`${AUTH}/login`, {
     method: 'POST',
@@ -87,6 +90,7 @@ export const logIn = async UserLogInData => {
   }
 }
 
+// 로그아웃
 export const logOut = async () => {
   const accessToken = getAccessToken() // localStorage에서 accessToken 검색
   const res = await fetch(`${AUTH}/logout`, {
@@ -112,6 +116,7 @@ export const logOut = async () => {
   }
 }
 
+// 사용자 정보 변경
 export const userInfo = async () => {
   const accessToken = getAccessToken() // localStorage에서 accessToken 검색
   const res = await fetch(`${AUTH}/user`, {
