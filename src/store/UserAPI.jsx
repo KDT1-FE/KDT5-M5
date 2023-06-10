@@ -7,6 +7,7 @@ const HEADERS = {
 }
 
 const AUTH = `${BASE_URL}/auth`
+const PRODUCT = `${BASE_URL}/procuts`
 
 // 제품 검색
 export const searchProducts = async requestBody => {
@@ -87,6 +88,30 @@ export const logIn = async UserLogInData => {
   } catch (err) {
     console.log(err)
     return alert('로그인에 실패했습니다. 다시 시도해주세요.')
+  }
+}
+
+// 인증
+export const authenticate = async () => {
+  const accessToken = getAccessToken() // localStorage에서 accessToken 검색
+  const res = await fetch(`${AUTH}/me`, {
+    method: 'POST',
+    headers: {
+      ...HEADERS,
+      Authorization: `Bearer ${accessToken}`
+    }
+  })
+  if (res.ok) {
+    const userAuthenticate = await res.json()
+    console.log(userAuthenticate)
+    return userAuthenticate
+  }
+  try {
+    const err = await res.json()
+    return err
+  } catch (err) {
+    console.log(err)
+    return alert('인증에 실패했습니다. 다시 시도해주세요.')
   }
 }
 
