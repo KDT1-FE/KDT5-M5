@@ -6,6 +6,8 @@ import Cart from './pages/Cart'
 import MyPage from './pages/MyPage'
 import Payment from './pages/Payment'
 import Sign from './pages/Sign'
+import Admin from './pages/Admin'
+import AdminHeader from './components/AdminHeader'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
@@ -15,6 +17,15 @@ const Layout = () => {
       <Header />
       <Outlet />
       <Footer />
+    </div>
+  )
+}
+
+const AdminLayout = () => {
+  return (
+    <div>
+      <AdminHeader />
+      <Outlet />
     </div>
   )
 }
@@ -49,6 +60,16 @@ function App() {
           <Route
             path="sign"
             element={<Sign />}
+          />
+        </Route>
+
+        <Route
+          path="/admin"
+          element={<AdminLayout />}>
+          <Route
+            // path="/admin/Home"
+            index
+            element={<Admin />}
           />
         </Route>
       </Routes>

@@ -1,8 +1,12 @@
-import React from "react";
-import "./banner.css";
+import React from 'react'
+import './banner.css'
 
 const Banner = () => {
-    return <div className="banner">banner</div>;
-};
+  return (
+    <div>
+      <div className="banner">banner </div>
+    </div>
+  )
+}
 
-export default Banner;
+export default Banner
