@@ -44,8 +44,6 @@ export const signUp = async UserSignUpData => {
   // 회원 가입 성공
   if (res.ok) {
     const userSignUp = await res.json()
-    const accessToken = userSignUp.accessToken
-    saveAccessToken(accessToken) // accessToken을 localStorage에 저장
     console.log(userSignUp)
     return userSignUp
   }
@@ -56,7 +54,7 @@ export const signUp = async UserSignUpData => {
   } catch (err) {
     // 에러 메시지 반환
     console.log(err)
-    return alert('로그인에 실패했습니다. 다시 시도해주세요.')
+    return alert('회원 가입에 실패했습니다. 다시 시도해주세요.')
   }
 }
 
@@ -83,7 +81,7 @@ export const logIn = async UserLogInData => {
     return err
   } catch (err) {
     console.log(err)
-    return alert('로그인에 실패했습니다. 다시 시도해주세요.')
+    return alert('에 실패했습니다. 다시 시도해주세요.')
   }
 }
 
