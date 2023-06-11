@@ -1,21 +1,17 @@
-import { BASE_URL, API_KEY, USER_NAME } from './Base'
-
-const HEADERS = {
-  'content-type': 'application/json',
-  apikey: API_KEY,
-  username: USER_NAME
-}
-
-const AUTH = `${BASE_URL}/auth`
-const PRODUCT = `${BASE_URL}/procuts`
+import { userHEADERS, AUTH, PRODUCT } from './Base'
+import {
+  saveAccessToken,
+  getAccessToken,
+  removeAccessToken
+} from './localStorage'
 
 // 제품 검색
-export const searchProducts = async requestBody => {
+export const searchProducts = async searchProductData => {
   try {
     const res = await fetch(`${PRODUCT}/search`, {
       method: 'POST',
-      headers: HEADERS,
-      body: JSON.stringify(requestBody)
+      headers: userHEADERS,
+      body: JSON.stringify(searchProductData)
     })
     // 제품 검색이 성공적으로 동작
     if (res.ok) {
@@ -38,7 +34,7 @@ export const searchProducts = async requestBody => {
 export const signUp = async UserSignUpData => {
   const res = await fetch(`${AUTH}/signup`, {
     method: 'POST',
-    headers: HEADERS,
+    headers: userHEADERS,
     body: JSON.stringify({
       email: UserSignUpData.email,
       password: UserSignUpData.password,
@@ -68,7 +64,7 @@ export const signUp = async UserSignUpData => {
 export const logIn = async UserLogInData => {
   const res = await fetch(`${AUTH}/login`, {
     method: 'POST',
-    headers: HEADERS,
+    headers: userHEADERS,
     body: JSON.stringify({
       email: UserLogInData.email,
       password: UserLogInData.password
@@ -97,7 +93,7 @@ export const authenticate = async () => {
   const res = await fetch(`${AUTH}/me`, {
     method: 'POST',
     headers: {
-      ...HEADERS,
+      ...userHEADERS,
       Authorization: `Bearer ${accessToken}`
     }
   })
@@ -121,7 +117,7 @@ export const logOut = async () => {
   const res = await fetch(`${AUTH}/logout`, {
     method: 'POST',
     headers: {
-      ...HEADERS,
+      ...userHEADERS,
       Authorization: `Bearer ${accessToken}`
     }
   })
@@ -147,7 +143,7 @@ export const userInfo = async () => {
   const res = await fetch(`${AUTH}/user`, {
     method: 'PUT',
     headers: {
-      ...HEADERS,
+      ...userHEADERS,
       Authorization: `Bearer ${accessToken}`
     }
   })
@@ -163,19 +159,4 @@ export const userInfo = async () => {
     console.log(err)
     return alert('사용자 정보 변경에 실패했습니다. 다시 시도해주세요.')
   }
-}
-
-// accessToken을 localStorage에 저장
-const saveAccessToken = accessToken => {
-  localStorage.setItem('accessToken', accessToken)
-}
-
-// localStorage에서 accessToken 검색
-const getAccessToken = () => {
-  return localStorage.getItem('accessToken')
-}
-
-// localStorage에서 accessToken 제거
-const removeAccessToken = () => {
-  localStorage.removeItem('accessToken')
 }

@@ -1,21 +1,11 @@
-import { BASE_URL, API_KEY, USER_NAME } from './Base'
-
-const HEADERS = {
-  'content-type': 'application/json',
-  apikey: API_KEY,
-  username: USER_NAME,
-  masterKey: 'true'
-}
-
-const AUTH = `${BASE_URL}/auth`
-const PRODUCT = `${BASE_URL}/products`
+import { adminHEADERS, AUTH, PRODUCT } from './Base'
 
 // 사용자 목록 조회
 export const getUserList = async () => {
   try {
     const res = await fetch(`${AUTH}/users`, {
       method: 'GET',
-      headers: HEADERS
+      headers: adminHEADERS
     })
     if (res.ok) {
       const userList = await res.json()
@@ -36,7 +26,7 @@ export const addProduct = async product => {
   try {
     const res = await fetch(`${PRODUCT}`, {
       method: 'POST',
-      headers: HEADERS,
+      headers: adminHEADERS,
       body: JSON.stringify(product)
     })
     if (res.ok) {
@@ -58,7 +48,7 @@ export const updateProduct = async (productId, updatedData) => {
   try {
     const res = await fetch(`${BASE_URL}/products/${productId}`, {
       method: 'PUT',
-      headers: HEADERS,
+      headers: adminHEADERS,
       body: JSON.stringify(updatedData)
     })
     if (res.ok) {
@@ -80,7 +70,7 @@ export const deleteProduct = async productId => {
   try {
     const res = await fetch(`${PRODUCT}/${productId}`, {
       method: 'DELETE',
-      headers: HEADERS
+      headers: adminHEADERS
     })
     if (res.ok) {
       return true
@@ -99,7 +89,7 @@ export const getProducts = async () => {
   try {
     const res = await fetch(`${PRODUCT}`, {
       method: 'GET',
-      headers: HEADERS
+      headers: adminHEADERS
     })
     if (res.ok) {
       const products = await res.json()
