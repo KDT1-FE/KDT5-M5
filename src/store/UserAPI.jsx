@@ -158,3 +158,27 @@ export const userInfo = async () => {
     return alert('사용자 정보 변경에 실패했습니다. 다시 시도해주세요.')
   }
 }
+
+// 제품 검색
+export const searchProduct = async title => {
+  const res = await fetch(`${PRODUCT}/search`, {
+    method: 'POST',
+    headers: userHEADERS,
+    body: JSON.stringify({
+      searchText: title
+    })
+  })
+
+  if (res.ok) {
+    const productId = await res.json()
+    console.log(productId)
+    return productId
+  }
+  try {
+    const err = await res.json()
+    return err
+  } catch (err) {
+    console.log(err)
+    return alert('제품 검색에 실패했습니다. 다시 시도해주세요.')
+  }
+}

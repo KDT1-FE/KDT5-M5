@@ -1,9 +1,9 @@
-import "./productEffectMenu.css";
+import './productEffectMenu.css'
 
-import React from "react";
+import React from 'react'
 
 const ProductEffectMenu = () => {
-    return <div className="product-effect">ProductEffectMenu</div>;
-};
+  return <div className="product-effect">ProductEffectMenu</div>
+}
 
-export default ProductEffectMenu;
+export default ProductEffectMenu

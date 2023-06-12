@@ -18,3 +18,4 @@ export const adminHEADERS = {
 export const AUTH = `${BASE_URL}/auth`
 export const PRODUCT = `${BASE_URL}/procuts`
 export const ACCOUNT = `${BASE_URL}/account`
+export const TRANJACTION = `${BASE_URL}/products/transactions`
