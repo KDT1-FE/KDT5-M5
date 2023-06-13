@@ -9,7 +9,6 @@ export const getUserList = async () => {
     })
     if (res.ok) {
       const userList = await res.json()
-      console.log(userList)
       return userList
     } else {
       throw new Error('사용자 목록 조회에 실패했습니다.')
@@ -30,7 +29,6 @@ export const addProduct = async product => {
     })
     if (res.ok) {
       const addedProduct = await res.json()
-      console.log(addedProduct)
       return addedProduct
     } else {
       throw new Error('상품 추가에 실패했습니다.')
@@ -51,7 +49,6 @@ export const updateProduct = async (productId, updatedData) => {
     })
     if (res.ok) {
       const updatedProduct = await res.json()
-      console.log(updatedProduct)
       return updatedProduct
     } else {
       throw new Error('상품 수정에 실패했습니다.')
@@ -89,7 +86,6 @@ export const getProducts = async () => {
     })
     if (res.ok) {
       const products = await res.json()
-      console.log(products)
       return products
     } else {
       throw new Error('상품 조회에 실패했습니다.')
