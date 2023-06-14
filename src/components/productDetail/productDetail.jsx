@@ -6,8 +6,8 @@ const productDetail = () => {
       <div className="productDetail">
         <section className="product_img">
           <img
-            src="${thumbnail}"
-            alt="title"
+            src={thumbnail}
+            alt={title}
           />
         </section>
         <div className="product_info">
