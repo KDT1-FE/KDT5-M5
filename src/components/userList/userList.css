@@ -1,0 +1,22 @@
+.userList ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.userList ul li {
+  width: 250px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(97, 97, 97);
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.userList ul li img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+}

@@ -1,0 +1,12 @@
+.Management {
+  background-color: rgb(34, 34, 34);
+  color: #fff;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 70px;
+  font-weight: 700;
+  text-align: center;
+  padding: 30px;
+}

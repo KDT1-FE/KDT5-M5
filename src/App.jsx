@@ -10,6 +10,8 @@ import Admin from './pages/Admin'
 import AdminHeader from './components/AdminHeader'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import UserManagement from './pages/Admin/userManagement/UserManagement'
+import ProductManagement from './pages/Admin/productManagement/ProductManagement'
 
 const Layout = () => {
   return (
@@ -42,11 +44,11 @@ function App() {
             element={<Home />}
           />
           <Route
-            path="/cart"
+            path="cart"
             element={<Cart />}
           />
           <Route
-            path="/login"
+            path="login"
             element={<Login />}
           />
           <Route
@@ -70,6 +72,14 @@ function App() {
             // path="/admin/Home"
             index
             element={<Admin />}
+          />
+          <Route
+            path="user"
+            element={<UserManagement />}
+          />
+          <Route
+            path="product"
+            element={<ProductManagement />}
           />
         </Route>
       </Routes>
