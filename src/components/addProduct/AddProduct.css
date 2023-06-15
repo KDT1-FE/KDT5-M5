@@ -1,6 +1,9 @@
 /* form {
 
 } */
+.add-product {
+  margin-bottom: 30px;
+}
 
 form span {
   width: 100px;

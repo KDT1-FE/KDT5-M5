@@ -67,7 +67,7 @@ const AddProduct = () => {
   })
 
   return (
-    <div>
+    <div className="add-product">
       AddProduct
       <form onSubmit={newProductPush}>
         <div>제품이름</div>
