@@ -4,7 +4,7 @@ import { singleProductSearch } from '../../store/UserAPI'
 import './index.css'
 
 const ProductPage = () => {
-  const { category, productId } = useParams()
+  const { productId } = useParams()
   const [product, setProduct] = useState(null)
 
   useEffect(() => {
@@ -23,33 +23,42 @@ const ProductPage = () => {
   return (
     <div className="section">
       <div className="section__container">
-        <div className="section__productDetail">
-          <h1 className="side__productDetail--info-title">제품 상세 정보</h1>
-          {product ? (
-            <div>
+        {product ? (
+          <div className="section__productDetail">
+            <div className="side__productDetail--image-container">
+              <img
+                className="side__productDetail--img"
+                src={product.photo}
+                alt={product.title}
+              />
+            </div>
+            <div className="side__productDetail--container">
               <h2 className="side__productDetail--info-title">
                 {product.title}
               </h2>
-              <div>
-                <img
-                  className="side__productDetail--img"
-                  src={product.photo}
-                  alt={product.title}
-                />
-              </div>
-              <p className="side__productDetail--info-desc">
-                {product.description}
-              </p>
               <p className="side__productDetail--info-price">
                 Price: {product.price}
               </p>
+              <p className="side__productDetail--info-desc">
+                {product.description}
+              </p>
+              <ul className="side__productDetail--tags">
+                {product.tags.map((tag, index) => (
+                  <li
+                    key={index}
+                    className={`side__productDetail--tag ${
+                      index === 0 ? 'first-tag' : ''
+                    }`}>
+                    {tag}
+                  </li>
+                ))}
+              </ul>
             </div>
-          ) : (
-            <p>제품 상세 정보를 로딩 중 입니다...</p>
-          )}
-        </div>
+          </div>
+        ) : (
+          <p>제품 상세 정보를 불러오는 중 입니다....</p>
+        )}
       </div>
-      <div>{category}</div>
     </div>
   )
 }
