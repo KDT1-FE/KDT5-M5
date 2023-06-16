@@ -77,3 +77,16 @@
     padding: 3px;
     border-radius: 7px;
   }
+
+  .side__productDetail--amountCal {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+
+  .side__totalPrice {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 23px;
+    gap: 30px;
+  }

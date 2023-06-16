@@ -6,6 +6,8 @@ import './index.css'
 const ProductPage = () => {
   const { productId } = useParams()
   const [product, setProduct] = useState(null)
+  const [amount, setAmount] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -19,6 +21,23 @@ const ProductPage = () => {
 
     fetchProduct()
   }, [productId])
+
+  useEffect(() => {
+    if (product) {
+      const calculatedPrice = product.price * amount
+      setTotalPrice(calculatedPrice)
+    }
+  }, [amount, product])
+
+  const amountMinus = () => {
+    if (amount - 1 >= 0) {
+      setAmount(amount - 1)
+    }
+  }
+
+  const amountPlus = () => {
+    setAmount(amount + 1)
+  }
 
   return (
     <div className="section">
@@ -53,6 +72,24 @@ const ProductPage = () => {
                   </li>
                 ))}
               </ul>
+              <div className="side__productDetail--amountCal">
+                <h3>구매 수량</h3>
+                <button
+                  className="side__productAmount--minus"
+                  onClick={amountMinus}>
+                  -
+                </button>
+                <span className="side__productAmount--amonut">{amount}</span>
+                <button
+                  className="side__productAmount--plus"
+                  onClick={amountPlus}>
+                  +
+                </button>
+              </div>
+              <div className="side__totalPrice">
+                <h3>상품금액 합계</h3>
+                <span>{totalPrice} 원</span>
+              </div>
             </div>
           </div>
         ) : (
