@@ -90,3 +90,22 @@
     margin-top: 23px;
     gap: 30px;
   }
+  
+  .side__payment {
+    margin-top: 17px;
+    background-color: #fff;
+    border: 1px solid;
+    border-radius: 10px;
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    cursor: pointer;
+  }
+
+  .side__payment:hover {
+    background-color: #81f781;
+    border: 1px solid #81f781;
+    color: #fff;
+  }

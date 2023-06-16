@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { singleProductSearch } from '../../store/UserAPI'
+import { Link } from 'react-router-dom'
 import './index.css'
 
 const ProductPage = () => {
@@ -90,6 +91,9 @@ const ProductPage = () => {
                 <h3>상품금액 합계</h3>
                 <span>{totalPrice} 원</span>
               </div>
+              <Link to="/payment">
+                <button className="side__payment">결제하기</button>
+              </Link>
             </div>
           </div>
         ) : (
