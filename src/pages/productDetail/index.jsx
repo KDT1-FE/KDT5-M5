@@ -73,6 +73,7 @@ const ProductPage = () => {
                   </li>
                 ))}
               </ul>
+<<<<<<< HEAD
               <div className="side__productDetail--amountCal">
                 <h3>구매 수량</h3>
                 <button
@@ -98,6 +99,12 @@ const ProductPage = () => {
           </div>
         ) : (
           <p>제품 상세 정보를 불러오는 중 입니다....</p>
+=======
+            </div>
+          </div>
+        ) : (
+          <p>Loading product details...</p>
+>>>>>>> 2ed5fd21218ed509f70d0fdcc0b32e3fb8400101
         )}
       </div>
     </div>
