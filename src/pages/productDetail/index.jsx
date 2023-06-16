@@ -92,7 +92,13 @@ const ProductPage = () => {
                 <span>{totalPrice} 원</span>
               </div>
               <Link to="/payment">
-                <button className="side__payment">결제하기</button>
+                <button // 상품 금액의 합계가 0이면 결제하기 창을 비활성화
+                  className={`side__payment ${
+                    totalPrice === 0 ? 'disabled' : ''
+                  }`}
+                  disabled={totalPrice === 0}>
+                  결제하기
+                </button>
               </Link>
             </div>
           </div>

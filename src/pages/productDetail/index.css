@@ -78,6 +78,28 @@
     border-radius: 7px;
   }
 
+  .side__productAmount--minus,
+  .side__productAmount--plus {
+    background-color: #fff;
+    width: 25px;
+    height: 25px;
+    border: 1px solid;
+    cursor: pointer;
+    font-weight: 700;
+    border-radius: 7px;
+  }
+
+  .side__productAmount--minus:hover,
+  .side__productAmount--plus:hover {
+    background-color: #81f781;
+    border: 1px solid #81f781;
+    color: #fff;
+  }
+
+  .side__productAmount--amonut {
+    line-height: 1.5;
+  }
+
   .side__productDetail--amountCal {
     display: flex;
     flex-wrap: wrap;
@@ -99,7 +121,7 @@
     width: 300px;
     height: 50px;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 5px;
     cursor: pointer;
   }
@@ -109,3 +131,11 @@
     border: 1px solid #81f781;
     color: #fff;
   }
+
+  .side__payment.disabled:hover {
+    /* 비활성화 상태인 창에 마우스 over를 해도 여전히 비활성화 되게  */
+    background-color: #f1f1f1;
+    cursor: not-allowed;
+    border: 1px solid;
+  } 
+  
