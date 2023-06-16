@@ -10,6 +10,7 @@ import Admin from './pages/Admin'
 import AdminHeader from './components/AdminHeader'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import ProductDetail from './pages/productDetail'
 import UserManagement from './pages/Admin/userManagement/UserManagement'
 import ProductManagement from './pages/Admin/productManagement/ProductManagement'
 
@@ -42,6 +43,10 @@ function App() {
           <Route
             index
             element={<Home />}
+          />
+          <Route
+            path="/product/:category/:productId"
+            element={<ProductDetail />}
           />
           <Route
             path="cart"

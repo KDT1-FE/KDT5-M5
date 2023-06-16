@@ -1,5 +1,3 @@
-// ProductMenu.js
-
 import React, { useState, useEffect } from 'react'
 import './productMenu.css'
 import ProductList from './ProductList'
@@ -32,10 +30,23 @@ const ProductMenu = ({ category }) => {
 
   return (
     <>
-      <div className="product-menu">
+      <div className="product-category">
         <h2>{category}</h2>
       </div>
-      <ProductList products={products} />
+      <div className="product-container">
+        {products.map(product => (
+          <Link
+            to={`/product/${product.tags[0]}/${product.id}`}
+            key={product.id}>
+            <ProductList
+              id={product.id}
+              title={product.title}
+              price={product.price}
+              thumbnail={product.thumbnail}
+            />
+          </Link>
+        ))}
+      </div>
     </>
   )
 }
