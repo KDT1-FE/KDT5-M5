@@ -3,6 +3,7 @@
     width: 1300px;
     height: 540px;
     display: flex;
+    margin: 0 auto;
   }
   
   .section__container {
@@ -69,7 +70,8 @@
   }
 
   .first-tag {
-    color: red; 
+    color: #81f781; 
+    font-weight: 600;
   }
 
   .side__productDetail--tag {
@@ -138,4 +140,8 @@
     cursor: not-allowed;
     border: 1px solid;
   } 
+
+  a {
+    width: 286.667px;
+  }
   

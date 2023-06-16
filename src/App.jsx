@@ -61,7 +61,7 @@ function App() {
             element={<MyPage />}
           />
           <Route
-            path="payment"
+            path="payment/:category/:productId"
             element={<Payment />}
           />
           <Route

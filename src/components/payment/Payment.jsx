@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams, useLocation } from 'react-router-dom'
+import { singleProductSearch } from '../../store/UserAPI'
+import queryString from 'query-string'
 import './payment.css'
 import DaumPostcode from 'react-daum-postcode'
 import Slider from 'react-slick'
@@ -6,10 +9,37 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 const Payment = () => {
+  const { category, productId } = useParams()
+  const [product, setProduct] = useState(null)
   const [deliveryMessage, setDeliveryMessage] = useState('')
   const [postalCode, setPostalCode] = useState('')
   const [address, setAddress] = useState('')
   const [showPostcodeModal, setShowPostcodeModal] = useState(false)
+
+  const location = useLocation()
+  const queryParams = queryString.parse(location.search)
+  const { amount: queryAmount, totalPrice: queryTotalPrice } = queryParams
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const productData = await singleProductSearch(productId)
+        setProduct(productData)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchProduct()
+  }, [productId])
+
+  if (!product) {
+    return <p>제품 정보를 가져오는 중 입니다...</p>
+  }
+
+  if (product.id !== productId) {
+    return <p>제품을 찾을 수가 없습니다.</p>
+  }
 
   const settings = {
     dots: true,
@@ -57,17 +87,18 @@ const Payment = () => {
               <td className="product-details">
                 <div className="product-image">
                   <img
-                    src="path/to/product-image.jpg"
-                    alt="Product Image"
+                    src={product.thumbnail}
+                    alt={product.title}
                   />
                 </div>
                 <div>
-                  <h3>{/* {title} */}</h3>
+                  <h3>{product.title}</h3>
+                  <p>{category}</p>
                 </div>
               </td>
-              <td>{price} 원</td>
-              <td>{amount} 개</td>
-              <td>{totalPrice} 원</td>
+              <td>{product.price} 원</td>
+              <td>{queryAmount} 개</td>
+              <td>{queryTotalPrice} 원</td>
             </tr>
           </tbody>
         </table>

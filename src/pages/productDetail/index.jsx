@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import './index.css'
 
 const ProductPage = () => {
-  const { productId } = useParams()
+  const { category, productId } = useParams()
   const [product, setProduct] = useState(null)
   const [amount, setAmount] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
@@ -91,8 +91,9 @@ const ProductPage = () => {
                 <h3>상품금액 합계</h3>
                 <span>{totalPrice} 원</span>
               </div>
-              <Link to="/payment">
-                <button // 상품 금액의 합계가 0이면 결제하기 창을 비활성화
+              <Link
+                to={`/payment/${category}/${productId}?amount=${amount}&totalPrice=${totalPrice}`}>
+                <button
                   className={`side__payment ${
                     totalPrice === 0 ? 'disabled' : ''
                   }`}
