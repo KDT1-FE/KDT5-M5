@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import React, { useState, useEffect, useRef } from 'react'
+import { useParams, useLocation, Link } from 'react-router-dom'
 import { singleProductSearch } from '../../store/UserAPI'
 import queryString from 'query-string'
 import './payment.css'
@@ -15,6 +15,7 @@ const Payment = () => {
   const [postalCode, setPostalCode] = useState('')
   const [address, setAddress] = useState('')
   const [showPostcodeModal, setShowPostcodeModal] = useState(false)
+  const directMessage = useRef()
 
   const location = useLocation()
   const queryParams = queryString.parse(location.search)
@@ -32,6 +33,12 @@ const Payment = () => {
 
     fetchProduct()
   }, [productId])
+
+  useEffect(() => {
+    if (deliveryMessage === '직접 입력') {
+      directMessage.current.focus()
+    }
+  }, [deliveryMessage])
 
   if (!product) {
     return <p>제품 정보를 가져오는 중 입니다...</p>
@@ -62,10 +69,6 @@ const Payment = () => {
     setPostalCode(data.zonecode)
     setAddress(data.address)
   }
-
-  let price
-  let amount
-  let totalPrice = price * amount
 
   return (
     <div className="payment-contents">
@@ -184,6 +187,7 @@ const Payment = () => {
                 <th>직접 입력</th>
                 <td>
                   <input
+                    ref={directMessage}
                     className="direct"
                     type="text"
                     placeholder="직접 입력"
@@ -237,6 +241,11 @@ const Payment = () => {
           </Slider>
         </div>
       </div>
+      <Link to="/mypage">
+        {/* 카드 결제 수단 선택하지 않거나 결제 수단이 없으면 비활성화 로직
+        추후에 추가 */}
+        <button>총 {queryTotalPrice} 원 결제하기</button>
+      </Link>
     </div>
   )
 }
