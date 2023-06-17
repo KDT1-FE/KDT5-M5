@@ -9,6 +9,7 @@ const ViewAllProducts = () => {
 
   useEffect(() => {
     getProducts().then(res => {
+      console.log(res)
       setAllProducts(res)
     })
   }, [changedProduct])
