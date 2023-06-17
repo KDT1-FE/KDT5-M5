@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import './viewAllProducts.css'
-import { getProducts, updateProduct } from '../../store/AdminAPI'
+import { deleteProduct, getProducts, updateProduct } from '../../store/AdminAPI'
 import ProductData from './ProductData'
+import ProductRemove from './ProductRemove'
 
 const ViewAllProducts = () => {
   const [allProducts, setAllProducts] = useState([])
   const [changedProduct, setChangedProduct] = useState('')
+  const [isRemoveProduct, setIsRemoveProduct] = useState(false)
 
   useEffect(() => {
     getProducts().then(res => {
-      console.log(res)
       setAllProducts(res)
     })
-  }, [changedProduct])
+  }, [changedProduct, isRemoveProduct])
 
   const Products = allProducts.map((product, productNum) => {
     async function edit(productId, updatedData) {
       const res = await updateProduct(productId, updatedData)
       setChangedProduct(res)
+    }
+
+    async function remove(productId) {
+      const res = await deleteProduct(productId)
+      setIsRemoveProduct(!isRemoveProduct)
     }
 
     return (
@@ -79,6 +85,11 @@ const ViewAllProducts = () => {
             property={'isSoldOut'}
             productId={product.id}
             onClick={edit}
+          />
+
+          <ProductRemove
+            productId={product.id}
+            onClick={remove}
           />
         </div>
       </li>

@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
 import noImg from '../../img/noImg.png'
+import { singleProductSearch } from '../../store/UserAPI'
+import { useEffect } from 'react'
 
 const ProductData = ({ item, data, property, productId, onClick }) => {
   const [isEdit, setIsEdit] = useState(false)
   const [newData, setNewData] = useState(data)
+  const [dImg, setDImg] = useState('')
+
+  useEffect(() => {
+    singleProductSearch(productId).then(res => {
+      setDImg(res.photo)
+    })
+  }, [])
 
   function editProductData() {
     setIsEdit(true)
@@ -83,13 +92,12 @@ const ProductData = ({ item, data, property, productId, onClick }) => {
         )
       }
 
-    ////////////////////// 이미지 //////////////////////////
+      ////////////////////// 이미지 //////////////////////////
     } else if (item === '썸네일 이미지' || item === '상세 이미지') {
       function imgEl() {
-
         function uploadImg(event, setState, imgEl) {
           const files = event.target.files
-          
+
           for (const file of files) {
             const reader = new FileReader()
             reader.readAsDataURL(file)
@@ -98,49 +106,94 @@ const ProductData = ({ item, data, property, productId, onClick }) => {
               console.log(imgEl)
 
               document.getElementsByClassName(imgEl).src = e.target.result
-              setState(e.target.result)
+              // setState(e.target.result)
             })
           }
         }
-        
-        productObj[property+'Base64'] = newData
-        console.log(productObj)
+        if (item === '상세 이미지') {
+          productObj[property + 'Base64'] = dImg
 
-        if (data) {
-          return (
-            <>
-            <img className={property}
-              src={newData}
-              alt={'상품이미지'}
-            />
-            <input
-              type="file"
-              onChange={e => uploadImg(e, setNewData, property)}
-            />
-            <button onClick={()=>onClick(productId, productObj)}>업로드</button>
-        </>
-            
-          )
+          if (dImg) {
+            return (
+              <>
+                <img
+                  className={property}
+                  src={dImg}
+                  alt={'상품이미지'}
+                />
+                <input
+                  type="file"
+                  onChange={e => uploadImg(e, setDImg, property)}
+                />
+                <button onClick={() => onClick(productId, productObj)}>
+                  업로드
+                </button>
+              </>
+            )
+          } else {
+            return (
+              <>
+                <img
+                  className={property}
+                  src={dImg ? dImg : noImg}
+                  alt={'상품이미지'}
+                />
+                <input
+                  type="file"
+                  onChange={e => uploadImg(e, setDImg, property)}
+                />
+                <button onClick={() => onClick(productId, productObj)}>
+                  업로드
+                </button>
+              </>
+            )
+          }
+
+          // console.log(productObj)
         } else {
+          productObj[property + 'Base64'] = newData
+          // console.log(productObj)
 
-          return (
-            <>
-            <img className={property}
-              src={newData?newData:noImg}
-              alt={'상품이미지'}
-            />
-              <input
-                type="file"
-                onChange={e => uploadImg(e, setNewData, property)}
-              />
-              <button onClick={()=>onClick(productId, productObj)}>업로드</button>
-            </>
-          )
+          if (data) {
+            return (
+              <>
+                <img
+                  className={property}
+                  src={newData}
+                  alt={'상품이미지'}
+                />
+                <input
+                  type="file"
+                  onChange={e => uploadImg(e, setNewData, property)}
+                />
+                <button onClick={() => onClick(productId, productObj)}>
+                  업로드
+                </button>
+              </>
+            )
+          } else {
+            return (
+              <>
+                <img
+                  className={property}
+                  src={newData ? newData : noImg}
+                  alt={'상품이미지'}
+                />
+                <input
+                  type="file"
+                  onChange={e => uploadImg(e, setNewData, property)}
+                />
+                <button onClick={() => onClick(productId, productObj)}>
+                  업로드
+                </button>
+              </>
+            )
+          }
         }
       }
       return imgEl()
 
-    //////////// 제품 매진 여부 ///////////////
+      //////////// 제품 매진 여부 ///////////////
     } else if (item === '제품 매진 여부') {
       if (data) {
         return (
@@ -163,7 +216,7 @@ const ProductData = ({ item, data, property, productId, onClick }) => {
           </div>
         )
       }
-    /////////////////// 일반 문자열 데이터 ////////////////
+      /////////////////// 일반 문자열 데이터 ////////////////
     } else {
       return (
         <>

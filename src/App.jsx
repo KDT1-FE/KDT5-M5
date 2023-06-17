@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import ProductDetail from './pages/productDetail'
 import UserManagement from './pages/Admin/userManagement/UserManagement'
 import ProductManagement from './pages/Admin/productManagement/ProductManagement'
+import ProductAdd from './pages/Admin/ProductAdd/ProductAdd'
 
 const Layout = () => {
   return (
@@ -83,7 +84,12 @@ function App() {
             element={<UserManagement />}
           />
           <Route
-            path="product"
+            path="productAdd"
+            element={<ProductAdd />}
+          />
+
+          <Route
+            path="products"
             element={<ProductManagement />}
           />
         </Route>
