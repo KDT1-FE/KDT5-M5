@@ -13,6 +13,8 @@ const AddProduct = () => {
   const [thumbnail, setThumbnail] = useState('')
   const [detailImg, setDetailImg] = useState('')
 
+  const [newProduct, setNewProduct] = useState('')
+
   const productObj = {
     title: product,
     price: Number.parseInt(price),
@@ -25,9 +27,9 @@ const AddProduct = () => {
 
   async function newProductPush(event) {
     event.preventDefault()
-    console.log(productObj)
+
     const res = await addProduct(productObj)
-    console.log(res)
+    setNewProduct(res)
   }
 
   function uploadImg(event, setState, imgEl) {

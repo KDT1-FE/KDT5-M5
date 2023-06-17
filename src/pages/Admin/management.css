@@ -1,4 +1,5 @@
-.Management {
+.Management,
+.ProductAdd {
   background-color: rgb(34, 34, 34);
   color: #fff;
   min-height: 100vh;
@@ -9,4 +10,9 @@ h1 {
   font-weight: 700;
   text-align: center;
   padding: 30px;
+}
+
+.link {
+  font-size: 40px;
+  margin: 20px;
 }
