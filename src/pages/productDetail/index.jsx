@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { singleProductSearch } from '../../store/UserAPI'
+import { singleProductSearch, authenticate } from '../../store/UserAPI'
 import { Link } from 'react-router-dom'
 import './index.css'
 
@@ -9,6 +9,11 @@ const ProductPage = () => {
   const [product, setProduct] = useState(null)
   const [amount, setAmount] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    checkLoginStatus()
+  }, [])
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -29,6 +34,17 @@ const ProductPage = () => {
       setTotalPrice(calculatedPrice)
     }
   }, [amount, product])
+
+  const checkLoginStatus = async () => {
+    try {
+      const user = await authenticate()
+      if (user) {
+        setIsLoggedIn(true)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const amountMinus = () => {
     if (amount - 1 >= 0) {
@@ -91,16 +107,22 @@ const ProductPage = () => {
                 <h3>상품금액 합계</h3>
                 <span>{totalPrice} 원</span>
               </div>
-              <Link
-                to={`/payment/${category}/${productId}?amount=${amount}&totalPrice=${totalPrice}`}>
-                <button
-                  className={`side__payment ${
-                    totalPrice === 0 ? 'disabled' : ''
-                  }`}
-                  disabled={totalPrice === 0}>
-                  결제하기
-                </button>
-              </Link>
+              {isLoggedIn ? (
+                <Link
+                  to={`/payment/${category}/${productId}?amount=${amount}&totalPrice=${totalPrice}`}>
+                  <button
+                    className={`side__payment ${
+                      totalPrice === 0 ? 'disabled' : ''
+                    }`}
+                    disabled={totalPrice === 0}>
+                    결제하기
+                  </button>
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <button className="side__payment">로그인 후 결제하기</button>
+                </Link>
+              )}
             </div>
           </div>
         ) : (
