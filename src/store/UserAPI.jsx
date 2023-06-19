@@ -163,31 +163,3 @@ export const singleProductSearch = async productId => {
     return alert('제품 조회에 실패했습니다. 다시 시도해주세요.')
   }
 }
-
-// 제품 구매 신청
-export const buyProducts = async (productId, accountId) => {
-  const accessToken = getAccessToken() // localStorage에서 accessToken 검색
-
-  const res = await fetch(`${PRODUCT}/buy`, {
-    method: 'POST',
-    headers: {
-      ...userHEADERS,
-      Authorization: `Bearer ${accessToken}`
-    },
-    body: JSON.stringify({
-      productId,
-      accountId
-    })
-  })
-
-  if (res.ok) {
-    const buyProduct = await res.json()
-    return buyProduct
-  }
-  try {
-    const err = await res.json()
-    return err
-  } catch (err) {
-    return alert('제품 구매에 실패했습니다. 다시 시도해주세요.')
-  }
-}

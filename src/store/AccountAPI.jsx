@@ -1,13 +1,11 @@
 import { userHEADERS, ACCOUNT } from './Base'
 import { getAccessToken } from './localStorage'
 
-const ACCOUNT = `${BASE_URL}/account`
+const accessToken = getAccessToken()
 
 // 은행 목록 조회
 export const gettBanks = async () => {
   try {
-    const accessToken = getAccessToken()
-
     const res = await fetch(`${ACCOUNT}/banks`, {
       method: 'GET',
       headers: {
@@ -30,8 +28,6 @@ export const gettBanks = async () => {
 // 계좌 잔액 확인
 export const getAccounts = async () => {
   try {
-    const accessToken = getAccessToken()
-
     const res = await fetch(`${ACCOUNT}`, {
       method: 'GET',
       headers: {
@@ -53,8 +49,6 @@ export const getAccounts = async () => {
 // 계좌 연결
 export const connectAccounts = async bankAccount => {
   try {
-    const accessToken = getAccessToken()
-
     const res = await fetch(`${ACCOUNT}`, {
       method: 'POST',
       headers: {
@@ -82,8 +76,6 @@ export const connectAccounts = async bankAccount => {
 // 계좌 해지
 export const deleteAccounts = async bankAccount => {
   try {
-    const accessToken = getAccessToken()
-
     const res = await fetch(`${ACCOUNT}`, {
       method: 'DELETE',
       headers: {
