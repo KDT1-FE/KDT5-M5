@@ -1,25 +1,38 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useParams, useLocation, Link } from 'react-router-dom'
-import { singleProductSearch } from '../../store/UserAPI'
-import queryString from 'query-string'
+import React, { useEffect, useRef, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { singleProductSearch, authenticate } from '../../store/UserAPI'
 import './payment.css'
 import DaumPostcode from 'react-daum-postcode'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { useStore } from '../../store/store'
 
 const Payment = () => {
+  const { amount, setAmount, totalPrice, setTotalPrice } = useStore()
   const { category, productId } = useParams()
   const [product, setProduct] = useState(null)
   const [deliveryMessage, setDeliveryMessage] = useState('')
   const [postalCode, setPostalCode] = useState('')
   const [address, setAddress] = useState('')
   const [showPostcodeModal, setShowPostcodeModal] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const directMessage = useRef()
 
-  const location = useLocation()
-  const queryParams = queryString.parse(location.search)
-  const { amount: queryAmount, totalPrice: queryTotalPrice } = queryParams
+  useEffect(() => {
+    checkLoginStatus()
+  }, [])
+
+  const checkLoginStatus = async () => {
+    try {
+      const user = await authenticate()
+      if (user) {
+        setIsLoggedIn(true)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -100,8 +113,8 @@ const Payment = () => {
                 </div>
               </td>
               <td>{product.price} 원</td>
-              <td>{queryAmount} 개</td>
-              <td>{queryTotalPrice} 원</td>
+              <td>{amount} 개</td>
+              <td>{totalPrice} 원</td>
             </tr>
           </tbody>
         </table>
@@ -244,7 +257,7 @@ const Payment = () => {
       <Link to="/mypage">
         {/* 카드 결제 수단 선택하지 않거나 결제 수단이 없으면 비활성화 로직
         추후에 추가 */}
-        <button>총 {queryTotalPrice} 원 결제하기</button>
+        <button>총 {totalPrice} 원 결제하기</button>
       </Link>
     </div>
   )
