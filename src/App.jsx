@@ -14,6 +14,11 @@ import ProductDetail from './pages/productDetail'
 import UserManagement from './pages/Admin/userManagement/UserManagement'
 import ProductManagement from './pages/Admin/productManagement/ProductManagement'
 import ProductAdd from './pages/Admin/ProductAdd/ProductAdd'
+import GetOrderList from './pages/MyPage/GetOrderList'
+import GetOrderCancelList from './pages/MyPage/GetOrderCancelList'
+import ChangeMyInfo from './pages/MyPage/ChangeMyInfo'
+import MyInfo from './components/myPage/MyInfo'
+import MyMenu from './components/myPage/MyMenu'
 
 const Layout = () => {
   return (
@@ -30,6 +35,18 @@ const AdminLayout = () => {
     <div>
       <AdminHeader />
       <Outlet />
+    </div>
+  )
+}
+
+const MyPageLayout = () => {
+  return (
+    <div style={{ display: 'flex' }}>
+      <MyMenu />
+      <div>
+        <MyInfo />
+        <Outlet />
+      </div>
     </div>
   )
 }
@@ -59,8 +76,24 @@ function App() {
           />
           <Route
             path="mypage"
-            element={<MyPage />}
-          />
+            element={<MyPageLayout />}>
+            <Route
+              index
+              element={<MyPage />}
+            />
+            <Route
+              path="getOrderList"
+              element={<GetOrderList />}
+            />
+            <Route
+              path="getOrderCancelList"
+              element={<GetOrderCancelList />}
+            />
+            <Route
+              path="changeMyInfo"
+              element={<ChangeMyInfo />}
+            />
+          </Route>
           <Route
             path="payment/:category/:productId"
             element={<Payment />}
