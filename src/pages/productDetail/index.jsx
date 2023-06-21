@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { singleProductSearch } from '../../store/UserAPI'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { singleProductSearch, authenticate } from '../../store/UserAPI'
 import './index.css'
+import { useStore } from '../../store/store'
 
 const ProductPage = () => {
   const { category, productId } = useParams()
-  const [product, setProduct] = useState(null)
-  const [amount, setAmount] = useState(0)
-  const [totalPrice, setTotalPrice] = useState(0)
+  const { amount, setAmount, totalPrice, setTotalPrice } = useStore(state => ({
+    amount: state.amount,
+    setAmount: state.setAmount,
+    totalPrice: state.totalPrice,
+    setTotalPrice: state.setTotalPrice
+  }))
+  const [product, setProduct] = React.useState(null)
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
+
+  useEffect(() => {
+    checkLoginStatus()
+  }, [])
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -28,15 +37,26 @@ const ProductPage = () => {
       const calculatedPrice = product.price * amount
       setTotalPrice(calculatedPrice)
     }
-  }, [amount, product])
+  }, [amount, product, setTotalPrice])
 
-  const amountMinus = () => {
+  const checkLoginStatus = async () => {
+    try {
+      const user = await authenticate()
+      if (user) {
+        setIsLoggedIn(true)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const amountDecrement = () => {
     if (amount - 1 >= 0) {
       setAmount(amount - 1)
     }
   }
 
-  const amountPlus = () => {
+  const amountIncrement = () => {
     setAmount(amount + 1)
   }
 
@@ -77,13 +97,13 @@ const ProductPage = () => {
                 <h3>구매 수량</h3>
                 <button
                   className="side__productAmount--minus"
-                  onClick={amountMinus}>
+                  onClick={amountDecrement}>
                   -
                 </button>
                 <span className="side__productAmount--amonut">{amount}</span>
                 <button
                   className="side__productAmount--plus"
-                  onClick={amountPlus}>
+                  onClick={amountIncrement}>
                   +
                 </button>
               </div>
@@ -91,20 +111,25 @@ const ProductPage = () => {
                 <h3>상품금액 합계</h3>
                 <span>{totalPrice} 원</span>
               </div>
-              <Link
-                to={`/payment/${category}/${productId}?amount=${amount}&totalPrice=${totalPrice}`}>
-                <button
-                  className={`side__payment ${
-                    totalPrice === 0 ? 'disabled' : ''
-                  }`}
-                  disabled={totalPrice === 0}>
-                  결제하기
-                </button>
-              </Link>
+              {isLoggedIn ? (
+                <Link to={`/payment/${category}/${productId}`}>
+                  <button
+                    className={`side__payment ${
+                      totalPrice === 0 ? 'disabled' : ''
+                    }`}
+                    disabled={totalPrice === 0}>
+                    결제하기
+                  </button>
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <button className="side__payment">로그인 후 결제하기</button>
+                </Link>
+              )}
             </div>
           </div>
         ) : (
-          <p>제품 상세 정보를 불러오는 중 입니다....</p>
+          <p>제품 상세 정보를 불러오는 중입니다....</p>
         )}
       </div>
     </div>

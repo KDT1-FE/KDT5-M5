@@ -1,8 +1,6 @@
 import { userHEADERS, ACCOUNT } from './Base'
 import { getAccessToken } from './localStorage'
 
-const ACCOUNT = `${BASE_URL}/account`
-
 // 은행 목록 조회
 export const gettBanks = async () => {
   try {
