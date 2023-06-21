@@ -1,10 +1,9 @@
 import { adminHEADERS, TRANJACTION, PRODUCT, userHEADERS } from './Base'
 import { getAccessToken } from './localStorage'
 
-const accessToken = getAccessToken()
-
 // 제품 구매 신청
 export const buyProducts = async (productId, accountId) => {
+  const accessToken = getAccessToken()
   try {
     const res = await fetch(`${PRODUCT}/buy`, {
       method: 'POST',
@@ -35,6 +34,7 @@ export const buyProducts = async (productId, accountId) => {
 
 // 제품 구매 취소
 export const cancelProducts = async detailId => {
+  const accessToken = getAccessToken()
   try {
     const res = await fetch(`${PRODUCT}/cancel`, {
       method: 'POST',
@@ -64,6 +64,7 @@ export const cancelProducts = async detailId => {
 
 // 제품 구매 확정
 export const confirm = async detailId => {
+  const accessToken = getAccessToken()
   try {
     const res = await fetch(`${PRODUCT}/ok`, {
       method: 'POST',
@@ -140,6 +141,65 @@ export const transactionsDetail = async (detailId, isCanceled, done) => {
     }
   } catch (err) {
     alert('상품 거래 완료 정보를 가져오는데 실패했습니다. 다시 시도해주세요.')
+    throw err
+  }
+}
+
+// 제품 전체 거래 구매 내역
+export const productsPurchase = async () => {
+  const accessToken = getAccessToken()
+  try {
+    const res = await fetch(`${TRANJACTION}/details`, {
+      method: 'GET',
+      headers: {
+        ...userHEADERS,
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+
+    if (res.ok) {
+      const transactionData = await res.json()
+      return transactionData
+    } else {
+      const err = await res.json()
+      throw new Error(
+        err.message ||
+          '전체 제품 구매 내역을 불러오는데 실패했습니다. 다시 시도해주세요.'
+      )
+    }
+  } catch (err) {
+    alert('전체 제품 구매 내역을 불러오는데 실패했습니다. 다시 시도해주세요.')
+    throw err
+  }
+}
+
+// 단일 제품 구매내역
+export const productPurchase = async detailId => {
+  const accessToken = getAccessToken()
+  try {
+    const res = await fetch(`${TRANJACTION}/details`, {
+      method: 'POST',
+      headers: {
+        ...userHEADERS,
+        Authorization: `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({
+        detailId
+      })
+    })
+
+    if (res.ok) {
+      const transactionData = await res.json()
+      return transactionData
+    } else {
+      const err = await res.json()
+      throw new Error(
+        err.message ||
+          '제품 상세 구매 내역을 불러오는데 실패했습니다. 다시 시도해주세요.'
+      )
+    }
+  } catch (err) {
+    alert('제품 상세 구매 내역을 불러오는데 실패했습니다. 다시 시도해주세요.')
     throw err
   }
 }
