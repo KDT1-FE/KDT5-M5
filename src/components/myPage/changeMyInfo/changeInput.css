@@ -17,7 +17,6 @@
 
 .info-input {
   display: flex;
-  min-height: 50px;
   background-color: antiquewhite;
   align-items: center;
   border-bottom: 1px solid #c9c9c9;
@@ -33,11 +32,15 @@
 
 .info-menu {
   width: 100px;
+  text-align: center;
 }
 
 .info-data {
   width: 100%;
-  height: auto;
-  min-height: 100px;
+
   background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
 }
