@@ -17,6 +17,7 @@ const Payment = () => {
   const [address, setAddress] = useState('')
   const [showPostcodeModal, setShowPostcodeModal] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null)
   const directMessage = useRef()
 
   useEffect(() => {
