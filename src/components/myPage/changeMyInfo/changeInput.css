@@ -1,0 +1,43 @@
+.change-info {
+}
+
+.change-info p {
+  margin-bottom: 30px;
+}
+
+.change-info h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.info {
+  border-top: 2px solid #c9c9c9;
+  border-bottom: 2px solid #c9c9c9;
+}
+
+.info-input {
+  display: flex;
+  min-height: 50px;
+  background-color: antiquewhite;
+  align-items: center;
+  border-bottom: 1px solid #c9c9c9;
+}
+
+.info-input:last-child {
+  border-bottom: none;
+}
+
+.info-input img {
+  width: 40px;
+}
+
+.info-menu {
+  width: 100px;
+}
+
+.info-data {
+  width: 100%;
+  height: auto;
+  min-height: 100px;
+  background-color: #fff;
+}

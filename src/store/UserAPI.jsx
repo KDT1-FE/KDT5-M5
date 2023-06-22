@@ -103,14 +103,20 @@ export const logOut = async () => {
 }
 
 // 사용자 정보 변경
-export const userInfo = async () => {
+export const userInfo = async userInfoData => {
   const accessToken = getAccessToken() // localStorage에서 accessToken 검색
   const res = await fetch(`${AUTH}/user`, {
     method: 'PUT',
     headers: {
       ...userHEADERS,
       Authorization: `Bearer ${accessToken}`
-    }
+    },
+    body: JSON.stringify({
+      displayName: userInfoData.displayName,
+      profileImgBase64: userInfoData.profileImgBase64,
+      oldPassword: userInfoData.oldPassword,
+      newPassword: userInfoData.newPassword
+    })
   })
   if (res.ok) {
     const userData = await res.json()
