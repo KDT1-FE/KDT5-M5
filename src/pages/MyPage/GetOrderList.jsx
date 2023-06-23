@@ -1,7 +1,8 @@
 import React from 'react'
+import OrderList from '../../components/myPage/getOrderList/OrderList'
 
 const GetOrderList = () => {
-  return <div>GetOrderList</div>
+  return <OrderList />
 }
 
 export default GetOrderList
