@@ -20,6 +20,7 @@
         "react-slick": "^0.29.0",
         "redux": "^4.1.2",
         "slick-carousel": "^1.8.1",
+        "styled-components": "^5.3.10",
         "swiper": "^9.4.0",
         "zustand": "^4.3.8"
     },

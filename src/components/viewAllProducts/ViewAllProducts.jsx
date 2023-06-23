@@ -1,109 +1,82 @@
 import React, { useEffect, useState } from 'react'
-import './viewAllProducts.css'
-import { deleteProduct, getProducts, updateProduct } from '../../store/AdminAPI'
-import ProductData from './ProductData'
-import ProductRemove from './ProductRemove'
+// import './viewAllProducts.css'
+import { getProducts } from '../../store/AdminAPI'
+import styled from 'styled-components'
 
 const ViewAllProducts = () => {
+  //////////////////////////////////////////
   const [allProducts, setAllProducts] = useState([])
-  const [changedProduct, setChangedProduct] = useState('')
-  const [isRemoveProduct, setIsRemoveProduct] = useState(false)
 
   useEffect(() => {
     getProducts().then(res => {
       setAllProducts(res)
+      console.log(res)
     })
-  }, [changedProduct, isRemoveProduct])
+  }, [])
 
-  const Products = allProducts.map((product, productNum) => {
-    async function edit(productId, updatedData) {
-      const res = await updateProduct(productId, updatedData)
-      setChangedProduct(res)
-    }
-
-    async function remove(productId) {
-      const res = await deleteProduct(productId)
-      setIsRemoveProduct(!isRemoveProduct)
-    }
-
+  const Products = allProducts.map(product => {
+    console.log(product)
     return (
-      <li key={productNum}>
-        <h2>{product.id}</h2>
-
-        <div className="product">
-          <ProductData
-            item={'제품명'}
-            data={product.title}
-            property={'title'}
-            productId={product.id}
-            onClick={edit}
+      <ProductWrapper
+        key={product.id}
+        onClick={() => (window.location.href = `./product/${product.id}`)}>
+        <div className="item">
+          <img
+            src={product.thumbnail}
+            alt="thumbnail"
           />
-
-          <ProductData
-            item={'가격'}
-            data={product.price}
-            property={'price'}
-            productId={product.id}
-            onClick={edit}
-          />
-
-          <ProductData
-            item={'제품 설명'}
-            data={product.description}
-            property={'description'}
-            productId={product.id}
-            onClick={edit}
-          />
-
-          <ProductData
-            item={'태그'}
-            data={product.tags}
-            property={'tags'}
-            productId={product.id}
-            onClick={edit}
-          />
-
-          <ProductData
-            item={'썸네일 이미지'}
-            data={product.thumbnail}
-            property={'thumbnail'}
-            productId={product.id}
-            onClick={edit}
-          />
-
-          <ProductData
-            item={'상세 이미지'}
-            data={product.photo}
-            property={'photo'}
-            productId={product.id}
-            onClick={edit}
-          />
-
-          <ProductData
-            item={'제품 매진 여부'}
-            data={product.isSoldOut}
-            property={'isSoldOut'}
-            productId={product.id}
-            onClick={edit}
-          />
-
-          <ProductRemove
-            productId={product.id}
-            onClick={remove}
-          />
+          <p className="title">title : {product.title}</p>
+          <p className="id">ID : {product.id}</p>
         </div>
-      </li>
+      </ProductWrapper>
     )
   })
 
   return (
-    <div className="all-products">
-      ViewAllProducts
-      <div>
-        <ul>{Products}</ul>
-      </div>
-    </div>
+    <Wrapper>
+      <ul>{Products}</ul>
+    </Wrapper>
   )
 }
 
 export default ViewAllProducts
+
+const Wrapper = styled.div`
+  padding-top: 70px;
+  max-width: 1200px;
+  margin: 0 auto;
+`
+
+const ProductWrapper = styled.li`
+  width: 100%;
+  img {
+    width: 50px;
+    margin-right: 10px;
+  }
+  p {
+    width: 100%;
+    margin-right: 10px;
+    white-space: nowrap;
+  }
+  .title {
+    overflow: hidden;
+  }
+  .id {
+    width: 350px;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .item:hover {
+    border: 1px solid black;
+    cursor: pointer;
+  }
+`
