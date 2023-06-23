@@ -27,7 +27,6 @@
     height: 520px;
     display: flex;
     flex-direction: column;
-    border: 1px solid #a9a9a9;
     margin: 0 20px;
   }
   
@@ -35,11 +34,17 @@
     width: 540px;
     height: 540px;
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     overflow: hidden;
     border: 1px solid #a9a9a9;
     margin: 0 20px; 
+    overflow: auto;
+  }
+
+  .side__productDetail--image-container::-webkit-scrollbar {
+    display: none;
   }
   
   .section__productDetail--img {
@@ -67,13 +72,16 @@
     align-items: center;
     font-size: 24px;
     font-weight: 700;
+    justify-content: start;
+    color: #e02020;
   }
   
   .side__productDetail--tags {
     margin-top: 16px;
     flex-wrap: wrap;
     display: flex;
-    gap: 5px;
+    gap: 10px;
+    margin-left: 10px;
   }
 
   .first-tag {
@@ -87,8 +95,8 @@
     border-radius: 7px;
   }
 
-  .side__productAmount--minus,
-  .side__productAmount--plus {
+  .side__productAmount--decrease,
+  .side__productAmount--increase {
     background-color: #fff;
     width: 25px;
     height: 25px;
@@ -98,8 +106,8 @@
     border-radius: 7px;
   }
 
-  .side__productAmount--minus:hover,
-  .side__productAmount--plus:hover {
+  .side__productAmount--decrease:hover,
+  .side__productAmount--increase:hover {
     background-color: #81f781;
     border: 1px solid #81f781;
     color: #fff;
@@ -112,16 +120,29 @@
   .side__productDetail--amountCal {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 15px;
+    justify-content: space-between;
+    margin: 15px 20px 0 20px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 3;
   }
 
   .side__totalPrice {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 23px;
+    margin: 23px 20px 0 20px;
     gap: 30px;
+    padding-bottom: 10px;
+    justify-content: space-between;
+    border-bottom: 2px solid #e02020;
+    line-height: 2;
+    font-weight: bold;
+    font-size: 24px;
+    color: #e02020;
   }
   
+  
+
   .side__payment {
     margin-top: 17px;
     background-color: #fff;
@@ -133,6 +154,12 @@
     font-weight: 700;
     letter-spacing: 5px;
     cursor: pointer;
+  }
+
+  .side__payment--link {
+    display: flex;
+    justify-content: center;
+    
   }
 
   .side__payment:hover {
@@ -147,9 +174,42 @@
     cursor: not-allowed;
     border: 1px solid;
   } 
+  
+  .info {
+    text-align: center;
+    margin-top: 50px;
+    font-weight: 700;
+    color: #a9a9a9;
+    font-size: 18px;
+  }  
 
-  .payment_link {
-    width: 0px;
-    height: 0px;
+  .side__productDetail--image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
+  .image-wrapper {
+    position: relative;
+  }
+  
+  .side__productDetail--imgInfo {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+    width: 540px;
+    color: #fff;
+  }
+
+  .side__productDetail--info-desc {
+    margin: 0 20px;
+  }
+
+  .disabled-link {
+    cursor: default;
+  }

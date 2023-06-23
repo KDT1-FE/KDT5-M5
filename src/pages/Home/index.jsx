@@ -7,8 +7,8 @@ import ProductMenu from '../../components/main/ProductMenu'
 
 const Home = () => {
   const [cleansing, setCleansing] = useState('cleansing')
-  const [makeUp, setMakeUp] = useState('makeUp')
-  const [skinCare, setSkinCare] = useState('skinCare')
+  const [makeUp, setMakeUp] = useState('makeup')
+  const [skinCare, setSkinCare] = useState('skincare')
 
   return (
     <div>
