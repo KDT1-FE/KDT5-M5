@@ -19,6 +19,7 @@ import GetOrderCancelList from './pages/MyPage/GetOrderCancelList'
 import ChangeMyInfo from './pages/MyPage/ChangeMyInfo'
 import MyInfo from './components/myPage/MyInfo'
 import MyMenu from './components/myPage/MyMenu'
+import PaymentMethod from './pages/MyPage/PaymentMethod'
 
 const Layout = () => {
   return (
@@ -80,6 +81,10 @@ function App() {
             <Route
               index
               element={<MyPage />}
+            />
+            <Route
+              path="paymentmethod"
+              element={<PaymentMethod />}
             />
             <Route
               path="getOrderList"

@@ -157,19 +157,6 @@ const ProductPage = () => {
           <p>제품 상세 정보를 불러오는 중입니다....</p>
         )}
       </div>
-      {/*  <div className="section__detail">
-        {product ? (
-          <div className="section__detail__img">
-            <p>dfd</p>
-            <img
-              src={product.photo}
-              alt=""
-            />
-          </div>
-        ) : (
-          <p>제품 상세 정보를 불러오는 중입니다....</p>
-        )}
-      </div> */}
     </div>
   )
 }

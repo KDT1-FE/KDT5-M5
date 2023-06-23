@@ -2,7 +2,7 @@ import { userHEADERS, ACCOUNT } from './Base'
 import { getAccessToken } from './localStorage'
 
 // 은행 목록 조회
-export const gettBanks = async () => {
+export const getBanks = async () => {
   try {
     const accessToken = getAccessToken()
 
@@ -25,7 +25,6 @@ export const gettBanks = async () => {
   }
 }
 
-// 계좌 잔액 확인
 export const getAccounts = async () => {
   try {
     const accessToken = getAccessToken()
@@ -37,11 +36,18 @@ export const getAccounts = async () => {
         Authorization: `Bearer ${accessToken}`
       }
     })
+
     if (res.ok) {
-      const accounts = await res.json()
-      return accounts
+      const response = await res.json()
+      const { accounts } = response
+
+      if (Array.isArray(accounts)) {
+        return accounts
+      } else {
+        throw new Error('Invalid account data: accounts is not an array')
+      }
     } else {
-      throw new Error('계좌 조회에 실패했습니다.')
+      throw new Error('Account lookup failed.')
     }
   } catch (error) {
     throw error
@@ -78,7 +84,7 @@ export const connectAccounts = async bankAccount => {
 }
 
 // 계좌 해지
-export const deleteAccounts = async bankAccount => {
+export const deleteAccount = async (accountId, signature) => {
   try {
     const accessToken = getAccessToken()
 
@@ -89,16 +95,15 @@ export const deleteAccounts = async bankAccount => {
         Authorization: `Bearer ${accessToken}`
       },
       body: JSON.stringify({
-        accountId: bankAccount.accountId,
-        signature: bankAccount,
-        signature
+        accountId: accountId,
+        signature: signature
       })
     })
     if (res.ok) {
-      const deleted = await res.json()
-      return deleted
+      const responseValue = await res.json()
+      return responseValue
     } else {
-      throw new Error('계좌를 해지하는데 실패했습니다.')
+      throw new Error('Failed to delete the account.')
     }
   } catch (error) {
     throw error

@@ -25,7 +25,7 @@ const ProductMenu = ({ category }) => {
   }, [category])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>로딩 중...</div>
   }
 
   return (
