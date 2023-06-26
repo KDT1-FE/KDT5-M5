@@ -54,6 +54,15 @@ const PaymentMethod = () => {
     setAccountNumber(numericInput)
   }
 
+  const handlePhoneNumber = e => {
+    const input = e.target.value
+    const numericInput = input.replace(/\D/g, '')
+    if (input !== numericInput) {
+      alert('숫자만 입력해주세요.')
+    }
+    setPhoneNumber(numericInput)
+  }
+
   const handleAddButtonClick = async () => {
     if (selectedBank && accountNumber && phoneNumber && signature) {
       try {
@@ -72,7 +81,7 @@ const PaymentMethod = () => {
         console.error('계좌 추가에 실패했습니다.:', error)
       }
     } else {
-      alert('은행과 계좌 번호를 입력해주세요.')
+      alert('사용하실 은행과 계좌 번호, 연락처를 입력해주세요.')
     }
   }
 
@@ -172,7 +181,7 @@ const PaymentMethod = () => {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
-            <form action="">
+            <form className="form">
               <select
                 name="bank"
                 id="bank"
@@ -188,7 +197,7 @@ const PaymentMethod = () => {
                 ))}
               </select>
               <label>
-                <span>계좌 번호 : </span>
+                <span>계좌 번호</span>
                 <input
                   type="text"
                   value={accountNumber}
@@ -197,11 +206,11 @@ const PaymentMethod = () => {
                 />
               </label>
               <label>
-                <span>연락처 : </span>
+                <span>연락처</span>
                 <input
                   type="text"
                   value={phoneNumber}
-                  onChange={e => setPhoneNumber(e.target.value)}
+                  onChange={handlePhoneNumber}
                   placeholder="'-'을 제외한 숫자를 입력해주세요."
                 />
               </label>
@@ -215,14 +224,14 @@ const PaymentMethod = () => {
               </label>
             </form>
             <button
-              className="modal__close-btn"
-              onClick={handleCloseModal}>
-              닫기
-            </button>
-            <button
               className="modal__add-btn"
               onClick={handleAddButtonClick}>
               추가
+            </button>
+            <button
+              className="modal__close-btn"
+              onClick={handleCloseModal}>
+              닫기
             </button>
           </div>
         </div>

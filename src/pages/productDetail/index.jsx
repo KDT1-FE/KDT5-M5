@@ -44,8 +44,10 @@ const ProductPage = () => {
   const checkLoginStatus = async () => {
     try {
       const user = await authenticate()
-      if (user) {
+      if (typeof user === 'object' && user !== null) {
         setIsLoggedIn(true)
+      } else {
+        setIsLoggedIn(false)
       }
     } catch (error) {
       console.log(error)
@@ -144,7 +146,9 @@ const ProductPage = () => {
                   </button>
                 </Link>
               ) : (
-                <Link to="/login">
+                <Link
+                  to="/login"
+                  className="side__payment--link">
                   <button className="side__payment">로그인 후 결제하기</button>
                 </Link>
               )}

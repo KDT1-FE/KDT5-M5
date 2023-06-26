@@ -18,7 +18,10 @@
   }
   
   .mypage__account--user {
+    display: flex;
+    flex-direction: column;
     margin-top: 20px;
+    justify-content: center;
   }
   
   .mypage__account--balance {
@@ -91,26 +94,48 @@
     padding: 20px;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
-  
-  form label {
-    display: block;
+
+  select {
+    width: 295px;
+    text-align: center;
     margin-bottom: 10px;
   }
   
-  form input[type="text"] {
-    width: 100%;
+  .form label {
+    display: block;
+    margin-bottom: 10px;
+    
+  }
+  
+  .form input[type="text"] {
+    width: 285px;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin-top: 5px;
   }
   
-  .modal__close-btn,
   .modal__add-btn {
     display: block;
     margin-top: 10px;
     padding: 10px 20px;
     background-color: #2196f3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+  }
+
+  .modal__close-btn {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #f32121;
     color: #fff;
     border: none;
     border-radius: 4px;
