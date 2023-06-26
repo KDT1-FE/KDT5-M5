@@ -65,11 +65,12 @@ const ProductPage = () => {
   }
 
   const shoppingCart = (product, amount) => {
-    const { id, title, thumbnail } = product
+    const { id, title, thumbnail, price } = product
     const productInCart = {
       id,
       title,
       thumbnail,
+      price,
       amount
     }
     localStorage.setItem('productInCart', JSON.stringify(productInCart))
