@@ -64,6 +64,17 @@ const ProductPage = () => {
     setAmount(amount + 1)
   }
 
+  const shoppingCart = (product, amount) => {
+    const { id, title, thumbnail } = product
+    const productInCart = {
+      id,
+      title,
+      thumbnail,
+      amount
+    }
+    localStorage.setItem('productInCart', JSON.stringify(productInCart))
+  }
+
   return (
     <div className="section">
       <div className="section__container">
@@ -130,26 +141,42 @@ const ProductPage = () => {
                 <span>{totalPrice.toLocaleString()} 원</span>
               </div>
               {isLoggedIn ? (
-                <Link
-                  to={
-                    isButtonActive ? `/payment/${category}/${productId}` : '#'
-                  }
-                  className={`side__payment--link ${
-                    isButtonActive ? '' : 'disabled-link'
-                  }`}>
-                  <button
-                    className={`side__payment ${
-                      isButtonActive ? '' : 'disabled'
-                    }`}
-                    disabled={!isButtonActive}>
-                    결제하기
-                  </button>
-                </Link>
+                <div className="side__payment--btn-container">
+                  <Link
+                    to={isButtonActive ? '/cart' : '#'}
+                    className={`side__payment--link ${
+                      isButtonActive ? '' : 'disabled-link'
+                    }`}>
+                    <button
+                      className={`side__payment ${
+                        isButtonActive ? '' : 'disabled'
+                      }`}
+                      disabled={!isButtonActive}
+                      onClick={() => shoppingCart(product, amount)}>
+                      장바구니
+                    </button>
+                  </Link>
+                  <Link
+                    to={
+                      isButtonActive ? `/payment/${category}/${productId}` : '#'
+                    }
+                    className={`side__payment--link ${
+                      isButtonActive ? '' : 'disabled-link'
+                    }`}>
+                    <button
+                      className={`side__payment ${
+                        isButtonActive ? '' : 'disabled'
+                      }`}
+                      disabled={!isButtonActive}>
+                      결제하기
+                    </button>
+                  </Link>
+                </div>
               ) : (
                 <Link
                   to="/login"
                   className="side__payment--link">
-                  <button className="side__payment">로그인 후 결제하기</button>
+                  <button className="side__payment">로그인 후 결제</button>
                 </Link>
               )}
               <p className="info">

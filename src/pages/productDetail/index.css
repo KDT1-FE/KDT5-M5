@@ -141,6 +141,10 @@
     color: #e02020;
   }
   
+  .side__payment--btn-container {
+    display: flex;
+    justify-content: center;
+  }
   
 
   .side__payment {
@@ -148,7 +152,7 @@
     background-color: #fff;
     border: 1px solid;
     border-radius: 10px;
-    width: 300px;
+    width: 230px;
     height: 50px;
     font-size: 20px;
     font-weight: 700;
