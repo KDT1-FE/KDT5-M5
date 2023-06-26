@@ -25,6 +25,7 @@ export const getBanks = async () => {
   }
 }
 
+// 계좌 잔고 확인
 export const getAccounts = async () => {
   try {
     const accessToken = getAccessToken()
@@ -44,10 +45,10 @@ export const getAccounts = async () => {
       if (Array.isArray(accounts)) {
         return accounts
       } else {
-        throw new Error('Invalid account data: accounts is not an array')
+        throw new Error('계좌 정보를 가져오는데 실패했습니다.')
       }
     } else {
-      throw new Error('Account lookup failed.')
+      throw new Error('계좌 정보를 가져오는데 실패했습니다.')
     }
   } catch (error) {
     throw error
@@ -103,7 +104,7 @@ export const deleteAccount = async (accountId, signature) => {
       const responseValue = await res.json()
       return responseValue
     } else {
-      throw new Error('Failed to delete the account.')
+      throw new Error('계좌를 삭제하는데 실패했습니다.')
     }
   } catch (error) {
     throw error

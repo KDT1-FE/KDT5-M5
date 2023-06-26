@@ -1,3 +1,8 @@
+h2 {
+  font-weight: bold;
+  margin: 10px 0;
+}
+
 .payment-contents {
     width: 50%;
     margin: 0 auto;
@@ -18,14 +23,16 @@
   .product-table td {
     padding: 10px;
     border: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
   }
-  
+
   .product-table th {
     background-color: #f0f0f0;
   }
   
-  .product-table img {
-    max-width: 100px;
+  .product-image {
+    max-width: 150px;
     height: auto;
   }
   
@@ -60,7 +67,7 @@
   }
   
   .recipient-info tr:nth-child(2) td {
-    height: 40px; /* Adjust the height as needed */
+    height: 40px;
   }
   
   .delivery-requests {
@@ -144,10 +151,47 @@
     background-color: #c0c0c0;
     text-align: center;
   }
+
+  .payment-method--container h2 {
+    text-align: center;
+    line-height: 3;
+    font-weight: bold;
+  }
   
   .payment-method {
     left: 0;
     right: 0;
       width: 250px;
       margin: 0 auto;
+  }
+
+  .payment__change--info {
+    text-align: center;
+    margin-top: 40px;
+    color: #a9a9a9;
+    font-weight: bold;
+  }
+
+  .paymnet__confirm--link {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+  }
+
+  .paymnet__confirm {
+    background-color: #fff;
+    border: 1px solid;
+    border-radius: 10px;
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    cursor: pointer;
+  }
+
+  .paymnet__confirm:hover {
+    background-color: #81f781;
+    border: 1px solid #81f781;
+    color: #fff;
   }
