@@ -125,7 +125,6 @@ const Payment = () => {
                 </div>
                 <div>
                   <h3>{product.title}</h3>
-                  <p>{category}</p>
                 </div>
               </td>
               <td>{product.price} 원</td>
@@ -248,26 +247,32 @@ const Payment = () => {
       <div className="payment-method--container">
         <h2> 결제수단 선택</h2>
         <div className="payment-method">
-          <Slider {...settings}>
-            {accountList.map(account => (
-              <div key={account.id}>
-                <img
-                  src={`../../../public/card/${account.bankName}.png`}
-                  alt={account.bankName}
-                />
-              </div>
-            ))}
-          </Slider>
+          {accountList.length > 0 ? (
+            <Slider {...settings}>
+              {accountList.map(account => (
+                <div key={account.id}>
+                  <img
+                    src={`../../../public/card/${account.bankName}.png`}
+                    alt={account.bankName}
+                  />
+                </div>
+              ))}
+            </Slider>
+          ) : (
+            <Link
+              to="/mypage/paymentmethod"
+              className="payment__add-link">
+              <button className="payment__add-btn">결제 수단 추가</button>
+            </Link>
+          )}
         </div>
       </div>
       <div className="payment__change--info">
         결제 수단을 변경하시려면 좌우로 드래그 해주세요.
       </div>
       <Link
-        to="/mypage"
+        to="/mypage/getOrderList"
         className="paymnet__confirm--link">
-        {/* 카드 결제 수단 선택하지 않거나 결제 수단이 없으면 비활성화 로직
-        추후에 추가 */}
         <button className="paymnet__confirm">
           총 {totalPrice.toLocaleString()} 원 결제하기
         </button>

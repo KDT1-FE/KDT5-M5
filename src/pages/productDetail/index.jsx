@@ -66,14 +66,36 @@ const ProductPage = () => {
 
   const shoppingCart = (product, amount) => {
     const { id, title, thumbnail, price } = product
-    const productInCart = {
-      id,
-      title,
-      thumbnail,
-      price,
-      amount
+    const saveProductInCart = localStorage.getItem('productInCart')
+
+    let productsInCart = []
+
+    if (saveProductInCart) {
+      productsInCart = JSON.parse(saveProductInCart)
     }
-    localStorage.setItem('productInCart', JSON.stringify(productInCart))
+
+    const productsInCartIndex = productsInCart.findIndex(
+      product => product.id === id
+    )
+
+    if (productsInCartIndex !== -1) {
+      productsInCart[productsInCartIndex].amount += amount
+    } else {
+      const productInCart = {
+        id,
+        title,
+        thumbnail,
+        price,
+        amount
+      }
+      productsInCart.push(productInCart)
+    }
+
+    localStorage.setItem('productInCart', JSON.stringify(productsInCart))
+  }
+
+  const duplicateCart = (product, amount) => {
+    shoppingCart(product, amount)
   }
 
   return (
@@ -153,7 +175,7 @@ const ProductPage = () => {
                         isButtonActive ? '' : 'disabled'
                       }`}
                       disabled={!isButtonActive}
-                      onClick={() => shoppingCart(product, amount)}>
+                      onClick={() => duplicateCart(product, amount)}>
                       장바구니
                     </button>
                   </Link>

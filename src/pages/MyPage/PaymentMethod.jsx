@@ -140,7 +140,7 @@ const PaymentMethod = () => {
         <div className="mypage__account--user">
           <p className="mypage__account--balance">
             <span className="maypage__account--total-balance">
-              총 잔고 합계:{' '}
+              총 잔고 합계 :{' '}
               {accountList.reduce(
                 (total, account) => total + account.balance,
                 0
@@ -149,28 +149,33 @@ const PaymentMethod = () => {
             </span>
           </p>
           <ul className="account-list">
-            {accountList.map(account => (
-              <li
-                key={account.id}
-                className="account__list">
-                <div className="account__list--info">
-                  <div>{account.bankName}</div>
-                  <div>{account.accountNumber}</div>
-                  <div>{account.balance}</div>
-                  <button
-                    onClick={() =>
-                      handleDelete(
-                        account.id,
-                        account.accountName,
-                        account.signature
-                      )
-                    }>
-                    삭제
-                  </button>
-                </div>
-              </li>
-            ))}
+            {accountList.length > 0 ? (
+              accountList.map(account => (
+                <li
+                  key={account.id}
+                  className="account__list">
+                  <div className="account__list--info">
+                    <div>{account.bankName}</div>
+                    <div>{account.accountNumber}</div>
+                    <div>{account.balance.toLocaleString()} 원</div>
+                    <button
+                      onClick={() =>
+                        handleDelete(
+                          account.id,
+                          account.accountName,
+                          account.signature
+                        )
+                      }>
+                      삭제
+                    </button>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <li className="account__list">계좌를 추가해주세요.</li>
+            )}
           </ul>
+
           <button
             className="create__account--btn"
             onClick={handleAddAccount}>
