@@ -1,0 +1,9 @@
+.my-info {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.my-info img {
+  width: 40px;
+}

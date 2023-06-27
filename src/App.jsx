@@ -10,6 +10,17 @@ import Admin from './pages/Admin'
 import AdminHeader from './components/AdminHeader'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import ProductDetail from './pages/productDetail'
+import UserManagement from './pages/Admin/UserManagement'
+import ProductManagement from './pages/Admin/ProductManagement'
+import ProductAdd from './pages/Admin/ProductAdd'
+import Product from './pages/Admin/Product'
+import GetOrderList from './pages/MyPage/GetOrderList'
+import GetOrderCancelList from './pages/MyPage/GetOrderCancelList'
+import ChangeMyInfo from './pages/MyPage/ChangeMyInfo'
+import MyInfo from './components/myPage/MyInfo'
+import MyMenu from './components/myPage/MyMenu'
+import OrderDetailItem from './components/myPage/getOrderList/OrderDetailItem'
 
 const Layout = () => {
   return (
@@ -30,6 +41,18 @@ const AdminLayout = () => {
   )
 }
 
+const MyPageLayout = () => {
+  return (
+    <div style={{ display: 'flex' }}>
+      <MyMenu />
+      <div>
+        <MyInfo />
+        <Outlet />
+      </div>
+    </div>
+  )
+}
+
 function App() {
   return (
     <div className="app">
@@ -42,19 +65,43 @@ function App() {
             element={<Home />}
           />
           <Route
-            path="/cart"
+            path="/product/:category/:productId"
+            element={<ProductDetail />}
+          />
+          <Route
+            path="cart"
             element={<Cart />}
           />
           <Route
-            path="/login"
+            path="login"
             element={<Login />}
           />
           <Route
             path="mypage"
-            element={<MyPage />}
-          />
+            element={<MyPageLayout />}>
+            <Route
+              index
+              element={<MyPage />}
+            />
+            <Route
+              path="getOrderList"
+              element={<GetOrderList />}
+            />
+            <Route
+              path="getOrderList/:detailId"
+              element={<OrderDetailItem />}
+            />
+            <Route
+              path="getOrderCancelList"
+              element={<GetOrderCancelList />}
+            />
+            <Route
+              path="changeMyInfo"
+              element={<ChangeMyInfo />}
+            />
+          </Route>
           <Route
-            path="payment"
+            path="payment/:category/:productId"
             element={<Payment />}
           />
           <Route
@@ -67,9 +114,24 @@ function App() {
           path="/admin"
           element={<AdminLayout />}>
           <Route
-            // path="/admin/Home"
             index
             element={<Admin />}
+          />
+          <Route
+            path="user"
+            element={<UserManagement />}
+          />
+          <Route
+            path="productAdd"
+            element={<ProductAdd />}
+          />
+          <Route
+            path="products"
+            element={<ProductManagement />}
+          />
+          <Route
+            path="product/:productId"
+            element={<Product />}
           />
         </Route>
       </Routes>

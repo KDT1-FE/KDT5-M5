@@ -1,8 +1,6 @@
 import { userHEADERS, ACCOUNT } from './Base'
 import { getAccessToken } from './localStorage'
 
-const ACCOUNT = `${BASE_URL}/account`
-
 // 은행 목록 조회
 export const gettBanks = async () => {
   try {
@@ -46,7 +44,6 @@ export const getAccounts = async () => {
       throw new Error('계좌 조회에 실패했습니다.')
     }
   } catch (error) {
-    console.error('계좌 조회를 하는 동안 오류가 발생했습니다.', error)
     throw error
   }
 }
@@ -76,7 +73,6 @@ export const connectAccounts = async bankAccount => {
       throw new Error('계좌를 연결하는데 실패했습니다.')
     }
   } catch (error) {
-    console.error('계좌를 연결하는 동안 오류가 발생했습니다.', error)
     throw error
   }
 }
@@ -105,7 +101,6 @@ export const deleteAccounts = async bankAccount => {
       throw new Error('계좌를 해지하는데 실패했습니다.')
     }
   } catch (error) {
-    console.error('계좌를 해지하는 동안 오류가 발생했스빈다.', error)
     throw error
   }
 }
