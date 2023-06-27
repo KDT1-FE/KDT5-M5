@@ -52,7 +52,18 @@ const TextItem = ({ product, setProduct, upData, item }) => {
 export default TextItem
 
 const Wrapper = styled.div`
-  .input {
+  width: 400px;
+  input {
+    width: 300px;
+    height: 30px;
+    border: none;
+    background-color: #9e9e9e;
+    border-radius: 5px;
+    padding: 10px;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #fff;
   }
   .hide {
     display: none;

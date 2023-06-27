@@ -35,8 +35,9 @@ const ImgItem = ({ product, setProduct, upData, item }) => {
 }
 
 const Wrapper = styled.div`
+  width: 400px;
   img {
-    width: 300px;
+    width: 100%;
   }
   input {
     display: none;

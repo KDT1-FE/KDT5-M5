@@ -18,6 +18,8 @@ const IsItem = ({ product, setProduct, upData, item }) => {
   )
 }
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+  width: 400px;
+`
 
 export default IsItem

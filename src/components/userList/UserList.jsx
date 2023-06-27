@@ -24,14 +24,33 @@ const UserList = () => {
 
   return (
     <Wrapper>
-      <h1>UserList</h1>
-      <ul>{userList}</ul>
+      <div className="background">
+        <h1>UserList</h1>
+        <ul>{userList}</ul>
+      </div>
     </Wrapper>
   )
 }
 
 const Wrapper = styled.div`
-  padding-top: 70px;
+  background-color: #5f5f5f;
+  .background {
+    background-color: #2e2e2e;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    color: #fff;
+    min-height: calc(100vh - 140px);
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
 
   ul {
     display: flex;

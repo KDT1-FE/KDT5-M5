@@ -72,87 +72,94 @@ const AddProduct = () => {
 
   return (
     <Warpper>
-      <h1>AddProduct</h1>
+      <div className="background">
+        <h1>AddProduct</h1>
 
-      <form onSubmit={newProductPush}>
-        <SubWarpper>
-          <p>제품이름</p>
-          <input
-            type="text"
-            onChange={e => setProduct(e.target.value)}
-          />
-        </SubWarpper>
-        <SubWarpper>
-          <p>제품가격</p>
-          <input
-            type="text"
-            onChange={e => setPrice(e.target.value)}
-          />
-        </SubWarpper>
-        <SubWarpper>
-          <p>제품 상세 설명</p>
-          <input
-            type="text"
-            onChange={e => setDetail(e.target.value)}
-          />
-        </SubWarpper>
-        <SubWarpper>
-          <p>제품 태그</p>
-          <input
-            className="tagInputEl"
-            type="text"
-            value={tag}
-            onChange={e => setTag(e.target.value)}
-          />
-          <button
-            type="button"
-            onClick={() => {
-              if (tag === '') {
-                return
-              }
-              addTags(tags, tag)
-              setTag('')
-            }}>
-            추가
-          </button>
-          <div>
-            <ul>{tagList}</ul>
-          </div>
-        </SubWarpper>
-        <SubWarpper>
-          <p>제품 썸네일</p>
-          <input
-            type="file"
-            onChange={e => uploadImg(e, setThumbnail, 'Thumbnail')}
-          />
-          <img id="Thumbnail" />
-        </SubWarpper>
-        <SubWarpper>
-          <p>제품 상세 사진</p>
-          <input
-            type="file"
-            onChange={e => uploadImg(e, setDetailImg, 'DetailImg')}
-          />
-          <img id="DetailImg" />
-        </SubWarpper>
+        <form onSubmit={newProductPush}>
+          <SubWarpper>
+            <p>제품이름</p>
+            <input
+              type="text"
+              onChange={e => setProduct(e.target.value)}
+            />
+          </SubWarpper>
+          <SubWarpper>
+            <p>제품가격</p>
+            <input
+              type="text"
+              onChange={e => setPrice(e.target.value)}
+            />
+          </SubWarpper>
+          <SubWarpper>
+            <p>제품 상세 설명</p>
+            <input
+              type="text"
+              onChange={e => setDetail(e.target.value)}
+            />
+          </SubWarpper>
+          <SubWarpper>
+            <p>제품 태그</p>
+            <input
+              className="tagInputEl"
+              type="text"
+              value={tag}
+              onChange={e => setTag(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={() => {
+                if (tag === '') {
+                  return
+                }
+                addTags(tags, tag)
+                setTag('')
+              }}>
+              추가
+            </button>
+            <div>
+              <ul>{tagList}</ul>
+            </div>
+          </SubWarpper>
+          <SubWarpper>
+            <p>제품 썸네일</p>
+            <input
+              type="file"
+              onChange={e => uploadImg(e, setThumbnail, 'Thumbnail')}
+            />
+            <img id="Thumbnail" />
+          </SubWarpper>
+          <SubWarpper>
+            <p>제품 상세 사진</p>
+            <input
+              type="file"
+              onChange={e => uploadImg(e, setDetailImg, 'DetailImg')}
+            />
+            <img id="DetailImg" />
+          </SubWarpper>
 
-        <button type="submit">등록</button>
-      </form>
+          <button type="submit">등록</button>
+        </form>
+      </div>
     </Warpper>
   )
 }
 
 const Warpper = styled.div`
-  background-color: #2e2e2e;
-  margin: 0 auto;
-  max-width: 1200px;
-  padding-top: 70px;
-  padding-bottom: 70px;
-  color: #fff;
+  background-color: #5f5f5f;
+  .background {
+    background-color: #2e2e2e;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    color: #fff;
+  }
+
   h1 {
     text-align: center;
     font-size: 32px;
     font-weight: bold;
+    margin-top: 20px;
     margin-bottom: 30px;
   }
 

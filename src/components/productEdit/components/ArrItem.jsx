@@ -37,7 +37,7 @@ const ArrItem = ({ product, setProduct, upData, item }) => {
                       e.stopPropagation()
                       removeTag(tag)
                     }}>
-                    x
+                    삭제
                   </button>
                 </li>
               )
@@ -69,6 +69,26 @@ const ArrItem = ({ product, setProduct, upData, item }) => {
 export default ArrItem
 
 const Wrapper = styled.div`
+  width: 400px;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  input {
+    width: 300px;
+    height: 30px;
+    border: none;
+    background-color: #9e9e9e;
+    border-radius: 5px;
+    padding: 10px;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #fff;
+  }
   .tag-remove {
     border: 0;
     background: #7e7e7e;
