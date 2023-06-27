@@ -22,8 +22,7 @@ const Footer = () => {
             <li><a href="#" onClick={(e) => { e.preventDefault(); }}>사업자정보확인 </a></li>        
           </ul>
         </div>
-        
-
+      
         <div className="footer-section2">
         <ul>
           <a href="#" onClick={(e) => { e.preventDefault(); }}>이용약관 . 법적고지</a>
