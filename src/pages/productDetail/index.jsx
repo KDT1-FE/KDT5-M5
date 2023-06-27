@@ -145,7 +145,7 @@ const ProductPage = () => {
               </ul>
               <div className="side__productDetail--amountCal">
                 <h3>구매 수량</h3>
-                <div>
+                <div className="side__productAmount--btn-container">
                   <button
                     className="side__productAmount--decrease"
                     onClick={amountDecrement}>

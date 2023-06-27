@@ -20,11 +20,8 @@ import GetOrderCancelList from './pages/MyPage/GetOrderCancelList'
 import ChangeMyInfo from './pages/MyPage/ChangeMyInfo'
 import MyInfo from './components/myPage/MyInfo'
 import MyMenu from './components/myPage/MyMenu'
-<<<<<<< HEAD
 import PaymentMethod from './pages/MyPage/PaymentMethod'
-=======
 import OrderDetailItem from './components/myPage/getOrderList/OrderDetailItem'
->>>>>>> f33089c72cdfb129b0155617bc558ad943d330ca
 
 const Layout = () => {
   return (
