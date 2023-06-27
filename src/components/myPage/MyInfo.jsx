@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { authenticate } from '../../store/UserAPI'
 import './myInfo.css'
+import userImg from '../../img/user.png'
 
 const MyInfo = () => {
   const [user, setUser] = useState([])
 
   const getUser = async () => {
     const res = await authenticate()
-    setUser(res.displayName)
+    setUser(res)
   }
 
   useEffect(() => {
@@ -16,7 +17,11 @@ const MyInfo = () => {
 
   return (
     <div className="my-info">
-      <h2>{user}님 반갑습니다</h2>
+      <img
+        src={user.profileImg ? user.profileImg : userImg}
+        alt="프로필 사진"
+      />
+      <h2>{user.displayName}님 반갑습니다</h2>
     </div>
   )
 }

@@ -11,15 +11,20 @@ import AdminHeader from './components/AdminHeader'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ProductDetail from './pages/productDetail'
-import UserManagement from './pages/Admin/userManagement/UserManagement'
-import ProductManagement from './pages/Admin/productManagement/ProductManagement'
-import ProductAdd from './pages/Admin/ProductAdd/ProductAdd'
+import UserManagement from './pages/Admin/UserManagement'
+import ProductManagement from './pages/Admin/ProductManagement'
+import ProductAdd from './pages/Admin/ProductAdd'
+import Product from './pages/Admin/Product'
 import GetOrderList from './pages/MyPage/GetOrderList'
 import GetOrderCancelList from './pages/MyPage/GetOrderCancelList'
 import ChangeMyInfo from './pages/MyPage/ChangeMyInfo'
 import MyInfo from './components/myPage/MyInfo'
 import MyMenu from './components/myPage/MyMenu'
+<<<<<<< HEAD
 import PaymentMethod from './pages/MyPage/PaymentMethod'
+=======
+import OrderDetailItem from './components/myPage/getOrderList/OrderDetailItem'
+>>>>>>> f33089c72cdfb129b0155617bc558ad943d330ca
 
 const Layout = () => {
   return (
@@ -91,6 +96,10 @@ function App() {
               element={<GetOrderList />}
             />
             <Route
+              path="getOrderList/:detailId"
+              element={<OrderDetailItem />}
+            />
+            <Route
               path="getOrderCancelList"
               element={<GetOrderCancelList />}
             />
@@ -113,7 +122,6 @@ function App() {
           path="/admin"
           element={<AdminLayout />}>
           <Route
-            // path="/admin/Home"
             index
             element={<Admin />}
           />
@@ -125,10 +133,13 @@ function App() {
             path="productAdd"
             element={<ProductAdd />}
           />
-
           <Route
             path="products"
             element={<ProductManagement />}
+          />
+          <Route
+            path="product/:productId"
+            element={<Product />}
           />
         </Route>
       </Routes>

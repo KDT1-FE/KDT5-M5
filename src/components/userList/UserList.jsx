@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import userImg from '../../img/user.png'
 import { getUserList } from '../../store/AdminAPI'
 import './userList.css'
+import UserItem from './UserItem'
 
 const UserList = () => {
   const [users, setUsers] = useState([])
@@ -12,21 +12,8 @@ const UserList = () => {
     })
   }, [])
 
-  console.log(users)
-
   const userList = users.map(user => {
-    return (
-      <li key={user.email}>
-        <img
-          src={userImg}
-          alt="유저 프로필"
-        />
-        <div>
-          <div>name : {user.displayName}</div>
-          <div>email : {user.email}</div>
-        </div>
-      </li>
-    )
+    return <UserItem user={user} />
   })
 
   return (
