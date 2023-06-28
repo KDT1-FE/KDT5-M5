@@ -1,9 +1,12 @@
+/*  */
+  
   .product-container .product-list {
     position: relative;
-    margin: 0 20px;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+    background-color: #fff;
   }
 
   .product-container .product-list .price {
@@ -12,23 +15,20 @@
   }
   
   .product-container .product-list img {
-    width: 100%;
+    width: 200px;
     height: auto;
     margin-bottom: 10px;
     border-radius: 5px;
+    object-fit: cover;
   }
   
   .product-container .product-card {
     border: 1px solid #000000;
     padding: 10px;
     text-align: center;
-
-  }
-  
-  .product-container .product-thumbnail {
     width: 200px;
-    height: 200px;
-    object-fit: cover;
+    background-color: #fff;
+    cursor: pointer;
   }
   
   .product-container .default-thumbnail {

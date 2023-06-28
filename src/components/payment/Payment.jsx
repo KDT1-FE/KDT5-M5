@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { singleProductSearch, authenticate } from '../../store/UserAPI'
+import { getAccounts } from '../../store/AccountAPI'
+import { buyProducts } from '../../store/ProductTransactions'
 import './payment.css'
 import DaumPostcode from 'react-daum-postcode'
 import Slider from 'react-slick'
@@ -9,15 +11,18 @@ import 'slick-carousel/slick/slick-theme.css'
 import { useStore } from '../../store/store'
 
 const Payment = () => {
-  const { amount, setAmount, totalPrice, setTotalPrice } = useStore()
-  const { category, productId } = useParams()
-  const [product, setProduct] = useState(null)
+  const { amount, totalPrice, product, setProduct } = useStore()
   const [deliveryMessage, setDeliveryMessage] = useState('')
   const [postalCode, setPostalCode] = useState('')
   const [address, setAddress] = useState('')
   const [showPostcodeModal, setShowPostcodeModal] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null)
+  const [accountList, setAccountList] = useState([])
+  const [recipientName, setRecipientName] = useState('')
+  const [contactNumber, setContactNumber] = useState('')
+  const [addressDetail, setAddressDetail] = useState('')
+  const [isFormValid, setIsFormValid] = useState(false)
+  const [selectAccount, setselectAccount] = useState('')
   const directMessage = useRef()
 
   useEffect(() => {
@@ -31,14 +36,14 @@ const Payment = () => {
         setIsLoggedIn(true)
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const productData = await singleProductSearch(productId)
+        const productData = await singleProductSearch(product.id)
         setProduct(productData)
       } catch (error) {
         console.error(error)
@@ -46,7 +51,21 @@ const Payment = () => {
     }
 
     fetchProduct()
-  }, [productId])
+  }, [product.id])
+
+  useEffect(() => {
+    const fetchAccounts = async () => {
+      try {
+        const accounts = await getAccounts()
+        setAccountList(accounts)
+      } catch (error) {
+        setAccountList([])
+        console.error('계좌를 가져오는 중 오류가 발생했습니다:', error)
+      }
+    }
+
+    fetchAccounts()
+  }, [])
 
   useEffect(() => {
     if (deliveryMessage === '직접 입력') {
@@ -54,11 +73,53 @@ const Payment = () => {
     }
   }, [deliveryMessage])
 
+  useEffect(() => {
+    validateForm()
+  }, [
+    recipientName,
+    contactNumber,
+    address,
+    deliveryMessage,
+    addressDetail,
+    directMessage
+  ])
+
+  useEffect(() => {
+    const fetchAccountID = async () => {
+      try {
+        const accounts = await getAccounts()
+        setAccountList(accounts)
+        if (accounts.length > 0) {
+          setselectAccount(accounts[0].id)
+        }
+      } catch (error) {
+        setAccountList([])
+        console.error('계좌를 가져오는 중 오류가 발생했습니다:', error)
+      }
+    }
+
+    fetchAccountID()
+  }, [])
+
+  const validateForm = () => {
+    if (
+      recipientName.trim() !== '' &&
+      contactNumber.trim() !== '' &&
+      address.trim() !== '' &&
+      addressDetail.trim() !== '' &&
+      deliveryMessage.trim() !== ''
+    ) {
+      setIsFormValid(true)
+    } else {
+      setIsFormValid(false)
+    }
+  }
+
   if (!product) {
     return <p>제품 정보를 가져오는 중 입니다...</p>
   }
 
-  if (product.id !== productId) {
+  if (product.id !== product.id) {
     return <p>제품을 찾을 수가 없습니다.</p>
   }
 
@@ -70,8 +131,33 @@ const Payment = () => {
     slidesToScroll: 1
   }
 
+  const handleBuyProduct = async () => {
+    try {
+      const buy = await buyProducts(product.id, selectAccount)
+      if (buy) {
+        alert('성공적으로 상품을 구매했습니다.')
+      } else {
+        alert('상품 구매에 실패했습니다.')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const handleDeliveryMessageChange = e => {
     setDeliveryMessage(e.target.value)
+  }
+
+  const handleRecipientNameChange = e => {
+    setRecipientName(e.target.value)
+  }
+
+  const handleContactNumberChange = e => {
+    setContactNumber(e.target.value)
+  }
+
+  const handleAddressDetailChange = e => {
+    setAddressDetail(e.target.value)
   }
 
   const handleAddressSearch = () => {
@@ -110,7 +196,6 @@ const Payment = () => {
                 </div>
                 <div>
                   <h3>{product.title}</h3>
-                  <p>{category}</p>
                 </div>
               </td>
               <td>{product.price} 원</td>
@@ -133,6 +218,7 @@ const Payment = () => {
                   className="recipient_name"
                   type="text"
                   placeholder="성함"
+                  onChange={handleRecipientNameChange}
                 />
               </td>
             </tr>
@@ -143,6 +229,7 @@ const Payment = () => {
                   className="contact_number"
                   type="text"
                   placeholder="연락처"
+                  onChange={handleContactNumberChange}
                 />
               </td>
             </tr>
@@ -166,6 +253,7 @@ const Payment = () => {
                   className="detail_address"
                   type="text"
                   placeholder="상세 정보"
+                  onChange={handleAddressDetailChange}
                 />
               </td>
             </tr>
@@ -230,35 +318,51 @@ const Payment = () => {
         </div>
       )}
 
-      <div>
+      <div className="payment-method--container">
         <h2> 결제수단 선택</h2>
         <div className="payment-method">
-          <Slider {...settings}>
-            <div>
-              <h3>1</h3>
-            </div>
-            <div>
-              <h3>2</h3>
-            </div>
-            <div>
-              <h3>3</h3>
-            </div>
-            <div>
-              <h3>4</h3>
-            </div>
-            <div>
-              <h3>5</h3>
-            </div>
-            <div>
-              <h3>6</h3>
-            </div>
-          </Slider>
+          {accountList.length > 0 ? (
+            <Slider
+              {...settings}
+              afterChange={index => {
+                const selectedAccount = accountList[index]
+                if (selectedAccount) {
+                  setselectAccount(selectedAccount.id)
+                }
+              }}>
+              {accountList.map(account => (
+                <div key={account.id}>
+                  <img
+                    src={`../../../public/card/${account.bankName}.png`}
+                    alt={account.bankName}
+                  />
+                  <div className="account-balace">
+                    잔액 : {account.balance.toLocaleString()} 원
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          ) : (
+            <Link
+              to="/mypage/paymentmethod"
+              className="payment__add-link">
+              <button className="payment__add-btn">결제 수단 추가</button>
+            </Link>
+          )}
         </div>
       </div>
-      <Link to="/mypage">
-        {/* 카드 결제 수단 선택하지 않거나 결제 수단이 없으면 비활성화 로직
-        추후에 추가 */}
-        <button>총 {totalPrice} 원 결제하기</button>
+      <div className="payment__change--info">
+        결제 수단을 변경하시려면 좌우로 드래그 해주세요.
+      </div>
+      <Link
+        to="/mypage/getOrderList"
+        className={`paymnet__confirm--link${isFormValid ? '' : ' disabled'}`}>
+        <button
+          onClick={handleBuyProduct}
+          className={`paymnet__confirm${!isFormValid ? ' disabled' : ''}`}
+          disabled={!isFormValid}>
+          총 {totalPrice.toLocaleString()} 원 결제하기
+        </button>
       </Link>
     </div>
   )

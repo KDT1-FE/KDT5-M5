@@ -2,3 +2,7 @@
   width: 1120px;
   margin: 0 auto;
 }
+
+input {
+  line-height: 1.2;
+}

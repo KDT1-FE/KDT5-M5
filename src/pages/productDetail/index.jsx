@@ -5,14 +5,17 @@ import './index.css'
 import { useStore } from '../../store/store'
 
 const ProductPage = () => {
-  const { category, productId } = useParams()
-  const { amount, setAmount, totalPrice, setTotalPrice } = useStore(state => ({
-    amount: state.amount,
-    setAmount: state.setAmount,
-    totalPrice: state.totalPrice,
-    setTotalPrice: state.setTotalPrice
-  }))
-  const [product, setProduct] = useState(null)
+  const { productId } = useParams()
+  const { amount, setAmount, totalPrice, setTotalPrice, product, setProduct } =
+    useStore(state => ({
+      amount: state.amount,
+      setAmount: state.setAmount,
+      totalPrice: state.totalPrice,
+      setTotalPrice: state.setTotalPrice,
+      product: state.product,
+      setProduct: state.setProduct
+    }))
+  /* const [product, setProduct] = useState('') */
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const isButtonActive = totalPrice !== 0
@@ -44,8 +47,10 @@ const ProductPage = () => {
   const checkLoginStatus = async () => {
     try {
       const user = await authenticate()
-      if (user) {
+      if (typeof user === 'object' && user !== null) {
         setIsLoggedIn(true)
+      } else {
+        setIsLoggedIn(false)
       }
     } catch (error) {
       console.log(error)
@@ -60,6 +65,40 @@ const ProductPage = () => {
 
   const amountIncrement = () => {
     setAmount(amount + 1)
+  }
+
+  const shoppingCart = (product, amount) => {
+    const { id, title, thumbnail, price } = product
+    const saveProductInCart = localStorage.getItem('productInCart')
+
+    let productsInCart = []
+
+    if (saveProductInCart) {
+      productsInCart = JSON.parse(saveProductInCart)
+    }
+
+    const productsInCartIndex = productsInCart.findIndex(
+      product => product.id === id
+    )
+
+    if (productsInCartIndex !== -1) {
+      productsInCart[productsInCartIndex].amount += amount
+    } else {
+      const productInCart = {
+        id,
+        title,
+        thumbnail,
+        price,
+        amount
+      }
+      productsInCart.push(productInCart)
+    }
+
+    localStorage.setItem('productInCart', JSON.stringify(productsInCart))
+  }
+
+  const duplicateCart = (product, amount) => {
+    shoppingCart(product, amount)
   }
 
   return (
@@ -109,7 +148,7 @@ const ProductPage = () => {
               </ul>
               <div className="side__productDetail--amountCal">
                 <h3>구매 수량</h3>
-                <div>
+                <div className="side__productAmount--btn-container">
                   <button
                     className="side__productAmount--decrease"
                     onClick={amountDecrement}>
@@ -128,24 +167,40 @@ const ProductPage = () => {
                 <span>{totalPrice.toLocaleString()} 원</span>
               </div>
               {isLoggedIn ? (
-                <Link
-                  to={
-                    isButtonActive ? `/payment/${category}/${productId}` : '#'
-                  }
-                  className={`side__payment--link ${
-                    isButtonActive ? '' : 'disabled-link'
-                  }`}>
-                  <button
-                    className={`side__payment ${
-                      isButtonActive ? '' : 'disabled'
-                    }`}
-                    disabled={!isButtonActive}>
-                    결제하기
-                  </button>
-                </Link>
+                <div className="side__payment--btn-container">
+                  <Link
+                    to={isButtonActive ? '/cart' : '#'}
+                    className={`side__payment--link ${
+                      isButtonActive ? '' : 'disabled-link'
+                    }`}>
+                    <button
+                      className={`side__payment ${
+                        isButtonActive ? '' : 'disabled'
+                      }`}
+                      disabled={!isButtonActive}
+                      onClick={() => duplicateCart(product, amount)}>
+                      장바구니
+                    </button>
+                  </Link>
+                  <Link
+                    to={isButtonActive ? '/payment' : '#'}
+                    className={`side__payment--link ${
+                      isButtonActive ? '' : 'disabled-link'
+                    }`}>
+                    <button
+                      className={`side__payment ${
+                        isButtonActive ? '' : 'disabled'
+                      }`}
+                      disabled={!isButtonActive}>
+                      결제하기
+                    </button>
+                  </Link>
+                </div>
               ) : (
-                <Link to="/login">
-                  <button className="side__payment">로그인 후 결제하기</button>
+                <Link
+                  to="/login"
+                  className="side__payment--link">
+                  <button className="side__payment">로그인 후 결제</button>
                 </Link>
               )}
               <p className="info">
@@ -157,19 +212,6 @@ const ProductPage = () => {
           <p>제품 상세 정보를 불러오는 중입니다....</p>
         )}
       </div>
-      {/*  <div className="section__detail">
-        {product ? (
-          <div className="section__detail__img">
-            <p>dfd</p>
-            <img
-              src={product.photo}
-              alt=""
-            />
-          </div>
-        ) : (
-          <p>제품 상세 정보를 불러오는 중입니다....</p>
-        )}
-      </div> */}
     </div>
   )
 }
