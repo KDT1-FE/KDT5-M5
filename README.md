@@ -303,84 +303,90 @@ $ npm run dev
 # 디렉토리 구조
 
 ```
-kdt5-m5
- ┣ public
- ┣ src
- ┃ ┣ api
- ┃ ┃ ┣ adminApi.ts
- ┃ ┃ ┣ authApi.ts
- ┃ ┃ ┣ bankApi.ts
- ┃ ┃ ┗ transactionApi.ts
- ┃ ┣ components
- ┃ ┃ ┣ product
- ┃ ┃ ┃ ┣ ProductBar.tsx
- ┃ ┃ ┃ ┣ ProductCard.tsx
- ┃ ┃ ┃ ┣ ProductSection.tsx
- ┃ ┃ ┃ ┗ ProductSortOptions.tsx
- ┃ ┃ ┣ ui
- ┃ ┃ ┃ ┣ Breadcrumbs.tsx
- ┃ ┃ ┃ ┣ Button.tsx
- ┃ ┃ ┃ ┣ CrazyLoading.tsx
- ┃ ┃ ┃ ┣ ImageUpload.tsx
- ┃ ┃ ┃ ┣ Input.tsx
- ┃ ┃ ┃ ┣ LoadingSpinner.tsx
- ┃ ┃ ┃ ┣ ProfileImage.tsx
- ┃ ┃ ┃ ┣ SectionTitle.tsx
- ┃ ┃ ┃ ┣ Select.tsx
- ┃ ┃ ┃ ┗ Skeleton.tsx
- ┃ ┃ ┣ Footer.tsx
- ┃ ┃ ┣ ImageSlider.tsx
- ┃ ┃ ┣ Layout.tsx
- ┃ ┃ ┣ Navbar.tsx
- ┃ ┃ ┣ Search.tsx
- ┃ ┃ ┣ SingleUser.tsx
- ┃ ┃ ┗ SubNavbar.tsx
- ┃ ┣ constants
- ┃ ┃ ┣ constants.ts
- ┃ ┃ ┗ library.ts
- ┃ ┣ routes
- ┃ ┃ ┣ admin
- ┃ ┃ ┃ ┣ AddProduct.tsx
- ┃ ┃ ┃ ┣ Admin.tsx
- ┃ ┃ ┃ ┣ AdminClients.tsx
- ┃ ┃ ┃ ┣ AdminProducts.tsx
- ┃ ┃ ┃ ┣ AllTransactions.tsx
- ┃ ┃ ┃ ┗ EditProduct.tsx
- ┃ ┃ ┣ myAccount
- ┃ ┃ ┃ ┣ bank
- ┃ ┃ ┃ ┃ ┣ BankAccounts.tsx
- ┃ ┃ ┃ ┃ ┗ ConnectBankAccount.tsx
- ┃ ┃ ┃ ┣ ChangeName.tsx
- ┃ ┃ ┃ ┣ ChangePassword.tsx
- ┃ ┃ ┃ ┣ Info.tsx
- ┃ ┃ ┃ ┣ MyAccount.tsx
- ┃ ┃ ┃ ┣ OrderDetail.tsx
- ┃ ┃ ┃ ┗ OrderList.tsx
- ┃ ┃ ┣ Home.tsx
- ┃ ┃ ┣ Login.tsx
- ┃ ┃ ┣ LogoutNeededRoute.tsx
- ┃ ┃ ┣ NotFound.tsx
- ┃ ┃ ┣ ProductDetail.tsx
- ┃ ┃ ┣ Products.tsx
- ┃ ┃ ┣ ProtectedRoute.tsx
- ┃ ┃ ┣ SearchProducts.tsx
- ┃ ┃ ┗ SignUp.tsx
- ┃ ┣ App.tsx
- ┃ ┣ index.css
- ┃ ┣ main.tsx
- ┃ ┣ store.ts
- ┃ ┗ vite-env.d.ts
- ┣ .eslintrc.cjs
- ┣ .gitignore
- ┣ .prettierrc
- ┣ custom.d.ts
- ┣ index.html
- ┣ package-lock.json
- ┣ package.json
- ┣ postcss.config.js
- ┣ README.md
- ┣ tailwind.config.js
- ┣ tsconfig.json
- ┣ tsconfig.node.json
- ┗ vite.config.ts
-```
+KDT5-M5
+┣ public
+┣ src
+┃ ┣ api
+┃ ┃ ┣ adminApi.ts
+┃ ┃ ┣ authApi.ts
+┃ ┃ ┣ bankApi.ts
+┃ ┃ ┗ transactionApi.ts
+┃ ┣ components
+┃ ┃ ┣ product
+┃ ┃ ┃ ┣ ProductBar.tsx
+┃ ┃ ┃ ┣ ProductCard.tsx
+┃ ┃ ┃ ┣ ProductSection.tsx
+┃ ┃ ┃ ┗ ProductSortOptions.tsx
+┃ ┃ ┣ ui
+┃ ┃ ┃ ┣ Breadcrumbs.tsx
+┃ ┃ ┃ ┣ Button.tsx
+┃ ┃ ┃ ┣ CrazyLoading.tsx
+┃ ┃ ┃ ┣ ImageUpload.tsx
+┃ ┃ ┃ ┣ Input.tsx
+┃ ┃ ┃ ┣ LoadingSpinner.tsx
+┃ ┃ ┃ ┣ ProfileImage.tsx
+┃ ┃ ┃ ┣ SectionTitle.tsx
+┃ ┃ ┃ ┣ Select.tsx
+┃ ┃ ┃ ┗ Skeleton.tsx
+┃ ┃ ┣ Footer.tsx
+┃ ┃ ┣ ImageSlider.tsx
+┃ ┃ ┣ Layout.tsx
+┃ ┃ ┣ Navbar.tsx
+┃ ┃ ┣ Search.tsx
+┃ ┃ ┣ SingleUser.tsx
+┃ ┃ ┗ SubNavbar.tsx
+┃ ┣ constants
+┃ ┃ ┣ constants.ts
+┃ ┃ ┗ library.ts
+┃ ┣ lib
+┃ ┃ ┣ ceilPrice.ts
+┃ ┃ ┗ time.ts
+┃ ┣ routes
+┃ ┃ ┣ admin
+┃ ┃ ┃ ┣ AddProduct.tsx
+┃ ┃ ┃ ┣ Admin.tsx
+┃ ┃ ┃ ┣ AdminClients.tsx
+┃ ┃ ┃ ┣ AdminProducts.tsx
+┃ ┃ ┃ ┣ AllTransactions.tsx
+┃ ┃ ┃ ┗ EditProduct.tsx
+┃ ┃ ┣ myAccount
+┃ ┃ ┃ ┣ bank
+┃ ┃ ┃ ┃ ┣ BankAccounts.tsx
+┃ ┃ ┃ ┃ ┗ ConnectBankAccount.tsx
+┃ ┃ ┃ ┣ ChangeName.tsx
+┃ ┃ ┃ ┣ ChangePassword.tsx
+┃ ┃ ┃ ┣ Info.tsx
+┃ ┃ ┃ ┣ Login.tsx
+┃ ┃ ┃ ┣ LogoutNeededRoute.tsx
+┃ ┃ ┃ ┣ MyAccount.tsx
+┃ ┃ ┃ ┣ OrderDetail.tsx
+┃ ┃ ┃ ┣ OrderList.tsx
+┃ ┃ ┃ ┗ SignUp.tsx
+┃ ┃ ┣ Home.tsx
+┃ ┃ ┣ Login.tsx
+┃ ┃ ┣ LogoutNeededRoute.tsx
+┃ ┃ ┣ NotFound.tsx
+┃ ┃ ┣ ProductDetail.tsx
+┃ ┃ ┣ Products.tsx
+┃ ┃ ┣ ProtectedRoute.tsx
+┃ ┃ ┣ SearchProducts.tsx
+┃ ┃ ┗ SignUp.tsx
+┃ ┣ App.tsx
+┃ ┣ index.css
+┃ ┣ main.tsx
+┃ ┣ store.ts
+┃ ┗ vite-env.d.ts
+┣ .eslintrc.cjs
+┣ .gitignore
+┣ .prettierrc
+┣ custom.d.ts
+┣ index.html
+┣ package-lock.json
+┣ package.json
+┣ postcss.config.js
+┣ README.md
+┣ tailwind.config.js
+┣ tsconfig.json
+┣ tsconfig.node.json
+┗ vite.config.ts
+ ```
