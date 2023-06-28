@@ -22,6 +22,7 @@ import MyInfo from './components/myPage/MyInfo'
 import MyMenu from './components/myPage/MyMenu'
 import PaymentMethod from './pages/MyPage/PaymentMethod'
 import OrderDetailItem from './components/myPage/getOrderList/OrderDetailItem'
+import ProductCategory from './pages/prdouctCategory/productCategory'
 
 const Layout = () => {
   return (
@@ -64,6 +65,10 @@ function App() {
           <Route
             index
             element={<Home />}
+          />
+          <Route
+            path="/product/:category"
+            element={<ProductCategory />}
           />
           <Route
             path="/product/:category/:productId"
