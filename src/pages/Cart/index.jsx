@@ -1,7 +1,8 @@
 import React from 'react'
+import GetCart from '../../components/cart/getCart'
 
 const Cart = () => {
-  return <div>Cart</div>
+  return <GetCart />
 }
 
 export default Cart

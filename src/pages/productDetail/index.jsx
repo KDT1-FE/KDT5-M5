@@ -128,21 +128,48 @@ const ProductPage = () => {
                 <span>{totalPrice.toLocaleString()} 원</span>
               </div>
               {isLoggedIn ? (
-                <Link
-                  to={
-                    isButtonActive ? `/payment/${category}/${productId}` : '#'
-                  }
-                  className={`side__payment--link ${
-                    isButtonActive ? '' : 'disabled-link'
-                  }`}>
+                <div>
+                  <Link
+                    to={
+                      isButtonActive ? `/payment/${category}/${productId}` : '#'
+                    }
+                    className={`side__payment--link ${
+                      isButtonActive ? '' : 'disabled-link'
+                    }`}>
+                    <button
+                      className={`side__payment ${
+                        isButtonActive ? '' : 'disabled'
+                      }`}
+                      disabled={!isButtonActive}>
+                      결제하기
+                    </button>
+                  </Link>
                   <button
                     className={`side__payment ${
                       isButtonActive ? '' : 'disabled'
                     }`}
-                    disabled={!isButtonActive}>
-                    결제하기
+                    onClick={() => {
+                      const cartProduct = { product: product, amount: amount }
+                      const storage = JSON.parse(
+                        localStorage.getItem('product')
+                      )
+                      console.log(storage)
+                      if (!storage) {
+                        localStorage.setItem(
+                          'product',
+                          JSON.stringify([cartProduct])
+                        )
+                      } else {
+                        localStorage.setItem(
+                          'product',
+                          JSON.stringify([...storage, cartProduct])
+                        )
+                      }
+                    }}
+                    type="button">
+                    장바구니 담기
                   </button>
-                </Link>
+                </div>
               ) : (
                 <Link to="/login">
                   <button className="side__payment">로그인 후 결제하기</button>
