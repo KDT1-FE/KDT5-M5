@@ -5,15 +5,16 @@ const GetCart = () => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    const storage = JSON.parse(localStorage.getItem('product'))
+    const storage = JSON.parse(localStorage.getItem('productInCart'))
     console.log(storage)
     setProducts(storage)
   }, [])
 
   console.log(products)
   const productList = products.map((item, index) => {
-    const { title, thumbnail, tags, price } = item.product
+    const { title, thumbnail, tags, price, amount } = item
 
+    console.log(item)
     const tag = tags.map((tag, index) => {
       return <span key={index}>{tag}</span>
     })
@@ -38,12 +39,15 @@ const GetCart = () => {
               onClick={() => {
                 let newProducts = products.slice()
                 newProducts[index].amount = newProducts[index].amount + 1
-                localStorage.setItem('product', JSON.stringify(newProducts))
+                localStorage.setItem(
+                  'productInCart',
+                  JSON.stringify(newProducts)
+                )
                 setProducts(newProducts)
               }}>
               +
             </button>
-            <p>{item.amount}</p>
+            <p>{amount}</p>
             <button
               onClick={() => {
                 let newProducts = products.slice()
@@ -51,7 +55,10 @@ const GetCart = () => {
                   return
                 } else {
                   newProducts[index].amount = newProducts[index].amount - 1
-                  localStorage.setItem('product', JSON.stringify(newProducts))
+                  localStorage.setItem(
+                    'productInCart',
+                    JSON.stringify(newProducts)
+                  )
                   setProducts(newProducts)
                 }
               }}>
@@ -66,7 +73,7 @@ const GetCart = () => {
                 return item !== newProducts[index]
               })
               console.log(newProducts)
-              localStorage.setItem('product', JSON.stringify(newProducts))
+              localStorage.setItem('productInCart', JSON.stringify(newProducts))
               setProducts(newProducts)
             }}>
             삭제

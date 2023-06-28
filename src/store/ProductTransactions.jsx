@@ -177,7 +177,7 @@ export const productsPurchase = async () => {
 export const productPurchase = async detailId => {
   const accessToken = getAccessToken()
   try {
-    const res = await fetch(`${TRANJACTION}/details`, {
+    const res = await fetch(`${TRANJACTION}/detail`, {
       method: 'POST',
       headers: {
         ...userHEADERS,

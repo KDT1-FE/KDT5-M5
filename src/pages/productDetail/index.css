@@ -37,19 +37,19 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    overflow: hidden;
     border: 1px solid #a9a9a9;
     margin: 0 20px; 
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .side__productDetail--image-container::-webkit-scrollbar {
     display: none;
   }
   
-  .section__productDetail--img {
+  .side__productDetail--img {
     width: 540px;
-    height: 540px;
+    height: auto;
   }
   
   .side__productDetail-menu {
@@ -95,6 +95,13 @@
     border-radius: 7px;
   }
 
+  .side__productAmount--btn-container {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
   .side__productAmount--decrease,
   .side__productAmount--increase {
     background-color: #fff;
@@ -137,10 +144,14 @@
     border-bottom: 2px solid #e02020;
     line-height: 2;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 24px;  
     color: #e02020;
   }
   
+  .side__payment--btn-container {
+    display: flex;
+    justify-content: space-around
+  }
   
 
   .side__payment {
@@ -148,7 +159,7 @@
     background-color: #fff;
     border: 1px solid;
     border-radius: 10px;
-    width: 300px;
+    width: 230px;
     height: 50px;
     font-size: 20px;
     font-weight: 700;
@@ -159,7 +170,6 @@
   .side__payment--link {
     display: flex;
     justify-content: center;
-    
   }
 
   .side__payment:hover {
@@ -170,7 +180,7 @@
 
   .side__payment.disabled:hover {
     /* 비활성화 상태인 창에 마우스 over를 해도 여전히 비활성화 되게  */
-    background-color: #f1f1f1;
+    background-color: #e02020;
     cursor: not-allowed;
     border: 1px solid;
   } 
