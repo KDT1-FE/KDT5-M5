@@ -15,7 +15,7 @@ const ProductPage = () => {
       product: state.product,
       setProduct: state.setProduct
     }))
-  /* const [product, setProduct] = useState('') */
+
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const isButtonActive = totalPrice !== 0
@@ -68,7 +68,7 @@ const ProductPage = () => {
   }
 
   const shoppingCart = (product, amount) => {
-    const { id, title, thumbnail, price } = product
+    const { id, title, thumbnail, price, tags } = product
     const saveProductInCart = localStorage.getItem('productInCart')
 
     let productsInCart = []
@@ -89,7 +89,8 @@ const ProductPage = () => {
         title,
         thumbnail,
         price,
-        amount
+        amount,
+        tags
       }
       productsInCart.push(productInCart)
     }

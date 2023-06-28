@@ -1,4 +1,9 @@
-/*  */
+.product-container.view {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
+}
   
   .product-container .product-list {
     position: relative;
@@ -17,18 +22,27 @@
   .product-container .product-list img {
     width: 200px;
     height: auto;
+    box-sizing: border-box;
+    padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
     object-fit: cover;
+    transition: all 0.2s linear;
   }
+
+  .product-container .product-list img:hover {
+    transform: scale(1.1);
+  }
+
   
-  .product-container .product-card {
+  .product-container .product-list .product-card {
     border: 1px solid #000000;
     padding: 10px;
     text-align: center;
     width: 200px;
     background-color: #fff;
     cursor: pointer;
+    box-shadow: 10px 8px 5px #a9a9a9c6;
   }
   
   .product-container .default-thumbnail {
