@@ -29,7 +29,7 @@ const ProductMenu = ({ category }) => {
   }, [category])
 
   if (isLoading) {
-    return <div>로딩 중...</div>
+    return <div className="product-menu-loader">로딩 중...</div>
   }
 
   const handleCategoryClick = () => {

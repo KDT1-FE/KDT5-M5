@@ -50,3 +50,10 @@
 .product-container .slick-slider.slick-initialized .slick-list::-webkit-scrollbar {
   display: none;
 }
+
+.product-menu-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

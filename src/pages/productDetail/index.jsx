@@ -210,7 +210,9 @@ const ProductPage = () => {
             </div>
           </div>
         ) : (
-          <p>제품 상세 정보를 불러오는 중입니다....</p>
+          <div className="loading__container">
+            제품 상세 정보를 불러오는 중입니다...
+          </div>
         )}
       </div>
     </div>
