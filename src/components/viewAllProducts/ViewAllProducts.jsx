@@ -10,12 +10,10 @@ const ViewAllProducts = () => {
   useEffect(() => {
     getProducts().then(res => {
       setAllProducts(res)
-      console.log(res)
     })
   }, [])
 
   const Products = allProducts.map(product => {
-    console.log(product)
     return (
       <ProductWrapper
         key={product.id}
@@ -68,7 +66,6 @@ const ProductWrapper = styled.li`
   .item {
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
     box-sizing: border-box;
     border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 5px;

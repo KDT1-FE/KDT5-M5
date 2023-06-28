@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import './AddProduct.css'
 import Tag from './Tag'
 import { addProduct } from '../../store/AdminAPI'
+import styled from 'styled-components'
 
 const AddProduct = () => {
   //제품 추가
@@ -12,8 +12,6 @@ const AddProduct = () => {
   const [tags, setTags] = useState([])
   const [thumbnail, setThumbnail] = useState('')
   const [detailImg, setDetailImg] = useState('')
-
-  const [newProduct, setNewProduct] = useState('')
 
   const productObj = {
     title: product,
@@ -29,7 +27,11 @@ const AddProduct = () => {
     event.preventDefault()
 
     const res = await addProduct(productObj)
-    setNewProduct(res)
+    // console.log()
+    if (res.id) {
+      alert('제품이 추가되었습니다')
+      location.reload()
+    }
   }
 
   function uploadImg(event, setState, imgEl) {
@@ -69,66 +71,140 @@ const AddProduct = () => {
   })
 
   return (
-    <div className="add-product">
-      AddProduct
+    <Warpper>
+      <h1>AddProduct</h1>
+
       <form onSubmit={newProductPush}>
-        <div>제품이름</div>
-        <input
-          type="text"
-          onChange={e => setProduct(e.target.value)}
-        />
-        <br />
-        <div> 제품가격</div>
-        <input
-          type="text"
-          onChange={e => setPrice(e.target.value)}
-        />
-        <br />
-        <div> 제품 상세 설명</div>
-        <input
-          type="text"
-          onChange={e => setDetail(e.target.value)}
-        />
-        <br />
-        <div> 제품 태그</div>
-        <input
-          className="tagInputEl"
-          type="text"
-          value={tag}
-          onChange={e => setTag(e.target.value)}
-        />
-        <button
-          type="button"
-          onClick={() => {
-            addTags(tags, tag)
-            setTag('')
-          }}>
-          추가
-        </button>
-        <div>
-          <ul>{tagList}</ul>
-        </div>
-        <br />
-        <div> 제품 썸네일</div>
-        <input
-          type="file"
-          onChange={e => uploadImg(e, setThumbnail, 'Thumbnail')}
-        />
-        <img id="Thumbnail" />
-        <br />
-        <div> 제품 상세 사진</div>
-        <input
-          type="file"
-          onChange={e => uploadImg(e, setDetailImg, 'DetailImg')}
-        />
-        <img id="DetailImg" />
-        <br />
-        {/* 제품 할인율 추후 구현 */}
-        {/* <input type="text" /> */}
+        <SubWarpper>
+          <p>제품이름</p>
+          <input
+            type="text"
+            onChange={e => setProduct(e.target.value)}
+          />
+        </SubWarpper>
+        <SubWarpper>
+          <p>제품가격</p>
+          <input
+            type="text"
+            onChange={e => setPrice(e.target.value)}
+          />
+        </SubWarpper>
+        <SubWarpper>
+          <p>제품 상세 설명</p>
+          <input
+            type="text"
+            onChange={e => setDetail(e.target.value)}
+          />
+        </SubWarpper>
+        <SubWarpper>
+          <p>제품 태그</p>
+          <input
+            className="tagInputEl"
+            type="text"
+            value={tag}
+            onChange={e => setTag(e.target.value)}
+          />
+          <button
+            type="button"
+            onClick={() => {
+              if (tag === '') {
+                return
+              }
+              addTags(tags, tag)
+              setTag('')
+            }}>
+            추가
+          </button>
+          <div>
+            <ul>{tagList}</ul>
+          </div>
+        </SubWarpper>
+        <SubWarpper>
+          <p>제품 썸네일</p>
+          <input
+            type="file"
+            onChange={e => uploadImg(e, setThumbnail, 'Thumbnail')}
+          />
+          <img id="Thumbnail" />
+        </SubWarpper>
+        <SubWarpper>
+          <p>제품 상세 사진</p>
+          <input
+            type="file"
+            onChange={e => uploadImg(e, setDetailImg, 'DetailImg')}
+          />
+          <img id="DetailImg" />
+        </SubWarpper>
+
         <button type="submit">등록</button>
       </form>
-    </div>
+    </Warpper>
   )
 }
+
+const Warpper = styled.div`
+  background-color: #2e2e2e;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  color: #fff;
+  h1 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+
+  form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  form img {
+    width: 300px;
+  }
+
+  button {
+    height: 35px;
+    border: none;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 15px 30px;
+    border-radius: 5px;
+    background-color: #b7ffb5;
+    text-decoration: none;
+    text-align: center;
+    line-height: 10px;
+  }
+
+  button:hover {
+    background-color: #77af9c;
+  }
+`
+
+const SubWarpper = styled.div`
+  background-color: #5f5f5f;
+  margin-bottom: 10px;
+  padding: 20px;
+  border-radius: 10px;
+
+  input {
+    width: 300px;
+    height: 30px;
+    border: none;
+    background-color: #9e9e9e;
+    border-radius: 5px;
+    padding: 10px;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #fff;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+`
 
 export default AddProduct
