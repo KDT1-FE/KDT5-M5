@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const GetCart = () => {
-  const [product, setProduct] = useState([])
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
     const storage = JSON.parse(localStorage.getItem('product'))
-    setProduct(storage)
+    console.log(storage)
+    setProducts(storage)
   }, [])
 
-  console.log(product)
-  const products = product.map((item, index) => {
+  console.log(products)
+  const productList = products.map((item, index) => {
     const { title, thumbnail, tags, price } = item.product
 
     const tag = tags.map((tag, index) => {
@@ -35,26 +36,41 @@ const GetCart = () => {
           <div className="amount">
             <button
               onClick={() => {
-                let newProduct = product.slice()
-                newProduct[index].amount = newProduct[index].amount + 1
-                setProduct(newProduct)
+                let newProducts = products.slice()
+                newProducts[index].amount = newProducts[index].amount + 1
+                localStorage.setItem('product', JSON.stringify(newProducts))
+                setProducts(newProducts)
               }}>
               +
             </button>
             <p>{item.amount}</p>
             <button
               onClick={() => {
-                let newProduct = product.slice()
-                if (newProduct[index].amount <= 1) {
+                let newProducts = products.slice()
+                if (newProducts[index].amount <= 1) {
                   return
                 } else {
-                  newProduct[index].amount = newProduct[index].amount - 1
-                  setProduct(newProduct)
+                  newProducts[index].amount = newProducts[index].amount - 1
+                  localStorage.setItem('product', JSON.stringify(newProducts))
+                  setProducts(newProducts)
                 }
               }}>
               -
             </button>
           </div>
+
+          <button
+            onClick={() => {
+              let newProducts = products.slice()
+              newProducts = newProducts.filter(item => {
+                return item !== newProducts[index]
+              })
+              console.log(newProducts)
+              localStorage.setItem('product', JSON.stringify(newProducts))
+              setProducts(newProducts)
+            }}>
+            삭제
+          </button>
         </LiWrapper>
       </li>
     )
@@ -62,7 +78,8 @@ const GetCart = () => {
   return (
     <Wrapper>
       GetCart
-      <ul>{products}</ul>
+      <ul>{productList}</ul>
+      <div>총 금액</div>
     </Wrapper>
   )
 }
