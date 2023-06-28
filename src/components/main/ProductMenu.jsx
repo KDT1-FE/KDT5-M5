@@ -50,7 +50,7 @@ const ProductMenu = ({ category }) => {
       <div className="product-category">
         <h2 onClick={handleCategoryClick}>{category}</h2>
       </div>
-      <div className="product-container menu">
+      <div className="product-container">
         <Slider {...settings}>
           {products.map(product => (
             <ProductList
