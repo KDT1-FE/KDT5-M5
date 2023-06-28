@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { singleProductSearch, authenticate } from '../../store/UserAPI'
 import { getAccounts } from '../../store/AccountAPI'
 import { buyProducts } from '../../store/ProductTransactions'
@@ -11,9 +11,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import { useStore } from '../../store/store'
 
 const Payment = () => {
-  const { amount, totalPrice } = useStore()
-  const { productId } = useParams()
-  const [product, setProduct] = useState(null)
+  const { amount, totalPrice, product, setProduct } = useStore()
   const [deliveryMessage, setDeliveryMessage] = useState('')
   const [postalCode, setPostalCode] = useState('')
   const [address, setAddress] = useState('')
@@ -38,14 +36,14 @@ const Payment = () => {
         setIsLoggedIn(true)
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const productData = await singleProductSearch(productId)
+        const productData = await singleProductSearch(product.id)
         setProduct(productData)
       } catch (error) {
         console.error(error)
@@ -53,7 +51,7 @@ const Payment = () => {
     }
 
     fetchProduct()
-  }, [productId])
+  }, [product.id])
 
   useEffect(() => {
     const fetchAccounts = async () => {
@@ -121,7 +119,7 @@ const Payment = () => {
     return <p>제품 정보를 가져오는 중 입니다...</p>
   }
 
-  if (product.id !== productId) {
+  if (product.id !== product.id) {
     return <p>제품을 찾을 수가 없습니다.</p>
   }
 
@@ -135,7 +133,7 @@ const Payment = () => {
 
   const handleBuyProduct = async () => {
     try {
-      const buy = await buyProducts(productId, selectAccount)
+      const buy = await buyProducts(product.id, selectAccount)
       if (buy) {
         alert('성공적으로 상품을 구매했습니다.')
       } else {

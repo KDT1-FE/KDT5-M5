@@ -111,7 +111,7 @@ function App() {
             />
           </Route>
           <Route
-            path="payment/:category/:productId"
+            path="payment"
             element={<Payment />}
           />
           <Route

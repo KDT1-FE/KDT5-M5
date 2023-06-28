@@ -5,14 +5,17 @@ import './index.css'
 import { useStore } from '../../store/store'
 
 const ProductPage = () => {
-  const { category, productId } = useParams()
-  const { amount, setAmount, totalPrice, setTotalPrice } = useStore(state => ({
-    amount: state.amount,
-    setAmount: state.setAmount,
-    totalPrice: state.totalPrice,
-    setTotalPrice: state.setTotalPrice
-  }))
-  const [product, setProduct] = useState(null)
+  const { productId } = useParams()
+  const { amount, setAmount, totalPrice, setTotalPrice, product, setProduct } =
+    useStore(state => ({
+      amount: state.amount,
+      setAmount: state.setAmount,
+      totalPrice: state.totalPrice,
+      setTotalPrice: state.setTotalPrice,
+      product: state.product,
+      setProduct: state.setProduct
+    }))
+  /* const [product, setProduct] = useState('') */
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const isButtonActive = totalPrice !== 0
@@ -180,9 +183,7 @@ const ProductPage = () => {
                     </button>
                   </Link>
                   <Link
-                    to={
-                      isButtonActive ? `/payment/${category}/${productId}` : '#'
-                    }
+                    to={isButtonActive ? '/payment' : '#'}
                     className={`side__payment--link ${
                       isButtonActive ? '' : 'disabled-link'
                     }`}>
