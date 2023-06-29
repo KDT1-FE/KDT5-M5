@@ -140,8 +140,11 @@ const Payment = () => {
     try {
       if (products) {
         let isSuccess = true
+
         for (const product of products) {
-          for (let i = 0; i < product.amount; i++) {
+          const paymentAmount = amount || product.amount
+
+          for (let i = 0; i < paymentAmount; i++) {
             const buy = await buyProducts(product.id, selectAccount)
             if (!buy) {
               isSuccess = false
@@ -152,13 +155,14 @@ const Payment = () => {
             break
           }
         }
+
         if (isSuccess) {
-          alert('제품을 성공적으로 구매했습니다.')
+          alert(`제품을 성공적으로 구매했습니다.`)
         } else {
           alert('제품 구매에 실패했습니다.')
         }
       } else {
-        alert('제품이 없습니다.')
+        alert('제품이 존재하지 않습니다.')
       }
     } catch (error) {
       console.log(error)
