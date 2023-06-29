@@ -45,7 +45,14 @@ const Payment = () => {
       try {
         const productIds = products.map(product => product.id)
         const productData = await Promise.all(
-          productIds.map(productId => singleProductSearch(productId))
+          productIds.map(async productId => {
+            const product = await singleProductSearch(productId)
+            const matchedProduct = products.find(p => p.id === productId)
+            if (matchedProduct) {
+              product.amount = matchedProduct.amount // Add the 'amount' property to the fetched product
+            }
+            return product
+          })
         )
         setProducts(productData)
       } catch (error) {
@@ -98,6 +105,11 @@ const Payment = () => {
     fetchAccountID()
   }, [])
 
+  useEffect(() => {
+    const storage = JSON.parse(localStorage.getItem('productInCart'))
+    setProducts(storage)
+  }, [])
+
   const validateForm = () => {
     if (
       recipientName.trim() !== '' &&
@@ -128,10 +140,15 @@ const Payment = () => {
     try {
       if (products) {
         let isSuccess = true
-        for (const productId of products.map(product => product.id)) {
-          const buy = await buyProducts(productId, selectAccount)
-          if (!buy) {
-            isSuccess = false
+        for (const product of products) {
+          for (let i = 0; i < product.amount; i++) {
+            const buy = await buyProducts(product.id, selectAccount)
+            if (!buy) {
+              isSuccess = false
+              break
+            }
+          }
+          if (!isSuccess) {
             break
           }
         }
@@ -178,7 +195,8 @@ const Payment = () => {
     return (
       <tbody>
         {products.map(product => {
-          const productTotalPrice = product.price * amount
+          const productTotalPrice =
+            product.price * (amount ? amount : product.amount)
 
           return (
             <tr key={product.id}>
@@ -194,7 +212,7 @@ const Payment = () => {
                 </div>
               </td>
               <td>{product.price.toLocaleString()} 원</td>
-              <td>{amount} 개</td>
+              <td>{amount ? amount : product.amount} 개</td>
               <td>{productTotalPrice.toLocaleString()} 원</td>
             </tr>
           )

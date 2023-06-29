@@ -44,10 +44,6 @@ const ProductPage = () => {
   }, [productId])
 
   useEffect(() => {
-    console.log('Current products:', products)
-  }, [products])
-
-  useEffect(() => {
     if (products && products.length > 0) {
       const calculatedPrice = products.reduce(
         (total, product) => total + product.price * amount,
