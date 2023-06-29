@@ -49,7 +49,7 @@ const Payment = () => {
             const product = await singleProductSearch(productId)
             const matchedProduct = products.find(p => p.id === productId)
             if (matchedProduct) {
-              product.amount = matchedProduct.amount // Add the 'amount' property to the fetched product
+              product.amount = matchedProduct.amount
             }
             return product
           })
