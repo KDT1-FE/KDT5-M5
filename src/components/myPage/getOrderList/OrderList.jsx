@@ -17,8 +17,11 @@ const OrderList = () => {
     <div>
       <h1>제품 전체 거래 내역</h1>
       <ul>
-        {purchase.map(item => (
-          <OrderItem purchase={item} />
+        {purchase.map((item, index) => (
+          <OrderItem
+            key={index}
+            purchase={item}
+          />
         ))}
       </ul>
     </div>

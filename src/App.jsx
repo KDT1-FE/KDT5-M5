@@ -45,11 +45,21 @@ const AdminLayout = () => {
 
 const MyPageLayout = () => {
   return (
-    <div style={{ display: 'flex' }}>
+    <div>
       <MyMenu />
-      <div>
-        <MyInfo />
-        <Outlet />
+      <div
+        style={{
+          maxWidth: '1200px',
+          minHeight: '500px',
+          margin: '0 auto',
+          padding: '0 200px'
+        }}>
+        <div>
+          <MyInfo />
+        </div>
+        <div>
+          <Outlet />
+        </div>
       </div>
     </div>
   )
@@ -101,10 +111,7 @@ function App() {
               path="getOrderList/:detailId"
               element={<OrderDetailItem />}
             />
-            <Route
-              path="getOrderCancelList"
-              element={<GetOrderCancelList />}
-            />
+
             <Route
               path="changeMyInfo"
               element={<ChangeMyInfo />}

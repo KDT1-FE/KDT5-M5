@@ -13,8 +13,8 @@ const OrderItem = ({ purchase }) => {
         <Link to={`./${detailId}`}> 제품명 : {product.title} </Link>
       </div>
       <div>가격 : {product.price} 원</div>
-      <div>거래 시간 : {timePaid}</div>
-      <div>거래 완료 : {done}</div>
+      <div>거래 시간 : {`${timePaid}`}</div>
+      <div>거래 완료 : {`${done}`}</div>
     </li>
   )
 }
