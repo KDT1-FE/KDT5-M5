@@ -45,7 +45,7 @@ const GetCart = () => {
             {tag}
           </div>
 
-          <p>{price}</p>
+          <p>{price} 원</p>
 
           <div className="amount">
             <button
@@ -116,6 +116,8 @@ const GetCart = () => {
         <p>
           장바구니 상품의 총 금액은 <span>{totalPrice}</span>원 입니다
         </p>
+
+        {/* ----------------------------------- */}
         <button
           onClick={() => {
             console.log('제품데이터 : ', products)
@@ -123,6 +125,7 @@ const GetCart = () => {
           }}>
           전체결제
         </button>
+        {/* ----------------------------------- */}
       </div>
     </Wrapper>
   )

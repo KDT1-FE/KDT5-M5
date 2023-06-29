@@ -223,3 +223,13 @@
   .disabled-link {
     cursor: default;
   }
+
+  .loading__container   {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+  }
+  
+  
