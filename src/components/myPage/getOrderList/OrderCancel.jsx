@@ -8,7 +8,7 @@ const OrderCancel = ({ detailId }) => {
     alert(res)
   }
 
-  return <button onClick={cancel}></button>
+  return <button onClick={cancel}>구매취소</button>
 }
 
 export default OrderCancel

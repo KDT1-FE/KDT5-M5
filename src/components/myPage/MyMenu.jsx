@@ -11,14 +11,14 @@ const MyMenu = () => {
         </li>
         <li>─────────</li>
         <li>
+          <a href="/cart">장바구니</a>
+        </li>
+        <li>
           <a href="/mypage/paymentMethod">결제 정보</a>
         </li>
         <li>─────────</li>
         <li>
           <a href="/mypage/getOrderList">주문 조회</a>
-        </li>
-        <li>
-          <a href="/mypage/getOrderCancelList">취소 내역 조회</a>
         </li>
         <li>─────────</li>
         <li>

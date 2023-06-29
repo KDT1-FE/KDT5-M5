@@ -8,7 +8,7 @@ const OrderOk = ({ detailId }) => {
     alert(res)
   }
 
-  return <button onClick={cancel}></button>
+  return <button onClick={cancel}>구매확정</button>
 }
 
 export default OrderOk
