@@ -141,10 +141,9 @@ const PaymentMethod = () => {
           <p className="mypage__account--balance">
             <span className="maypage__account--total-balance">
               총 잔고 합계 :{' '}
-              {accountList.reduce(
-                (total, account) => total + account.balance,
-                0
-              )}{' '}
+              {accountList
+                .reduce((total, account) => total + account.balance, 0)
+                .toLocaleString()}{' '}
               원
             </span>
           </p>

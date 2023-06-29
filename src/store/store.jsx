@@ -3,10 +3,10 @@ import { create } from 'zustand'
 const useStore = create(set => ({
   amount: 0,
   totalPrice: 0,
-  product: '',
+  products: [],
   setAmount: newAmount => set(state => ({ amount: newAmount })),
   setTotalPrice: newTotalPrice => set(state => ({ totalPrice: newTotalPrice })),
-  setProduct: newProduct => set(state => ({ product: newProduct }))
+  setProducts: newProducts => set(state => ({ products: newProducts }))
 }))
 
 export { useStore }

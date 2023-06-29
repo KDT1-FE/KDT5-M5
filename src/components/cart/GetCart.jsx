@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import MyInfo from '../myPage/MyInfo'
+import { useStore } from '../../store/store'
+import { useNavigate } from 'react-router-dom'
 
 const GetCart = () => {
-  const [products, setProducts] = useState([])
-  const [totalPrice, setTotalPrice] = useState(0)
+  const navigate = useNavigate()
+  const { products, setProducts, totalPrice, setTotalPrice } = useStore(
+    state => ({
+      products: state.products,
+      setProducts: state.setProducts,
+      totalPrice: state.totalPrice,
+      setTotalPrice: state.setTotalPrice
+    })
+  )
 
   useEffect(() => {
     const storage = JSON.parse(localStorage.getItem('productInCart'))
@@ -97,6 +106,11 @@ const GetCart = () => {
       </li>
     )
   })
+
+  const handlePayment = () => {
+    navigate('/payment')
+  }
+
   return (
     <Wrapper>
       <div className="cart">
@@ -116,16 +130,7 @@ const GetCart = () => {
         <p>
           장바구니 상품의 총 금액은 <span>{totalPrice}</span>원 입니다
         </p>
-
-        {/* ----------------------------------- */}
-        <button
-          onClick={() => {
-            console.log('제품데이터 : ', products)
-            console.log('총 금액 : ' + totalPrice)
-          }}>
-          전체결제
-        </button>
-        {/* ----------------------------------- */}
+        <button onClick={handlePayment}>전체결제</button>
       </div>
     </Wrapper>
   )

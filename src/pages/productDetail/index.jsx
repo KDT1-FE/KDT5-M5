@@ -6,15 +6,21 @@ import { useStore } from '../../store/store'
 
 const ProductPage = () => {
   const { productId } = useParams()
-  const { amount, setAmount, totalPrice, setTotalPrice, product, setProduct } =
-    useStore(state => ({
-      amount: state.amount,
-      setAmount: state.setAmount,
-      totalPrice: state.totalPrice,
-      setTotalPrice: state.setTotalPrice,
-      product: state.product,
-      setProduct: state.setProduct
-    }))
+  const {
+    products,
+    setProducts,
+    amount,
+    setAmount,
+    totalPrice,
+    setTotalPrice
+  } = useStore(state => ({
+    products: state.products,
+    setProducts: state.setProducts,
+    amount: state.amount,
+    setAmount: state.setAmount,
+    totalPrice: state.totalPrice,
+    setTotalPrice: state.setTotalPrice
+  }))
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
@@ -28,7 +34,7 @@ const ProductPage = () => {
     const fetchProduct = async () => {
       try {
         const productData = await singleProductSearch(productId)
-        setProduct(productData)
+        setProducts([productData])
       } catch (error) {
         console.error(error)
       }
@@ -38,11 +44,18 @@ const ProductPage = () => {
   }, [productId])
 
   useEffect(() => {
-    if (product) {
-      const calculatedPrice = product.price * amount
+    console.log('Current products:', products)
+  }, [products])
+
+  useEffect(() => {
+    if (products && products.length > 0) {
+      const calculatedPrice = products.reduce(
+        (total, product) => total + product.price * amount,
+        0
+      )
       setTotalPrice(calculatedPrice)
     }
-  }, [amount, product, setTotalPrice])
+  }, [amount, products, setTotalPrice])
 
   const checkLoginStatus = async () => {
     try {
@@ -105,108 +118,117 @@ const ProductPage = () => {
   return (
     <div className="section">
       <div className="section__container">
-        {product ? (
+        {products && products.length > 0 ? (
           <div className="section__productDetail">
-            <div className="side__productDetail--image-container">
-              <div className="image-wrapper">
-                <p className="side__productDetail--imgInfo">제품 이미지</p>
-                <img
-                  className="side__productDetail--img"
-                  src={product.thumbnail}
-                  alt={product.title}
-                />
+            {products.map((product, index) => (
+              <div
+                key={index}
+                className="side__productDetail--image-container">
+                <div className="image-wrapper">
+                  <p className="side__productDetail--imgInfo">제품 이미지</p>
+                  <img
+                    className="side__productDetail--img"
+                    src={product.thumbnail}
+                    alt={product.title}
+                  />
+                </div>
+                <div className="image-wrapper">
+                  <p className="side__productDetail--imgInfo">제품 상세 정보</p>
+                  <img
+                    className="side__productDetail--img"
+                    src={product.photo}
+                    alt={product.title}
+                  />
+                </div>
               </div>
-              <div className="image-wrapper">
-                <p className="side__productDetail--imgInfo">제품 상세 정보</p>
-                <img
-                  className="side__productDetail--img"
-                  src={product.photo}
-                  alt={product.title}
-                />
-              </div>
-            </div>
-
+            ))}
             <div className="side__productDetail--container">
-              <h2 className="side__productDetail--info-title">
-                {product.title}
-              </h2>
-              <p className="side__productDetail--info-price">
-                {product.price.toLocaleString()} 원
-              </p>
-              <p className="side__productDetail--info-desc">
-                {product.description}
-              </p>
-              <ul className="side__productDetail--tags">
-                {product.tags.map((tag, index) => (
-                  <li
-                    key={index}
-                    className={`side__productDetail--tag ${
-                      index === 0 ? 'first-tag' : ''
-                    }`}>
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-              <div className="side__productDetail--amountCal">
-                <h3>구매 수량</h3>
-                <div className="side__productAmount--btn-container">
-                  <button
-                    className="side__productAmount--decrease"
-                    onClick={amountDecrement}>
-                    -
-                  </button>
-                  <span className="side__productAmount--amonut">{amount}</span>
-                  <button
-                    className="side__productAmount--increase"
-                    onClick={amountIncrement}>
-                    +
-                  </button>
+              {products.map((product, index) => (
+                <div key={index}>
+                  <h2 className="side__productDetail--info-title">
+                    {product.title}
+                  </h2>
+                  <p className="side__productDetail--info-price">
+                    {product.price.toLocaleString()} 원
+                  </p>
+                  <p className="side__productDetail--info-desc">
+                    {product.description}
+                  </p>
+                  <ul className="side__productDetail--tags">
+                    {product.tags.map((tag, index) => (
+                      <li
+                        key={index}
+                        className={`side__productDetail--tag ${
+                          index === 0 ? 'first-tag' : ''
+                        }`}>
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="side__productDetail--amountCal">
+                    <h3>구매 수량</h3>
+                    <div className="side__productAmount--btn-container">
+                      <button
+                        className="side__productAmount--decrease"
+                        onClick={amountDecrement}>
+                        -
+                      </button>
+                      <span className="side__productAmount--amonut">
+                        {amount}
+                      </span>
+                      <button
+                        className="side__productAmount--increase"
+                        onClick={amountIncrement}>
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div className="side__totalPrice">
+                    <h3>상품금액 합계</h3>
+                    <span>{totalPrice.toLocaleString()} 원</span>
+                  </div>
+                  {isLoggedIn ? (
+                    <div className="side__payment--btn-container">
+                      <Link
+                        to={isButtonActive ? '/cart' : '#'}
+                        className={`side__payment--link ${
+                          isButtonActive ? '' : 'disabled-link'
+                        }`}>
+                        <button
+                          className={`side__payment ${
+                            isButtonActive ? '' : 'disabled'
+                          }`}
+                          disabled={!isButtonActive}
+                          onClick={() => duplicateCart(product, amount)}>
+                          장바구니
+                        </button>
+                      </Link>
+                      <Link
+                        to={isButtonActive ? '/payment' : '#'}
+                        className={`side__payment--link ${
+                          isButtonActive ? '' : 'disabled-link'
+                        }`}>
+                        <button
+                          className={`side__payment ${
+                            isButtonActive ? '' : 'disabled'
+                          }`}
+                          disabled={!isButtonActive}>
+                          결제하기
+                        </button>
+                      </Link>
+                    </div>
+                  ) : (
+                    <Link
+                      to="/login"
+                      className="side__payment--link">
+                      <button className="side__payment">로그인 후 결제</button>
+                    </Link>
+                  )}
+                  <p className="info">
+                    제품 이미지를 스크롤 하시면 상세 정보 이미지가 있습니다.
+                  </p>
                 </div>
-              </div>
-              <div className="side__totalPrice">
-                <h3>상품금액 합계</h3>
-                <span>{totalPrice.toLocaleString()} 원</span>
-              </div>
-              {isLoggedIn ? (
-                <div className="side__payment--btn-container">
-                  <Link
-                    to={isButtonActive ? '/cart' : '#'}
-                    className={`side__payment--link ${
-                      isButtonActive ? '' : 'disabled-link'
-                    }`}>
-                    <button
-                      className={`side__payment ${
-                        isButtonActive ? '' : 'disabled'
-                      }`}
-                      disabled={!isButtonActive}
-                      onClick={() => duplicateCart(product, amount)}>
-                      장바구니
-                    </button>
-                  </Link>
-                  <Link
-                    to={isButtonActive ? '/payment' : '#'}
-                    className={`side__payment--link ${
-                      isButtonActive ? '' : 'disabled-link'
-                    }`}>
-                    <button
-                      className={`side__payment ${
-                        isButtonActive ? '' : 'disabled'
-                      }`}
-                      disabled={!isButtonActive}>
-                      결제하기
-                    </button>
-                  </Link>
-                </div>
-              ) : (
-                <Link
-                  to="/login"
-                  className="side__payment--link">
-                  <button className="side__payment">로그인 후 결제</button>
-                </Link>
-              )}
-              <p className="info">
-                제품 이미지를 스크롤 하시면 상세 정보 이미지가 있습니다.
-              </p>
+              ))}
             </div>
           </div>
         ) : (

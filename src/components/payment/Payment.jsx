@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { singleProductSearch, authenticate } from '../../store/UserAPI'
 import { getAccounts } from '../../store/AccountAPI'
@@ -11,7 +11,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import { useStore } from '../../store/store'
 
 const Payment = () => {
-  const { amount, totalPrice, product, setProduct } = useStore()
+  const { amount, totalPrice, products, setProducts } = useStore()
   const [deliveryMessage, setDeliveryMessage] = useState('')
   const [postalCode, setPostalCode] = useState('')
   const [address, setAddress] = useState('')
@@ -22,7 +22,7 @@ const Payment = () => {
   const [contactNumber, setContactNumber] = useState('')
   const [addressDetail, setAddressDetail] = useState('')
   const [isFormValid, setIsFormValid] = useState(false)
-  const [selectAccount, setselectAccount] = useState('')
+  const [selectAccount, setSelectAccount] = useState('')
   const directMessage = useRef()
 
   useEffect(() => {
@@ -43,15 +43,18 @@ const Payment = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const productData = await singleProductSearch(product.id)
-        setProduct(productData)
+        const productIds = products.map(product => product.id)
+        const productData = await Promise.all(
+          productIds.map(productId => singleProductSearch(productId))
+        )
+        setProducts(productData)
       } catch (error) {
         console.error(error)
       }
     }
 
     fetchProduct()
-  }, [product.id])
+  }, [])
 
   useEffect(() => {
     const fetchAccounts = async () => {
@@ -66,12 +69,6 @@ const Payment = () => {
 
     fetchAccounts()
   }, [])
-
-  useEffect(() => {
-    if (deliveryMessage === '직접 입력') {
-      directMessage.current.focus()
-    }
-  }, [deliveryMessage])
 
   useEffect(() => {
     validateForm()
@@ -90,7 +87,7 @@ const Payment = () => {
         const accounts = await getAccounts()
         setAccountList(accounts)
         if (accounts.length > 0) {
-          setselectAccount(accounts[0].id)
+          setSelectAccount(accounts[0].id)
         }
       } catch (error) {
         setAccountList([])
@@ -115,12 +112,8 @@ const Payment = () => {
     }
   }
 
-  if (!product) {
-    return <p>제품 정보를 가져오는 중 입니다...</p>
-  }
-
-  if (product.id !== product.id) {
-    return <p>제품을 찾을 수가 없습니다.</p>
+  if (!products || products.length === 0) {
+    return <p>장바구니에 상품이 없습니다.</p>
   }
 
   const settings = {
@@ -133,11 +126,22 @@ const Payment = () => {
 
   const handleBuyProduct = async () => {
     try {
-      const buy = await buyProducts(product.id, selectAccount)
-      if (buy) {
-        alert('성공적으로 상품을 구매했습니다.')
+      if (products) {
+        let isSuccess = true
+        for (const productId of products.map(product => product.id)) {
+          const buy = await buyProducts(productId, selectAccount)
+          if (!buy) {
+            isSuccess = false
+            break
+          }
+        }
+        if (isSuccess) {
+          alert('제품을 성공적으로 구매했습니다.')
+        } else {
+          alert('제품 구매에 실패했습니다.')
+        }
       } else {
-        alert('상품 구매에 실패했습니다.')
+        alert('제품이 없습니다.')
       }
     } catch (error) {
       console.log(error)
@@ -170,6 +174,35 @@ const Payment = () => {
     setAddress(data.address)
   }
 
+  const renderProductTable = () => {
+    return (
+      <tbody>
+        {products.map(product => {
+          const productTotalPrice = product.price * amount
+
+          return (
+            <tr key={product.id}>
+              <td className="product-details">
+                <div className="product-image">
+                  <img
+                    src={product.thumbnail}
+                    alt={product.title}
+                  />
+                </div>
+                <div>
+                  <h3>{product.title}</h3>
+                </div>
+              </td>
+              <td>{product.price.toLocaleString()} 원</td>
+              <td>{amount} 개</td>
+              <td>{productTotalPrice.toLocaleString()} 원</td>
+            </tr>
+          )
+        })}
+      </tbody>
+    )
+  }
+
   return (
     <div className="payment-contents">
       <div className="title-box">
@@ -185,24 +218,7 @@ const Payment = () => {
               <th>결제 금액</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td className="product-details">
-                <div className="product-image">
-                  <img
-                    src={product.thumbnail}
-                    alt={product.title}
-                  />
-                </div>
-                <div>
-                  <h3>{product.title}</h3>
-                </div>
-              </td>
-              <td>{product.price} 원</td>
-              <td>{amount} 개</td>
-              <td>{totalPrice} 원</td>
-            </tr>
-          </tbody>
+          {renderProductTable()}
         </table>
       </div>
       <div className="payment-info">
@@ -327,7 +343,7 @@ const Payment = () => {
               afterChange={index => {
                 const selectedAccount = accountList[index]
                 if (selectedAccount) {
-                  setselectAccount(selectedAccount.id)
+                  setSelectAccount(selectedAccount.id)
                 }
               }}>
               {accountList.map(account => (
