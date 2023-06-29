@@ -4,10 +4,6 @@ import './changeInput.css'
 
 import userImg from '../../../img/user.png'
 
-//       displayName: userInfoData.displayName,
-//       profileImgBase64: userInfoData.profileImgBase64,
-//       oldPassword: userInfoData.oldPassword,
-//       newPassword: userInfoData.newPassword
 const ChangeInput = () => {
   const [userData, setUserData] = useState('')
   const [newUserData, setNewUserData] = useState('')
