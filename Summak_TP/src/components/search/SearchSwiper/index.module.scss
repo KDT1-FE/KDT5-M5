@@ -1,0 +1,25 @@
+.container {
+  margin-bottom: 65px;
+}
+
+.swiperItem img {
+  width: 100%;
+}
+
+.bullet {
+  max-width: 15px;
+  height: 15px;
+  border-radius: 7.5px;
+  margin: 5px;
+  background-color: white;
+  border: 1px solid grey;
+}
+
+@media screen and (max-width: 768px) {
+  .bullet {
+    p {
+      visibility: hidden;
+      position: absolute;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@import '@/_variables.scss';
+
+.lists {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  .process {
+    border-radius: 50%;
+    border: 3px solid $bg-primary-grey;
+    background-color: $bg-primary-white;
+    margin: 20px;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    .content {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    @media (max-width: 1400px) {
+      min-width: 100px;
+      min-height: 100px;
+    }
+  }
+
+  .isActive {
+    background-color: $point-red;
+    border: 3px solid $point-red;
+    .content {
+      color: $text-light-white;
+    }
+  }
+}
+.lists::after {
+  background-color: $bg-primary-grey;
+  content: '';
+  height: 2px;
+  display: block;
+  left: 0;
+  right: 0;
+  top: 50%;
+  width: 85%;
+  margin-left: 50px;
+  position: absolute;
+  z-index: 0;
+}

@@ -1,0 +1,62 @@
+@import '@/_variables.scss';
+
+.subTitle {
+  margin-top: 100px;
+  margin-bottom: 80px;
+  font-size: 32px;
+}
+.container {
+  display: flex;
+  align-items: center;
+  margin-top: -40px;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $bg-sub-grey;
+
+  .info {
+    color: $text-sub-grey;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .logout-info {
+    color: $text-sub-grey;
+  }
+
+  .passwordChange {
+    margin-top: 15px;
+
+    .passwordChangeLink {
+      text-decoration-line: none;
+      font-weight: bold;
+    }
+  }
+
+  .btn-group {
+    text-align: center;
+  }
+
+  .cancel-btn {
+    background-color: $text-sub-light-grey;
+    width: 240px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid grey;
+    color: $text-primary-black;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-right: 30px;
+    cursor: pointer;
+  }
+
+  .logout-btn {
+    background-color: $point-red;
+    width: 240px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid red;
+    color: $text-light-white;
+    font-weight: 700;
+    cursor: pointer;
+  }
+}

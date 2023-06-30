@@ -1,0 +1,42 @@
+@import 'src/_variables.scss';
+
+.container {
+  margin: auto;
+  width: $mypage-width;
+  height: $mypage-height;
+  background-color: $bg-sub-grey;
+  display: flex;
+  margin-bottom: 30px;
+  .section {
+    position: relative;
+    width: 70%;
+    height: 90%;
+    margin: auto;
+    .title {
+      font-size: 1.4rem;
+      letter-spacing: -0.5;
+      font-weight: 800;
+    }
+    .line {
+      margin: 20px auto 25px;
+    }
+    .getItems {
+      position: relative;
+      width: 100%;
+      height: 85%;
+      flex-grow: 1;
+      overflow: auto; /* 스크롤 추가 */
+      .getItem {
+        position: absolute;
+        height: 101%;
+        width: 96%;
+        left: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        // background-color: $bg-primary-white;
+      }
+    }
+  }
+}

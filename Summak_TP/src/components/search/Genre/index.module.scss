@@ -1,0 +1,40 @@
+@import '/src/_variables.scss';
+.container {
+  position: -webkit-sticky; /* 사파리 브라우저 지원 */
+  position: sticky;
+  top: 20px;
+  min-width: 220px;
+  height: fit-content;
+  .title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .genreList {
+    font-size: 1.2rem;
+    padding-top: 1.5rem;
+    .current {
+      font-weight: 700;
+    }
+    .genre {
+      margin: 1rem;
+      a {
+        transition: all 0.3s ease-in-out;
+        color: $text-primary-black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+    .genre:hover {
+      a {
+        color: $point-red;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .container {
+    min-width: 220px;
+  }
+}

@@ -1,13 +1,11 @@
 # SumTendo 게임판매 웹서비스
-
-- Sumtendo 는 닌텐도 게임을 판매하는 웹서비스 입니다.
-  <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/c8faf8da-82e5-4f17-b4d1-ffc7ba7458f3" style="width:100px"/>
++ Sumtendo 는 닌텐도 게임을 판매하는 웹서비스 입니다.
+<img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/c8faf8da-82e5-4f17-b4d1-ffc7ba7458f3" style="width:100px"/>
 
 <br/>
 <br/>
 
 ➡️배포 - 숨텐도
-
 <div style="display:flex">
   
 <a href="https://sum-tendo-deploy.vercel.app">
@@ -29,6 +27,7 @@
 <a href="https://sumtendo-admin-deploy.vercel.app/">
 <img src="https://img.shields.io/badge/SUMTENDO_ADMIN-000000?style=flat&logo=vercel&logoColor=white"/>
 </a>
+
 
 <a href="https://github.com/ruddnjs3769/Sumtendo_Admin_Deploy">
 <img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white"/>
@@ -53,58 +52,51 @@
 </div>
 
 ### Feature
-
 #### Main
-
-|                                                               메인페이지                                                               |                                                             제품 보기/검색                                                             |
-| :------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/6bd459f8-a295-4172-ae58-5647a12368fd" width="400"/> | <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/b7bc40d8-5063-4e6c-916f-41d0ef798963" width="400"/> |
-|                                                           <b>카테고리별 상품                                                           |                                                              <b>상품 검색                                                              |
-| <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/c7a7bb68-0dff-4bde-abe4-81927c4b32e0" width="400"/> | <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/72f7b9aa-d06d-4f05-a73f-15b6621d09fd" width="400"/> |
-
+|                                                                                      메인페이지                                                                                       |                                                                                       제품 보기/검색                                                                                        |
+| :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                     <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/6bd459f8-a295-4172-ae58-5647a12368fd" width="400"/>                      |     <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/b7bc40d8-5063-4e6c-916f-41d0ef798963" width="400"/>                                                  |
+|                                                                                  <b>카테고리별 상품                                                                                   |                                                                                     <b>상품 검색                                                                                      |
+|                    <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/c7a7bb68-0dff-4bde-abe4-81927c4b32e0" width="400"/>                             |              <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/72f7b9aa-d06d-4f05-a73f-15b6621d09fd" width="400"/>                                 |
 #### Access
-
-|                                                                회원가입                                                                |                                                                 로그인                                                                 |
-| :------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/0b54cabc-8970-4091-96a2-ebba54730c81" width="400"/> | <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/ab63ab51-5082-4341-9931-cb9bb2875938" width="400"/> |
-|                                                              <b>로그아웃                                                               |                                                           <b>비밀번호 재설정                                                           |
-| <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/e55df623-e81e-46ad-b90d-2cbf762e0d72" width="400"/> | <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/270350ac-56a2-4ca9-8104-d77b4565f811" width="400"/> |
+|                                                                                      회원가입                                                                                       |                                                                                       로그인                                                                                        |
+| :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                     <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/0b54cabc-8970-4091-96a2-ebba54730c81" width="400"/>                      |     <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/ab63ab51-5082-4341-9931-cb9bb2875938" width="400"/>                                                  |
+|                                                                                  <b>로그아웃                                                                                   |                                                                                     <b>비밀번호 재설정                                                                                      |
+|                    <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/e55df623-e81e-46ad-b90d-2cbf762e0d72" width="400"/>                             |              <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/270350ac-56a2-4ca9-8104-d77b4565f811" width="400"/>                                 |
 
 #### User
-
-|                                                               마이페이지                                                               |                                                                계좌조회                                                                |
-| :------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/7f1ecc3f-102e-4cb9-abb0-d92fa8f02006" width="400"/> | <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/26c79a4e-1558-44a0-be77-99d076f94331" width="400"/> |
-|                                                              <b>정보 수정                                                              |                                                              <b>구매내역                                                               |
-| <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/24ce931c-95f3-404d-9d7a-492f9c62c57c" width="400"/> | <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/55a97b10-ccb8-45ad-a679-060e8b79dcc0" width="400"/> |
+|                                                                                      마이페이지                                                                                       |                                                                                       계좌조회                                                                                        |
+| :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                     <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/7f1ecc3f-102e-4cb9-abb0-d92fa8f02006" width="400"/>                      |     <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/26c79a4e-1558-44a0-be77-99d076f94331" width="400"/>                                                  |
+|                                                                                  <b>정보 수정                                                                                   |                                                                                     <b>구매내역                                                                                      |
+|                    <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/24ce931c-95f3-404d-9d7a-492f9c62c57c" width="400"/>                             |              <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/55a97b10-ccb8-45ad-a679-060e8b79dcc0" width="400"/>                                 |
 
 #### Payment
+|                                                                                      장바구니                                                                                       |                                                                                       구매정보확인                                                                                        |
+| :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                     <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/ccfcf810-0c93-446f-b9b3-a2bdab8748d3" width="400"/>                      |     <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/56867c23-373d-4957-8b63-0fb14f060fce" width="400"/>                                                  |
+|                                                                                  <b>결제                                                                                   |                                                                                     <b>결제 완료                                                                                      |
+|                    <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/b1ce6ca7-8835-4be3-a5a6-3951f29f5748" width="400"/>                             |              <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/ae4687a3-54ec-42a0-adc9-1416133229d0" width="400"/>                                 |
 
-|                                                                장바구니                                                                |                                                              구매정보확인                                                              |
-| :------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/ccfcf810-0c93-446f-b9b3-a2bdab8748d3" width="400"/> | <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/56867c23-373d-4957-8b63-0fb14f060fce" width="400"/> |
-|                                                                <b>결제                                                                 |                                                              <b>결제 완료                                                              |
-| <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/b1ce6ca7-8835-4be3-a5a6-3951f29f5748" width="400"/> | <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/ae4687a3-54ec-42a0-adc9-1416133229d0" width="400"/> |
 
 #### Admin
-
-|                                                             관리자 로그인                                                              |                                                               유저 관리                                                                |
-| :------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/7ebe99f0-d3a1-4759-b7df-18349f5b637f" width="400"/> | <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/7528fc8b-c4f4-4e66-9084-fe28cd534d1a" width="400"/> |
-|                                                              <b>제품 관리                                                              |                                                            <b>제품 스크래핑                                                            |
-| <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/471a9c99-c08e-40a1-8dde-3f7c6f83e924" width="400"/> | <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/746b302e-51cb-4e8a-9602-66f758dad4c1" width="400"/> |
+|                                                                                      관리자 로그인                                                                                       |                                                                                       유저 관리                                                                                        |
+| :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                     <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/7ebe99f0-d3a1-4759-b7df-18349f5b637f" width="400"/>                      |     <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/7528fc8b-c4f4-4e66-9084-fe28cd534d1a" width="400"/>                                                  |
+|                                                                                  <b>제품 관리                                                                                   |                                                                                     <b>제품 스크래핑                                                                                      |
+|                    <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/471a9c99-c08e-40a1-8dde-3f7c6f83e924" width="400"/>                             |              <img src="https://github.com/FastCampusGroup6/ToyProject__Nintendo/assets/84277185/746b302e-51cb-4e8a-9602-66f758dad4c1" width="400"/>                                 |
 
 ## Team
 
-| 팀원 |                       김경원                        |                           김성은                           |                    이창휘                    |                       정태욱                       |
-| :--: | :-------------------------------------------------: | :--------------------------------------------------------: | :------------------------------------------: | :------------------------------------------------: |
-| 역할 | 장바구니 / 결제 동의 / 구매 정보 / 결제 / 결제 완료 | 마이페이지 / 계좌 조회 / 계좌 추가 / 구매 내역 / 정보 수정 | 회원가입 / 로그인 / 로그아웃 / 비밀번호 변경 | 메인 / 검색 / 어드민 / 제품 상세정보 / 장르별 검색 |
+|  팀원  |                 김경원                  |                      김성은                      |                    이창휘                    |                      정태욱                      |  
+| :----: | :-------------------------------------: | :----------------------------------------------: | :------------------------------------------: | :----------------------------------------------: | 
+|  역할  | 장바구니 / 결제 동의 / 구매 정보 / 결제 / 결제 완료 |     마이페이지 / 계좌 조회 / 계좌 추가 / 구매 내역 / 정보 수정    |     회원가입 / 로그인 / 로그아웃 / 비밀번호 변경   |         메인 / 검색 / 어드민 / 제품 상세정보 / 장르별 검색      | 
 
 <br>
 <br>
 
 ## Files
-
 <details>
 <summary>자료구조</summary>
   
@@ -384,3 +376,4 @@
 ```
   
 </details>
+

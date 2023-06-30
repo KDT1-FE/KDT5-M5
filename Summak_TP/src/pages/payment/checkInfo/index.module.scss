@@ -1,0 +1,47 @@
+@import '@/_variables.scss';
+
+.orderer {
+  width: 100%;
+  margin-top: 50px;
+  .orderInfo {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  .info {
+    display: flex;
+    border-bottom: 3px solid $bg-light-grey;
+    border-top: 1px solid $bg-light-grey;
+    padding: 24px 0;
+    .title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .title:last-child {
+      margin-top: 20px;
+    }
+    .content {
+      font-size: 14px;
+      margin-left: 20px;
+    }
+    .content:last-child {
+      margin-top: 20px;
+    }
+  }
+  margin-bottom: 100px;
+}
+.totals {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  .mark {
+    font-weight: 700;
+  }
+  .price {
+    font-size: 26px;
+    margin-left: 25px;
+  }
+}

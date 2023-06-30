@@ -1,0 +1,63 @@
+@import '@/_variables.scss';
+
+.subTitle {
+  margin-top: 100px;
+  margin-bottom: 80px;
+  font-size: 32px;
+}
+.container {
+  display: flex;
+  align-items: center;
+  margin-top: -40px;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $bg-sub-grey;
+
+  .select {
+    width: 640px;
+    height: 220px;
+    background-color: $bg-primary-white;
+  }
+
+  .info {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    line-height: 30px;
+    color: $text-sub-grey;
+  }
+
+  .accountform {
+    justify-content: space-between;
+    width: 540px;
+    margin: 0 auto;
+    display: flex;
+
+    .non-account {
+      width: 270px;
+      text-align: center;
+    }
+
+    .has-account {
+      width: 270px;
+      text-align: center;
+    }
+
+    .account-info {
+      margin-bottom: 15px;
+      color: $text-sub-grey;
+      font-weight: 600;
+    }
+
+    .account-btn {
+      background-color: $point-red;
+      width: 240px;
+      height: 40px;
+      border-radius: 20px;
+      border: 1px solid red;
+      color: $text-light-white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+}

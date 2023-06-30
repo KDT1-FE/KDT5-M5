@@ -1,0 +1,64 @@
+@import '@/_variables.scss';
+
+.aTag {
+  color: $text-primary-black;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 5px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  text-overflow: ellipsis;
+  &:hover {
+    font-weight: 800;
+  }
+}
+
+.container {
+  top: 0;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  .itemThumbnail {
+    width: 130px;
+    height: 130px;
+    border-radius: 10px;
+    border: 1px solid $bg-primary-grey;
+    overflow: hidden;
+    .itemImg {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.3s ease;
+      object-fit: cover;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+  .spanTag {
+    padding: 15px 5px 0 0;
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    line-height: 1.3;
+    word-wrap: break-word;
+  }
+  .itemTitle {
+    width: 125px;
+    text-align: left;
+    // background-color: greenyellow;
+  }
+  .itemPrice {
+    position: relative;
+    left: -35px;
+    font-weight: 800;
+    // background-color: greenyellow;
+  }
+}

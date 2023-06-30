@@ -1,0 +1,11 @@
+.container {
+  margin-top: 2rem;
+  .list {
+    display: grid;
+    justify-content: center;
+    grid-template: auto / repeat(4, 1fr);
+    grid-gap: 2rem;
+    margin-top: 5rem;
+    overflow: hidden;
+  }
+}

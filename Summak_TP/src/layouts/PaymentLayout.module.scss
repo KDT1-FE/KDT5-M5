@@ -1,0 +1,13 @@
+@import '@/_variables';
+
+.main {
+  background-color: $bg-primary-white;
+  .container {
+    width: 70%;
+    background-color: $bg-primary-white;
+    margin: 0 15%;
+    border-radius: 20px;
+    position: relative;
+    min-height: 100vh;
+  }
+}

@@ -1,0 +1,35 @@
+@import '/src/variables.scss';
+
+.cover {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  span {
+    padding-right: 1rem;
+  }
+  select {
+    min-width: 200px;
+    height: 35px;
+  }
+  .genre {
+    font-weight: 700;
+    padding-right: 2rem;
+  }
+  .generCancleBtn {
+    text-decoration: none;
+    width: 100px;
+    height: 2rem;
+    border: 2px solid $bg-primary-white;
+    background-color: $point-red;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $text-light-white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      background-color: $bg-primary-white;
+      color: $point-red;
+      border: 2px solid $point-red;
+    }
+  }
+}

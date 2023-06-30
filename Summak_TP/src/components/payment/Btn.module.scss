@@ -1,0 +1,17 @@
+@import '@/_variables.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .btn {
+    width: 170px;
+    height: 40px;
+    background-color: $point-red;
+    border: none;
+    border-radius: 3px;
+    color: $text-light-white;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+}

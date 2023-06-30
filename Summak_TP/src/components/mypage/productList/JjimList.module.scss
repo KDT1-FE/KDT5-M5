@@ -1,0 +1,35 @@
+@import '@/_variables.scss';
+
+.section {
+  position: relative;
+  width: 100%;
+  height: 60%;
+  margin-top: 50px;
+  // background-color: green;
+  .jjimList {
+    position: absolute;
+    left: 15px;
+  }
+  .jjimMore {
+    position: absolute;
+    right: 10px;
+    padding: 5px;
+    font-size: 0.9rem;
+    color: $text-primary-black;
+    font-weight: 500;
+    text-decoration: none;
+    word-spacing: 3px;
+    letter-spacing: -0.5px;
+    &:hover {
+      font-weight: 800;
+    }
+  }
+  .jjimItem {
+    position: absolute;
+    display: flex;
+    top: 10px;
+    justify-content: space-between;
+    margin-top: 40px;
+    // background-color: green;
+  }
+}
