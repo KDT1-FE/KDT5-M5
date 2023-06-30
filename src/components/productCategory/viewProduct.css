@@ -1,8 +1,32 @@
-.product-container {
+
+  .price-sort {
+    box-sizing: border-box;
     display: flex;
-    flex-wrap: wrap;
-    gap: 50px;
     justify-content: center;
+    margin-top: 40px;
+    padding-left: 870px;
   }
 
+  .price-sort span {
+    color: #a9a9a9;
+    font-size: 13px;
+    line-height: 1.6;
+    cursor: pointer;
+    transition: all 0.2s linear
+  }
+
+  .price-sort span:hover {
+    color: #000;
+    transform: scale(1.1);
+    font-weight: 600;
+  }
+
+  .price-sort span:first-child,
+  .price-sort span:last-child {
+    border-bottom: 1px solid;
+  }
   
+  .price-sort .active {
+    color: #e02020;
+    font-weight: 600;
+  }
