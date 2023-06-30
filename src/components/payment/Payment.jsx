@@ -157,6 +157,7 @@ const Payment = () => {
         }
 
         if (isSuccess) {
+          localStorage.removeItem('productInCart')
           alert(`제품을 성공적으로 구매했습니다.`)
         } else {
           alert('제품 구매에 실패했습니다.')
