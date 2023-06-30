@@ -4,6 +4,8 @@
     height: 540px;
     display: flex;
     margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 150px;
   }
   
   .section__container {

@@ -1,0 +1,14 @@
+.banner__section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+.banner__section--container {
+    width: 700px;
+    height: 300px;
+}
+
+.banner__section .banner__section--container img {
+    width: 700px;
+    height: 300px;
+}

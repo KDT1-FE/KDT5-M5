@@ -19,7 +19,7 @@ const Payment = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [accountList, setAccountList] = useState([])
   const [recipientName, setRecipientName] = useState('')
-  const [contactNumber, setContactNumber] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [addressDetail, setAddressDetail] = useState('')
   const [isFormValid, setIsFormValid] = useState(false)
   const [selectAccount, setSelectAccount] = useState('')
@@ -81,7 +81,7 @@ const Payment = () => {
     validateForm()
   }, [
     recipientName,
-    contactNumber,
+    phoneNumber,
     address,
     deliveryMessage,
     addressDetail,
@@ -113,7 +113,7 @@ const Payment = () => {
   const validateForm = () => {
     if (
       recipientName.trim() !== '' &&
-      contactNumber.trim() !== '' &&
+      phoneNumber.trim() !== '' &&
       address.trim() !== '' &&
       addressDetail.trim() !== '' &&
       deliveryMessage.trim() !== ''
@@ -175,11 +175,23 @@ const Payment = () => {
   }
 
   const handleRecipientNameChange = e => {
-    setRecipientName(e.target.value)
+    const input = e.target.value
+    const filteredInput = input.replace(/[^A-Za-zㄱ-ㅎㅏ-ㅣ가-힣]/g, '')
+
+    if (input !== filteredInput) {
+      e.target.value = filteredInput
+      alert('문자만 입력해주세요.')
+    }
+    setRecipientName(filteredInput)
   }
 
-  const handleContactNumberChange = e => {
-    setContactNumber(e.target.value)
+  const handlePhoneNumberChange = e => {
+    const input = e.target.value
+    const numericInput = input.replace(/\D/g, '')
+    if (input !== numericInput) {
+      alert('숫자만 입력해주세요.')
+    }
+    setPhoneNumber(numericInput)
   }
 
   const handleAddressDetailChange = e => {
@@ -212,13 +224,19 @@ const Payment = () => {
                     alt={product.title}
                   />
                 </div>
-                <div>
+                <div className="product-title">
                   <h3>{product.title}</h3>
                 </div>
               </td>
-              <td>{product.price.toLocaleString()} 원</td>
-              <td>{amount ? amount : product.amount} 개</td>
-              <td>{productTotalPrice.toLocaleString()} 원</td>
+              <td className="product-price">
+                {product.price.toLocaleString()} 원
+              </td>
+              <td className="product-amount">
+                {amount ? amount : product.amount} 개
+              </td>
+              <td className="product-totalPrice">
+                {productTotalPrice.toLocaleString()} 원
+              </td>
             </tr>
           )
         })}
@@ -234,11 +252,11 @@ const Payment = () => {
       <div className="product-info">
         <table className="product-table">
           <thead>
-            <tr>
-              <th>상품 정보</th>
-              <th>판매 가격</th>
-              <th>구매 수량</th>
-              <th>결제 금액</th>
+            <tr className="product-info--detail">
+              <th className="product-info--title">상품 정보</th>
+              <th className="product-info--price">판매 가격</th>
+              <th className="product-info--amount">구매 수량</th>
+              <th className="product-info--total">결제 금액</th>
             </tr>
           </thead>
           {renderProductTable()}
@@ -267,8 +285,9 @@ const Payment = () => {
                 <input
                   className="contact_number"
                   type="text"
+                  value={phoneNumber}
+                  onChange={handlePhoneNumberChange}
                   placeholder="연락처"
-                  onChange={handleContactNumberChange}
                 />
               </td>
             </tr>

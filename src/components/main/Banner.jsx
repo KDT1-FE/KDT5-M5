@@ -14,44 +14,40 @@ const Banner = () => {
     speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    draggable: false,
+    draggable: true,
     autoplay: autoplay,
-    autoplaySpeed: 1000
-  }
-
-  useEffect(() => {
-    if (sliderRef.current) {
-      sliderRef.current.slickPause() // Pause autoplay
-
-      if (autoplay) {
-        sliderRef.current.slickPlay() // Start autoplay
-      }
-    }
-  }, [autoplay])
-
-  const toggleAutoplay = () => {
-    setAutoplay(!autoplay)
+    autoplaySpeed: 3000,
+    appendDots: dots => (
+      <div
+        style={{
+          padding: '10px'
+        }}>
+        <ul style={{ margin: '20px' }}> {dots} </ul>
+      </div>
+    )
   }
 
   return (
-    <div className="banner">
-      <Slider
-        ref={sliderRef}
-        {...settings}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-      </Slider>
-      <button onClick={toggleAutoplay}>
-        {autoplay ? 'Stop Autoplay' : 'Start Autoplay'}
-      </button>
-    </div>
+    <section className="banner__section">
+      <div className="banner__section--container">
+        <Slider
+          ref={sliderRef}
+          {...settings}>
+          <div>
+            <img
+              src="../../public/No_Img.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <h3>2</h3>
+          </div>
+          <div>
+            <h3>3</h3>
+          </div>
+        </Slider>
+      </div>
+    </section>
   )
 }
 

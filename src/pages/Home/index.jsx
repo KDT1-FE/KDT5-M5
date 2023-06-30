@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Banner from '../../components/main/banner'
-import ProductEffectMenu from '../../components/main/ProductEffectMenu'
 import ProductMenu from '../../components/main/ProductMenu'
 
 const Home = () => {
@@ -10,9 +9,10 @@ const Home = () => {
 
   return (
     <div>
-      <div>
+      <div
+        className="main--container"
+        style={{ marginBottom: '100px', marginTop: '10px' }}>
         <Banner />
-        <ProductEffectMenu />
         <ProductMenu category={cleansing} />
         <ProductMenu category={makeUp} />
         <ProductMenu category={skinCare} />
