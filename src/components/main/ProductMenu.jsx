@@ -48,7 +48,11 @@ const ProductMenu = ({ category }) => {
   return (
     <>
       <div className="product-category">
-        <h2 onClick={handleCategoryClick}>{category}</h2>
+        <div
+          className="category"
+          onClick={handleCategoryClick}>
+          {category}
+        </div>
       </div>
       <div className="product-container">
         <Slider {...settings}>

@@ -28,8 +28,9 @@ const GetCart = () => {
     let totalPrice = 0
     products.map(item => {
       const { price, amount } = item
-
-      totalPrice = totalPrice + price * amount
+      if (!isNaN(price) && !isNaN(amount)) {
+        totalPrice = totalPrice + price * amount
+      }
     })
     setTotalPrice(totalPrice)
   }, [products])

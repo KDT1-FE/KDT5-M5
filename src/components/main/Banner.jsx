@@ -11,47 +11,50 @@ const Banner = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 2000,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    draggable: false,
+    draggable: true,
     autoplay: autoplay,
-    autoplaySpeed: 1000
-  }
-
-  useEffect(() => {
-    if (sliderRef.current) {
-      sliderRef.current.slickPause() // Pause autoplay
-
-      if (autoplay) {
-        sliderRef.current.slickPlay() // Start autoplay
-      }
-    }
-  }, [autoplay])
-
-  const toggleAutoplay = () => {
-    setAutoplay(!autoplay)
+    autoplaySpeed: 3000,
+    arrows: false,
+    appendDots: dots => (
+      <div
+        style={{
+          padding: '10px'
+        }}>
+        <ul style={{ margin: '20px' }}> {dots} </ul>
+      </div>
+    )
   }
 
   return (
-    <div className="banner">
-      <Slider
-        ref={sliderRef}
-        {...settings}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-      </Slider>
-      <button onClick={toggleAutoplay}>
-        {autoplay ? 'Stop Autoplay' : 'Start Autoplay'}
-      </button>
-    </div>
+    <section className="banner__section">
+      <div className="banner__section--container">
+        <Slider
+          ref={sliderRef}
+          {...settings}>
+          <div>
+            <img
+              src="../../public/productEffective/cleansing_effect.jpg"
+              alt="클렌징 제품 효과"
+            />
+          </div>
+          <div>
+            <img
+              src="../../public/productEffective/makeup_effect.jpg"
+              alt="메이크업 제품 효과"
+            />
+          </div>
+          <div>
+            <img
+              src="../../public/productEffective/skincare_effect.jpg"
+              alt="스킨케어 제품 효과"
+            />
+          </div>
+        </Slider>
+      </div>
+    </section>
   )
 }
 
