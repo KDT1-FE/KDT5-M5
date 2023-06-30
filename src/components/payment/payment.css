@@ -253,3 +253,10 @@ h2 {
   .slick-slider.slick-initialized  .slick-arrow.slick-next::before {
     color: black;
   }
+
+  .default-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 650px;
+  }

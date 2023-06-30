@@ -44,6 +44,7 @@ const Payment = () => {
     const fetchProduct = async () => {
       try {
         const productIds = products.map(product => product.id)
+        alert('새로고침을 하면 값이 초기화되어 결제가 진행되지않습니다.')
         const productData = await Promise.all(
           productIds.map(async productId => {
             const product = await singleProductSearch(productId)
@@ -125,7 +126,7 @@ const Payment = () => {
   }
 
   if (!products || products.length === 0) {
-    return <p>장바구니에 상품이 없습니다.</p>
+    return <p className="default-info">결제 상품이 없습니다.</p>
   }
 
   const settings = {
