@@ -1,0 +1,38 @@
+@import '@/_variables.scss';
+
+.navBar {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 11rem;
+  height: 100%;
+  text-align: center;
+  background-color: $bg-sub-grey;
+  .container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $bg-sub-grey;
+    mix-blend-mode: multiply;
+    .link {
+      margin: 50px 0;
+      height: 30px;
+      width: 100%;
+      line-height: 30px;
+      font-size: 1rem;
+      background-color: $bg-sub-grey;
+      .account,
+      .mypage {
+        text-decoration: none;
+        color: $text-primary-black;
+        &:hover {
+          font-weight: 800;
+          mix-blend-mode: normal;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@import '@/_variables.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  .cart_header {
+    border-bottom: 1px solid $bg-light-grey;
+    display: flex;
+    flex-flow: row wrap;
+    font-weight: 700;
+    padding: 10px 0;
+    .title {
+      flex: 1;
+    }
+    .qty {
+      flex-basis: 90px;
+      max-width: 90px;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .price {
+      flex-basis: 150px;
+      max-width: 150px;
+      text-align: right;
+    }
+  }
+  .cartList {
+    list-style: none;
+  }
+}

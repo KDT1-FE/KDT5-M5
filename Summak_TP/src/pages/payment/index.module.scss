@@ -1,0 +1,14 @@
+@import '@/_variables.scss';
+
+.inner {
+  margin-top: 50px;
+  .notice {
+    margin: 50px 0;
+    .noticeP {
+      margin-bottom: 16px;
+      .strong {
+        font-weight: 800;
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+@import '@/_variables.scss';
+
+.container {
+  margin: auto;
+  width: $mypage-width;
+  height: $mypage-height;
+  display: flex;
+  margin-bottom: 30px;
+  background-color: $bg-sub-grey;
+  .section {
+    position: relative;
+    margin: auto;
+    margin-right: 30px;
+    width: 70%;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    letter-spacing: -0.5;
+    font-weight: 800;
+    border-radius: 10px;
+    background-color: $bg-primary-white;
+    .inner {
+      position: absolute;
+      height: 70%;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      font-size: 20px;
+      font-weight: 300;
+      text-align: left;
+      .content {
+        width: 100%;
+        height: 100%;
+        margin: 3px;
+        .title {
+          font-size: 1.4rem;
+          letter-spacing: -0.5;
+          font-weight: 800;
+        }
+        .line {
+          margin: 20px auto 25px;
+        }
+        .label {
+          font-size: 1.1rem;
+          letter-spacing: -0.5;
+          font-weight: 800;
+        }
+        .text {
+          margin-top: 15px;
+          font-size: 1rem;
+        }
+      }
+      .inputForm {
+        height: 300px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .inputTag {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          outline: none;
+          appearance: none;
+          width: 95%;
+          height: 20px;
+          padding: 15px 20px;
+          border-radius: 10px;
+          border: solid 1px $bg-primary-grey;
+          font-size: 1rem;
+          &:focus {
+            border: solid 2px $point-red;
+            caret-color: $point-red;
+          }
+        }
+        .msg {
+          margin: 15px 0 0;
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: $text-primary-black;          
+        }
+        .error {
+          margin: 15px 0 0;
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: $point-red;
+        }
+        .btnTag {
+          width: 100%;
+          margin-top: 20px;
+          padding: 15px 10px;
+          color: $text-light-white;
+          text-align: center;
+          border: none;
+          border-radius: 10px;
+          text-decoration: none;
+          font-size: 1.1rem;
+          font-weight: 800;
+          background-color: $point-red;
+          cursor: pointer;
+        }
+        .btnTag.disabled {
+          background-color: $bg-primary-grey;
+          cursor:auto;
+        }
+      }
+    }
+  }
+}

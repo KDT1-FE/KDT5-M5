@@ -1,0 +1,44 @@
+@import '/src/variables';
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  max-width: 1200px;
+  inset: 0;
+  margin: auto;
+  padding: 0 1rem;
+  .title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 120px 0 50px 0;
+  }
+  .storeList {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    > li {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 1.5rem;
+      border: 1px solid $text-sub-grey;
+      border-bottom: 2px solid black;
+      margin-left: -1px;
+      padding: 30px;
+    }
+    margin-bottom: 120px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    text-align: center;
+  }
+  .storeList {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "nintendo_scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "scrape": "tsc & cross-env NODE_ENV=production node ./dist/main.js",
+    "scrape:test": "tsc & cross-env NODE_ENV=development node ./dist/main.js",
+    "findAll": "tsc & cross-env NODE_ENV=test node ./dist/findAll.js",
+    "deleteAll": "tsc & node ./dist/deleteAll.js",
+    "product": "tsc & node ./dist/getProduct.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "puppeteer": "^20.7.2"
+  },
+  "type": "module"
+}

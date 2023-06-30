@@ -1,0 +1,23 @@
+@import '/src/_variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $point-orange;
+  height: 140px;
+  margin: 120px 0;
+  .title {
+    color: $text-light-white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .link {
+    text-decoration: none;
+    color: $text-light-white;
+    font-weight: 700;
+    font-size: 2rem;
+  }
+}

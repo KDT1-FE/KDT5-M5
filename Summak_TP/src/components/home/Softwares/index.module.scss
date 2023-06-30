@@ -1,0 +1,98 @@
+@import '/src/variables';
+.container {
+  position: relative;
+  max-width: 1200px;
+  inset: 0;
+  margin: auto;
+  padding: 0 1rem;
+  .title {
+    display: flex;
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    p {
+      color: $text-sub-grey;
+      line-height: 3rem;
+      margin-left: 1rem;
+      font-size: 0.8rem;
+    }
+  }
+  .list {
+    display: grid;
+    grid-template: 1fr / repeat(4, 1fr);
+    gap: 1.2rem;
+    .item {
+      width: 100%;
+      height: 100%;
+      &:hover {
+        a {
+          color: $point-red;
+        }
+      }
+      img {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      a {
+        display: flex;
+        height: inherit;
+        flex-direction: column;
+        text-decoration: none;
+        color: $text-primary-black;
+        transition: color 0.2s ease-in-out;
+        .title {
+          font-weight: 700;
+          flex-grow: 1;
+        }
+        .title:hover {
+          color: $point-red;
+        }
+        .leftInfo {
+          height: max-content;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 0.8rem;
+          color: $text-sub-grey;
+          padding: 0.5rem 0;
+          p {
+            padding: 0.2rem 0;
+          }
+        }
+        .rightInfo {
+          display: flex;
+          height: 100%;
+          justify-content: flex-end;
+          flex-direction: column;
+        }
+      }
+    }
+  }
+  .moreBtnCover {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    .moreBtn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      width: 200px;
+      height: 50px;
+      border: 2px solid $bg-primary-white;
+      background-color: $point-red;
+      font-size: 1rem;
+      font-weight: 700;
+      color: $text-light-white;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        background-color: $bg-primary-white;
+        color: $point-red;
+        border: 2px solid $point-red;
+      }
+    }
+  }
+}
