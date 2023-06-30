@@ -4,11 +4,12 @@
     margin-bottom: 60px;
 }
 .banner__section--container {
-    width: 700px;
-    height: 300px;
+    width: 1200px;
+    height: 400px;
 }
 
 .banner__section .banner__section--container img {
-    width: 700px;
-    height: 300px;
+    width: 100%;
+    height: 400px;
 }
+

@@ -17,6 +17,7 @@ const Banner = () => {
     draggable: true,
     autoplay: autoplay,
     autoplaySpeed: 3000,
+    arrows: false,
     appendDots: dots => (
       <div
         style={{
@@ -35,12 +36,15 @@ const Banner = () => {
           {...settings}>
           <div>
             <img
-              src="../../public/No_Img.jpg"
-              alt=""
+              src="../../public/productEffective/cleansing_effect.jpg"
+              alt="클렌징 제품 효과"
             />
           </div>
           <div>
-            <h3>2</h3>
+            <img
+              src="../../public/productEffective/makeup_effect.jpg"
+              alt="메이크업 제품 효과"
+            />
           </div>
           <div>
             <h3>3</h3>
