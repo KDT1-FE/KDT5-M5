@@ -11,7 +11,7 @@ const Banner = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 2000,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     draggable: true,
@@ -47,7 +47,10 @@ const Banner = () => {
             />
           </div>
           <div>
-            <h3>3</h3>
+            <img
+              src="../../public/productEffective/skincare_effect.jpg"
+              alt="스킨케어 제품 효과"
+            />
           </div>
         </Slider>
       </div>
