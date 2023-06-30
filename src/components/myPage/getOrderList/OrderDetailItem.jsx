@@ -30,37 +30,41 @@ const OrderDetailItem = () => {
       <h1>단일 제품 상세 거래 내역</h1>
 
       <SubWrapper>
-        <p>거래 계좌 정보</p>
-        <ul>
-          <li>bankName : {bankName}</li>
-          <li>bankCode : {bankCode}</li>
-          <li>accountNumber : {accountNumber}</li>
-        </ul>
+        <img
+          src={thumbnail}
+          alt="thumbnail"
+        />
         <p>제품 정보</p>
         <ul>
           <li>title: {title}</li>
           <li>price: {price}</li>
           <li>description: {description}</li>
           <li>tags: {tags}</li>
-          <li>
-            <img
-              src={thumbnail}
-              alt="thumbnail"
-            />
-          </li>
         </ul>
-        거래 정보
+
+        <p>거래 계좌 정보</p>
         <ul>
+          <li>bankName : {bankName}</li>
+          <li>bankCode : {bankCode}</li>
+          <li>accountNumber : {accountNumber}</li>
+        </ul>
+
+        <p>거래 정보</p>
+        <ul>
+          <li>{done ? '구매 확정' : isCanceled ? '구매 취소' : '배송 중'}</li>
+
+          {done ? null : isCanceled ? null : (
+            <li>
+              취소하기 : <OrderCancel detailId={detailId} />
+            </li>
+          )}
+          {done ? null : isCanceled ? null : (
+            <li>
+              거래 확정 : <OrderOk detailId={detailId} />
+            </li>
+          )}
+
           <li>timePaid : {timePaid}</li>
-          <li>isCanceled : {`${isCanceled}`}</li>
-          <li>
-            취소하기 : <OrderCancel detailId={detailId} />
-          </li>
-          <li>done : {`${done}`}</li>
-          <li>
-            {' '}
-            거래 확정 : <OrderOk detailId={detailId} />{' '}
-          </li>
         </ul>
       </SubWrapper>
     </Wrapper>
@@ -76,6 +80,9 @@ const Wrapper = styled.div`
 `
 
 const SubWrapper = styled.div`
+  img {
+    width: 300px;
+  }
   ul {
     margin-bottom: 20px;
   }

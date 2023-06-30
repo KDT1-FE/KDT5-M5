@@ -17,7 +17,11 @@ const GetCart = () => {
 
   useEffect(() => {
     const storage = JSON.parse(localStorage.getItem('productInCart'))
-    setProducts(storage)
+    if (!storage) {
+      setProducts([])
+    } else {
+      setProducts(storage)
+    }
   }, [])
 
   useEffect(() => {
@@ -130,7 +134,16 @@ const GetCart = () => {
         <p>
           장바구니 상품의 총 금액은 <span>{totalPrice}</span>원 입니다
         </p>
-        <button onClick={handlePayment}>전체결제</button>
+        <button
+          onClick={() => {
+            if (products.length === 0) {
+              alert('담긴 상품이 없습니다.')
+            } else {
+              handlePayment()
+            }
+          }}>
+          전체결제
+        </button>
       </div>
     </Wrapper>
   )
