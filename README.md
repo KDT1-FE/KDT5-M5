@@ -3,29 +3,55 @@
 # 프로젝트 소개 👀
 
 > 저희 10조는 올리브영을 벤치마킹한 팀 프로젝트 입니다.  
-> **본 과제는 패스트캠퍼스 측에서 제공한 API를 이용하여 만들어졌습니다.**
+> **본 과제는 패스트캠퍼스 측에서 제공한 API를 이용하여 만들어졌습니다.**  
 > 개발 진행 일정 : 2023.05.31 - 2023.06.30
 </br>
 - 배포: [아보카도영](배포주소)  
 </br>
 - 테스트 ID  
-</br>
     - 관리자
         - ID : admin@test.com
         - password : 12341234   
-    </br>
     - 일반 사용자
         - ID : tester@test.test
         - password : 12341234  
 </br>
+# 기술 스택
+
+## Environment
+
+<img src="https://img.shields.io/badge/VISUAL STUDIO CODE-007ACC?style=for-the-badge&logo=VISUALSTUDIOCODE&logoColor=white">
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+
+## Config
+
+<img src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+<img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
+
+## Development
+
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+<img src="https://img.shields.io/badge/reactrouter-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
+<img src="https://img.shields.io/badge/dotenv-ECD53F?style=for-the-badge&logo=dotenv&logoColor=white">
+<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
+<img src="https://img.shields.io/badge/Zustand-6D1ED4?style=for-the-badge&logo=Zustand&logoColor=white">
+<img src="https://img.shields.io/badge/slick carousel-0CC1F3?style=for-the-badge&logo=slick carousel&logoColor=white">
+<img src="https://img.shields.io/badge/react daum post code-000000?style=for-the-badge&logo=react daum post code&logoColor=white">
+
+
+## Communication
+<img src="https://img.shields.io/badge/zoom-2D8CFF?style=for-the-badge&logo=zoom&logoColor=white">
+<img src="https://img.shields.io/badge/kakaotalk-FFCD00?style=for-the-badge&logo=kakaotalk&logoColor=white">
+
 </br>
 
 # 팀원 소개 
 
 | 팀원        | 남기훈           | 김진우           | 김승주           | 김가은           |
 |---------|-----------------|-----------------|-----------------|-----------------|
-| 대표 이미지 | ![이미지1](이미지URL1) | ![이미지2](이미지URL2) | ![이미지3](이미지URL3) | ![이미지4](이미지URL4) |
-| 깃허브 | [@BearHumanS](https://github.com/BearHumanS) |  |  |  |
+| 대표 이미지 |<img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/38935fd7-b6a3-432a-b1e8-777a53818433" width="110px"> | ![이미지2](이미지URL2) | <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/0d2000fb-cb74-40aa-a527-e0a1f51db858" width="110px"> | <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/a54118ee-202d-4275-b448-481e1023f4bd" width="110px"> |
+| 깃허브 | [@BearHumanS](https://github.com/BearHumanS) | [@]() | [@kimseungju511](https://github.com/kimseungju511) | [@KIMKAEUN](https://github.com/KIMKAEUN ) |
 | 담당     | [메인페이지]</br> - 배너</br> - 카테고리</br> [카테고리 페이지]</br> [상세 페이지]</br> [결제 페이지]</br> [API정리]</br> [마이페이지]</br> - 계좌관리</br> <zustand store관리>     | [로그인 페이지]</br> [회원가입 페이지]</br> [마이페이지] </br> - 주문 조회</br> - 회원정보 수정</br> [관리자 페이지]</br> [장바구니 페이지]</br> <라우터 설정></br> <GitHub 관리>      | [메인페이지]</br> - 헤더      | [메인페이지]</br> - 푸터</br> <자료조사>       |
 
 
@@ -122,4 +148,20 @@
 - 로컬스토리지에 저장된 장바구니 관련 key를 확인하고 value값을 가져옴
 - 전역으로 상태관리하여 결제창으로 제품들의 정보와 구매 수량을 확인
 
-
+|                                                                                      메인페이지                                                                                        |                                                                                       모든제품                                                                                        |
+| :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                     <img src="                                                                                                                   " width="400"/>                      |     <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/fef30201-a57f-4037-8b69-9adfb4bb7a8b" width="400"/>      |
+|                                                                                  <b>카테고리별 상품                                                                                    |                                                                                     <b>상품 검색--- 미완                                                                                      |
+| <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/d24716c7-db9e-4465-8b71-69b4d73527b8" width="400"/>                                                    |              <img src="" width="400"/>               |
+|                                                                                   <b>상품 상세 페이지                                                                                   |                                                                                  <b>장바구니                                                                                  |
+|     <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/56d63bea-c091-4215-a551-3de8e3b143e1" width="400"/>                                                | <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/287a31b7-ded7-489c-ad32-eee9b3665666" width="400"/>                                                    |                                                                                                              " width="400"/>      |                |
+|                                                                                     <b>거래 내역                                                                                       |                                                                                      <b>결제창                                                                                     |
+|     <img src="                                                                                                                                                    " width="400"/>      |   <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/fe455f6d-df3f-4bbd-b81d-d722e57ec9a8" width="400"/>          |
+|                                                                                  <b>계좌 조회 / 해지                                                                                   |                                                                                     <b>계좌 추가                                                                                      |
+|    <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/34d05b7a-8dd8-4098-ab50-b0d82972ed09" width="400"/>    |     <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/045aad50-ebec-4aca-b0de-9c6d11fdba61" width="400"/>      |
+|                                                                                     <b>구매 내역                                                                                      |                                                                                      <b>로그인                                                                                      |
+|     <img src="                                                                                                                                                    " width="400"/>      |   <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/6a6668a6-1d51-414c-ad20-8a8362b874dd" width="400"/>               |
+|                                                                                       <b>회원가입                                                                                    |                                                                                      <b>사용자 목록                                                                                      |
+|    <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/27abc0b9-88ac-48f5-b359-6c6bd83c901e" width="400"/>      |   <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/f489027f-cd94-426a-bd58-6155fac01338" width="400"/>                        |
+|                                                                                       <b>제품 추가                                                                                       |                                                                                      <b>제품 관리                                                                                      |
+|    <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/606d5713-75a6-40aa-8b69-0501d7e33ade" width="400"/>      |   <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/1dd0ebdf-cd38-452b-a411-0c29c63e47f7" width="400"/>                        |

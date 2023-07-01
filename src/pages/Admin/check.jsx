@@ -1,5 +1,5 @@
 import { authenticate } from '../../store/UserAPI'
-const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL2
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL
 
 export const loginCheck = async () => {
   const res = await authenticate()
