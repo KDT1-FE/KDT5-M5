@@ -15,9 +15,8 @@ const Login = () => {
       if (res.user.email === ADMIN_EMAIL) {
         location.replace('/admin')
       } else {
-        history.back()
+        location.assign('/')
       }
-      // 로그인 성공시 이전화면으로
     } else {
       alert(`${res}`)
     }

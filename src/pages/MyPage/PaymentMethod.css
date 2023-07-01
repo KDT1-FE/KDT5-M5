@@ -1,147 +1,145 @@
 .mypage__account {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 80px 0 150px 0;
-  }
-  
-  .mypage__account--container {
-    width: 400px;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .mypage__account h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .mypage__account--user {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    justify-content: center;
-  }
-  
-  .mypage__account--balance {
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  .mypage__account--total-balance {
-    font-weight: bold;
-  }
-  
-  .account-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .account__list {
-    margin-bottom: 10px;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 4px;
-    text-align: center;
-  }
-  
-  .account__list--info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .account__list--info > div {
-    flex: 1;
-  }
-  
-  .account__list--info button {
-    padding: 5px 10px;
-    background-color: #e53935;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .create__account--btn {
-    display: block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #2196f3;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal {
-    width: 300px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 80px 0 150px 0;
+  min-height: calc(100vh - 550px);
+}
 
-  select {
-    width: 295px;
-    height: 30px;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  .form label {
-    display: block;
-    margin-bottom: 10px;
-    
-  }
-  
-  .form input[type="text"] {
-    width: 285px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-top: 5px;
-  }
-  
-  .modal__add-btn {
-    display: block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #2196f3;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    
-  }
+.mypage__account--container {
+  width: 400px;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .modal__close-btn {
-    display: block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #f32121;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
+.mypage__account h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.mypage__account--user {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.mypage__account--balance {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.mypage__account--total-balance {
+  font-weight: bold;
+}
+
+.account-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.account__list {
+  margin-bottom: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.account__list--info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account__list--info > div {
+  flex: 1;
+}
+
+.account__list--info button {
+  padding: 5px 10px;
+  background-color: #e53935;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create__account--btn {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 300px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+select {
+  width: 295px;
+  height: 30px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form input[type='text'] {
+  width: 285px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.modal__add-btn {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal__close-btn {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #f32121;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

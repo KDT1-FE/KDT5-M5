@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { userInfo } from '../../../store/UserAPI'
-import './changeInput.css'
 
 import userImg from '../../../img/user.png'
+import styled from 'styled-components'
 
 const ChangeInput = () => {
   const [userData, setUserData] = useState('')
@@ -59,97 +59,153 @@ const ChangeInput = () => {
   }, [])
 
   return (
-    <div className="change-info">
-      <h1>회원정보 수정</h1>
-      <p>회원님의 소중한 정보를 안전하게 관리하세요</p>
-      <h2>기본정보</h2>
+    <Wrapper>
+      <h2>기본 정보 수정</h2>
 
-      <div className="info">
-        <div className="info-input">
-          <div className="info-menu">이름</div>
-          <div className="info-data">
-            {userData.displayName}
+      <div className="sub-wrapper">
+        <InfoWrapper>
+          <p>이름</p>
+          <DataWrapper>
+            <div>{userData.displayName}</div>
 
-            <input
-              type="text"
-              placeholder="이름"
-              value={`${
-                newUserData.displayName ? newUserData.displayName : ''
-              }`}
-              onChange={e => {
-                setNewUserData({ displayName: e.target.value })
-              }}
-            />
-            <button
-              type="button"
-              onClick={changeUserInfo}>
-              변경
-            </button>
-          </div>
-        </div>
+            <div>
+              <input
+                type="text"
+                placeholder="이름"
+                value={`${
+                  newUserData.displayName ? newUserData.displayName : ''
+                }`}
+                onChange={e => {
+                  setNewUserData({ displayName: e.target.value })
+                }}
+              />
+              <button
+                type="button"
+                onClick={changeUserInfo}>
+                변경
+              </button>
+            </div>
+          </DataWrapper>
+        </InfoWrapper>
 
-        <div className="info-input">
-          <div className="info-menu">프로필</div>
-          <div className="info-data">
+        <InfoWrapper>
+          <p>프로필</p>
+          <DataWrapper>
             <img
               // src={`${userData.profileImg ? userData.profileImg : userImg}`}
               src={`${profileImg ? profileImg : userImg}`}
               alt="profileImg"
             />
-            <input
-              type="file"
-              onChange={e => {
-                uploadImg(e)
-              }}
-            />
-            <button
-              type="button"
-              onClick={changeUserInfo}>
-              변경
-            </button>
-          </div>
-        </div>
+            <div>
+              <input
+                type="file"
+                onChange={e => {
+                  uploadImg(e)
+                }}
+              />
 
-        <div className="info-input">
-          <div className="info-menu">비밀번호</div>
-          <div className="info-data">
-            <input
-              type="password"
-              placeholder="현재 비밀번호"
-              value={`${
-                newUserData.oldPassword ? newUserData.oldPassword : ''
-              }`}
-              onChange={e => {
-                setNewUserData({
-                  newPassword: newUserData.newPassword,
-                  oldPassword: e.target.value
-                })
-              }}
-            />
-            <br />
-            <input
-              type="password"
-              placeholder="새로운 비밀번호"
-              value={`${
-                newUserData.newPassword ? newUserData.newPassword : ''
-              }`}
-              onChange={e => {
-                setNewUserData({
-                  oldPassword: newUserData.oldPassword,
-                  newPassword: e.target.value
-                })
-              }}
-            />
-            <button
-              type="button"
-              onClick={changeUserInfo}>
-              변경
-            </button>
-          </div>
-        </div>
+              <button
+                type="button"
+                onClick={changeUserInfo}>
+                변경
+              </button>
+            </div>
+          </DataWrapper>
+        </InfoWrapper>
+
+        <InfoWrapper>
+          <p>비밀번호</p>
+
+          <DataWrapper>
+            <div>
+              <input
+                type="password"
+                placeholder="현재 비밀번호"
+                value={`${
+                  newUserData.oldPassword ? newUserData.oldPassword : ''
+                }`}
+                onChange={e => {
+                  setNewUserData({
+                    newPassword: newUserData.newPassword,
+                    oldPassword: e.target.value
+                  })
+                }}
+              />
+              <br />
+              <input
+                type="password"
+                placeholder="새로운 비밀번호"
+                value={`${
+                  newUserData.newPassword ? newUserData.newPassword : ''
+                }`}
+                onChange={e => {
+                  setNewUserData({
+                    oldPassword: newUserData.oldPassword,
+                    newPassword: e.target.value
+                  })
+                }}
+              />
+
+              <button
+                type="button"
+                onClick={changeUserInfo}>
+                변경
+              </button>
+            </div>
+          </DataWrapper>
+        </InfoWrapper>
       </div>
-    </div>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  min-height: calc(100vh - 350px);
+  h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  .sub-wrapper {
+    border-top: 2px solid #696969;
+  }
+`
+
+const InfoWrapper = styled.div`
+  display: flex;
+  border-bottom: 1px solid #c7c7c7;
+
+  p {
+    background-color: #edffed;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 80px;
+    border-right: 1px solid #c7c7c7;
+
+    color: #707070;
+    font-weight: bold;
+  }
+  img {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+`
+
+const DataWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  padding: 20px;
+
+  input {
+    margin: 10px;
+    border: none;
+    border-bottom: 1px solid #a5a5a5;
+    height: 30px;
+  }
+`
 
 export default ChangeInput

@@ -36,35 +36,60 @@ const OrderDetailItem = () => {
         />
         <p>제품 정보</p>
         <ul>
-          <li>title: {title}</li>
-          <li>price: {price}</li>
-          <li>description: {description}</li>
-          <li>tags: {tags}</li>
+          <li>
+            <span>제품명</span> {title}
+          </li>
+          <li>
+            <span>가격</span> {price}
+          </li>
+          <li>
+            <span>제품설명</span> {description}
+          </li>
+          <li>
+            <span>태그</span>{' '}
+            {tags
+              ? tags.map(tag => {
+                  return `# ${tag} `
+                })
+              : null}
+          </li>
         </ul>
 
         <p>거래 계좌 정보</p>
         <ul>
-          <li>bankName : {bankName}</li>
-          <li>bankCode : {bankCode}</li>
-          <li>accountNumber : {accountNumber}</li>
+          <li>
+            <span>은행</span> {bankName}
+          </li>
+          <li>
+            <span>은행 코드</span> {bankCode}
+          </li>
+          <li>
+            <span>계좌 번호</span> {accountNumber}
+          </li>
         </ul>
 
         <p>거래 정보</p>
         <ul>
-          <li>{done ? '구매 확정' : isCanceled ? '구매 취소' : '배송 중'}</li>
+          <li>
+            <span>거래 여부</span>
+            {done ? '구매 확정' : isCanceled ? '구매 취소' : '배송 중'}
+          </li>
 
           {done ? null : isCanceled ? null : (
             <li>
-              취소하기 : <OrderCancel detailId={detailId} />
+              <span>구매 취소</span> <OrderCancel detailId={detailId} />
             </li>
           )}
           {done ? null : isCanceled ? null : (
             <li>
-              거래 확정 : <OrderOk detailId={detailId} />
+              <span>구매 확정</span> <OrderOk detailId={detailId} />
             </li>
           )}
 
-          <li>timePaid : {timePaid}</li>
+          <li>
+            <span>거래 날짜</span>{' '}
+            {`${timePaid ? timePaid.split('T', 1) : null}`}
+          </li>
         </ul>
       </SubWrapper>
     </Wrapper>
@@ -75,15 +100,34 @@ export default OrderDetailItem
 
 const Wrapper = styled.div`
   h1 {
+    font-size: 32px;
     margin-bottom: 20px;
+    font-weight: bold;
   }
 `
 
 const SubWrapper = styled.div`
+  p {
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    margin-bottom: 5px;
+    line-height: 30px;
+  }
+  span {
+    display: inline-block;
+    width: 100px;
+    color: #7a7a7a;
+  }
   img {
-    width: 300px;
+    width: 500px;
   }
   ul {
     margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #888888;
+  }
+
+  li {
+    line-height: 30px;
   }
 `
