@@ -1,4 +1,4 @@
-.userHeader {
+.header_section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,18 +8,16 @@
   z-index: 300;
 }
 
-.service {
-  width: width-inner;
+.header_section-service {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
+  align-items: flex-end;
+  gap: 1.5rem;
   height: 2.6rem;
-  font-size: 12px;
-}
-
-.service p {
-  margin-right: 10px;
+  font-size: 15px;
+  width: 100%;
+  max-width: 1040px;
+  line-height: 30px;
 }
 
 button {
@@ -32,24 +30,27 @@ button {
   padding: 0;
 }
 
-.search {
-  width: width-inner;
+.header_section-search {
   display: flex;
   justify-content: space-between;
   display: flex;
   align-items: center;
   gap: 1rem;
+  position: relative;
+  top: 15px;
 }
 
-.logo {
-  width: 44px;
+.header_section-logo {
+  width: 200px;
+  height: 120px;
+  color: #000;
 }
 
-.inputWrap {
+.header_section-inputWrap {
   position: relative;
 }
 
-.search-Input {
+.searchInput {
   width: 24rem;
   font-size: 16px;
   outline: none;
@@ -69,19 +70,40 @@ button {
   cursor: pointer;
 }
 
-.header_section-shopping-basket {
-  position: relative;
-}
-
 nav {
   width: width-inner;
   padding-top: 1rem;
 }
 
 .navbar {
+  width: 800px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   height: 4rem;
   align-items: center;
-  font-weight: 600;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 18px;
+  background: none;
+}
+.navbar_skin {
+  
+}
+.navbar_skin:hover {
+  color: #81f781;
+  text-decoration: underline;
+}
+.navbar_cleansing {
+  
+}
+.navbar_cleansing:hover{
+  color: #81f781;
+  text-decoration: underline;
+}
+.navbar_makeup {
+  
+}
+.navbar_makeup:hover {
+  color: #81f781;
+  text-decoration: underline;
 }
