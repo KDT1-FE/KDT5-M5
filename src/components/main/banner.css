@@ -1,0 +1,15 @@
+.banner__section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+.banner__section--container {
+    width: 1200px;
+    height: 400px;
+}
+
+.banner__section .banner__section--container img {
+    width: 100%;
+    height: 400px;
+}
+

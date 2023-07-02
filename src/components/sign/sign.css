@@ -1,0 +1,73 @@
+.sign-background {
+  height: 100%;
+  padding: 100px 0;
+  background-color: #f6f6f6;
+}
+
+.sign {
+  width: 510px;
+
+  margin: 40px auto;
+  border-top: 0;
+  background-color: #fff;
+  padding: 100px;
+}
+
+.sign h2 {
+  font-size: 30px;
+  line-height: 40px;
+  color: #000;
+  font-weight: 700;
+  text-align: center;
+}
+.sign p {
+  margin-top: 6px;
+  font-size: 18px;
+  line-height: 20px;
+  color: #888;
+  text-align: center;
+  margin: 1rem;
+}
+
+.sign ul > li:first-child input {
+  top: 1px;
+  border-radius: 5px 5px 0 0;
+}
+
+.sign ul > li:last-child input {
+  bottom: 1px;
+  border-radius: 0 0 5px 5px;
+}
+
+.sign input:focus {
+  outline: none;
+  border: 2px solid #81f781;
+  z-index: 10;
+}
+
+.sign input {
+  position: relative;
+  padding: 0 20px;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border: 1px solid #d0d0d0;
+  box-sizing: border-box;
+}
+
+.sign button {
+  width: 100%;
+  height: 50px;
+  margin: 1rem 0;
+  background-color: #81f781;
+  padding: 11px 0 9px;
+  font-size: 24px;
+  line-height: 30px;
+  border-radius: 5px;
+  font-weight: 400;
+  text-align: center;
+  color: #fff;
+  border: 0;
+  box-shadow: none;
+  cursor: pointer;
+}

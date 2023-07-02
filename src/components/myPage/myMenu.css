@@ -1,0 +1,13 @@
+.my-menu {
+  margin-right: 30px;
+  position: fixed;
+  top: 250px;
+  left: 20px;
+  min-width: 160px;
+}
+
+.my-menu h2 {
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+}
