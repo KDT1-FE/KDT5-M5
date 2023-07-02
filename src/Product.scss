@@ -1,0 +1,48 @@
+.info-container {
+  width: 1200px;
+  margin: 50px auto;
+
+  .setting {
+    background-color: #fff;
+    text-align: left;
+    padding-left: 30px;
+  }
+
+  table {
+    border-collapse: collapse;
+    background-color: #fff;
+
+    thead {
+      th {
+        padding: 10px 0;
+      }
+    }
+    th {
+      background-color: #e6e6e6;
+      padding: 0 20px;
+    }
+    tr {
+      border: 1px solid #c6c6c6;
+    }
+    td {
+      padding: 10px 30px;
+    }
+  }
+  label {
+    margin-right: 10px;
+  }
+  ul {
+    width: 30%;
+    border: 1px solid #c6c6c6;
+    li {
+      padding: 10px;
+      cursor: pointer;
+      &.selected {
+        background-color: orange;
+      }
+      &:not(:last-child) {
+        border-bottom: 1px solid #c6c6c6;
+      }
+    }
+  }
+}

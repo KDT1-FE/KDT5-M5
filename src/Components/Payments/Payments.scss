@@ -1,0 +1,24 @@
+#status {
+  float: right;
+  margin: 10px;
+}
+.pagination {
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+.failed {
+  color: red;
+}
+.ready {
+  color: green;
+}
+.cancelled {
+  color: indianred;
+}
+.paid {
+  color: blue;
+}
+.selected {
+  background-color: #e6e6e6;
+}
