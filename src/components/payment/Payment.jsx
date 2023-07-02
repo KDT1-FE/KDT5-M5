@@ -9,6 +9,15 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useStore } from '../../store/store'
+import {
+  nh_bank,
+  kb_bank,
+  k_bank,
+  shinhan_bank,
+  woori_bank,
+  kakao_bank,
+  hana_bank
+} from './CardImg'
 
 const Payment = () => {
   const { amount, totalPrice, products, setProducts } = useStore()
@@ -24,6 +33,16 @@ const Payment = () => {
   const [isFormValid, setIsFormValid] = useState(false)
   const [selectAccount, setSelectAccount] = useState('')
   const directMessage = useRef()
+
+  const bankImgs = {
+    하나은행: hana_bank,
+    케이뱅크: k_bank,
+    카카오뱅크: kakao_bank,
+    우리은행: woori_bank,
+    신한은행: shinhan_bank,
+    NH농협은행: nh_bank,
+    KB국민은행: kb_bank
+  }
 
   useEffect(() => {
     checkLoginStatus()
@@ -391,10 +410,7 @@ const Payment = () => {
               }}>
               {accountList.map(account => (
                 <div key={account.id}>
-                  <img
-                    src={`../../../public/card/${account.bankName}.png`}
-                    alt={account.bankName}
-                  />
+                  {bankImgs[account.bankName]}
                   <div className="account-balace">
                     잔액 : {account.balance.toLocaleString()} 원
                   </div>
