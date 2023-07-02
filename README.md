@@ -51,7 +51,7 @@
 |:---------:|:-----------------:|:-----------------:|:-----------------:|:-----------------:|
 | 대표 이미지 |<img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/38935fd7-b6a3-432a-b1e8-777a53818433" width="110px"> | ![이미지2](이미지URL2) | <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/0d2000fb-cb74-40aa-a527-e0a1f51db858" width="110px"> | <img src="https://github.com/BearHumanS/Frontend_Team-project/assets/115094069/a54118ee-202d-4275-b448-481e1023f4bd" width="110px"> |
 | 깃허브 | [@BearHumanS](https://github.com/BearHumanS) | [@jinu6262](https://github.com/jinu6262) | [@kimseungju511](https://github.com/kimseungju511) | [@KIMKAEUN](https://github.com/KIMKAEUN ) |
-| 담당     | [메인페이지]</br> - 배너</br> - 카테고리</br> [카테고리 페이지]</br> [상세 페이지]</br> [결제 페이지]</br> [API정리]</br> [마이페이지]</br> - 계좌관리</br> <zustand store관리>     | [로그인 페이지]</br> [회원가입 페이지]</br> [마이페이지] </br> - 주문 조회</br> - 회원정보 수정</br> [관리자 페이지]</br> [장바구니 페이지]</br> <라우터 설정></br> <GitHub 관리>      | [메인페이지]</br> - 헤더      | [메인페이지]</br> - 푸터</br> <자료조사>       |
+| 담당     | [메인페이지]</br> - 배너</br> - 카테고리</br> [카테고리 페이지]</br> [상세 페이지]</br> [결제 페이지]</br> [API정리]</br> [마이페이지]</br> - 계좌관리</br> <zustand store관리>     | [로그인 페이지]</br> [회원가입 페이지]</br> [마이페이지] </br> - 주문 조회</br> - 회원정보 수정</br> [관리자 페이지]</br> - 유저 리스트</br> - 제품 등록</br> - 제품 관리</br> [장바구니 페이지]</br> <라우터 설정></br> <GitHub 관리>      | [메인페이지]</br> - 헤더      | [메인페이지]</br> - 푸터</br> <자료조사>       |
 
 
 # 페이지 기능
