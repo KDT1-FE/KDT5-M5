@@ -56,7 +56,7 @@ export default function Header() {
               <strong>{displayName}</strong>님, 안녕하세요.
             </p>
             <Link
-              to="/sign"
+              to="/"
               onClick={Logout_Click}>
               로그아웃
             </Link>
