@@ -23,6 +23,7 @@ import MyMenu from './components/myPage/MyMenu'
 import PaymentMethod from './pages/MyPage/PaymentMethod'
 import OrderDetailItem from './components/myPage/getOrderList/OrderDetailItem'
 import ProductCategory from './pages/prdouctCategory/productCategory'
+import SearchResult from './components/searchResult/searchResult'
 
 const Layout = () => {
   return (
@@ -124,6 +125,10 @@ function App() {
           <Route
             path="sign"
             element={<Sign />}
+          />
+          <Route
+            path="product/search"
+            element={<SearchResult />}
           />
         </Route>
 

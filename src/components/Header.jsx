@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BsCart2 } from 'react-icons/bs'
 import { BiSearch } from 'react-icons/bi'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { searchProduct, authenticate, logOut } from '../store/UserAPI'
 import './Header.css'
 import logo from '../img/lmainlogo.png'
+import { useStore } from '../store/store'
 
 export default function Header() {
+  const navigate = useNavigate()
   // 검색어를 state에 저장
   const [searchText, setSearchText] = useState('')
+  const { searchResult, setSearchResult } = useStore(state => ({
+    searchResult: state.searchResult,
+    setSearchResult: state.setSearchResult
+  }))
   const [isLogin, setIsLogin] = useState(false)
   const [displayName, setDisplayName] = useState('')
 
@@ -24,7 +30,9 @@ export default function Header() {
       setSearchText('')
       return
     }
-    await searchProduct(searchText)
+    const result = await searchProduct(searchText)
+    setSearchResult(result)
+    navigate('/product/search')
     return
   }
   const header_LoginCheck = async () => {
@@ -56,7 +64,7 @@ export default function Header() {
               <strong>{displayName}</strong>님, 안녕하세요.
             </p>
             <Link
-              to="/"
+              to="/sign"
               onClick={Logout_Click}>
               로그아웃
             </Link>
@@ -111,7 +119,6 @@ export default function Header() {
               onClick={() => {
                 console.log('CLICK!!')
                 handleSearch()
-                setSearchText('')
               }}>
               <BiSearch
                 size="24"
