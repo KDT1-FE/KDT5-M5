@@ -1,0 +1,49 @@
+[[redirects]]
+  from = "https://beautyinside.netlify.app/"
+  to = "https://beautyinside.netlify.app/"
+  status = 200
+
+[[redirects]]
+  from = "https://beautyinside.netlify.app/SignIn"
+  to = "https://beautyinside.netlify.app/SignIn"
+  status = 200
+
+[[redirects]]
+  from = "https://beautyinside.netlify.app/SignUp"
+  to = "https://beautyinside.netlify.app/SignUp"
+  status = 200
+
+[[redirects]]
+  from = "https://beautyinside.netlify.app/PersonalColor"
+  to = "https://beautyinside.netlify.app/PersonalColor"
+  status = 200
+
+[[redirects]]
+  from = "https://beautyinside.netlify.app/Best"
+  to = "https://beautyinside.netlify.app/Best"
+  status = 200
+
+[[redirects]]
+  from = "https://beautyinside.netlify.app/Makeup"
+  to = "https://beautyinside.netlify.app/Makeup"
+  status = 200
+
+[[redirects]]
+  from = "https://beautyinside.netlify.app/CartPurchase"
+  to = "https://beautyinside.netlify.app/CartPurchase"
+  status = 200
+
+[[redirects]]
+  from = "https://beautyinside.netlify.app/MyPage/PurchaseList"
+  to = "https://beautyinside.netlify.app/MyPage/PurchaseList"
+  status = 200
+
+[[redirects]]
+  from = "https://beautyinside.netlify.app/MyPage/"
+  to = "https://beautyinside.netlify.app/MyPage/PurchaseList"
+  status = 200
+
+[[redirects]]
+  from = "https://beautyinside.netlify.app/MyPage/Account"
+  to = "https://beautyinside.netlify.app/MyPage/Account"
+  status = 200
