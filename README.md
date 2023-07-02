@@ -1,1319 +1,195 @@
-# 🤝 거래 API 활용, 팀 프로젝트
+# 🏠 집 가구싶어 (SweetHome)
 
-주어진 API를 분석해 어떤 프로젝트를 진행/완성할 것인지 팀 단위로 자유롭게 결정하고 만들어보세요.  
-TypeScript를 필수로 사용해야 합니다.  
-과제 수행 및 리뷰 기간은 별도 공지를 참고하세요!
+<p>React, TypeScript, Rest API를 활용한 라이프 스타일 홈 데코·인테리어 쇼핑몰 프로젝트입니다.<br />
+성별과 연령에 상관없이 모두가 관심을 가지고 이용할 수 있는 인테리어 관련 주제로 선정하였으며,<br />
+‘집(Home)’ + ‘가구(Furniture)’ + ‘가고싶다.(Want To Go)’ 의 합성어로 언제 어디서나 집에 가고싶게 만드는 제품을 판매하다는 의미의 쇼핑몰입니다.</p>
 
-## 과제 수행 및 제출 방법
+<br />
 
-```
-KDT기수번호_이름
-
-E.g, KDT0_ParkYoungWoong
-```
-
-1. 현재 저장소를 로컬에 클론(Clone)합니다.
-1. 자신의 본명으로 브랜치를 생성합니다.(구분 가능하도록 본명을 꼭 파스칼케이스로 표시하세요, `git branch KDTX_ParkYoungWoong`)
-1. 자신의 본명 브랜치에서 과제를 수행합니다.
-1. 과제 수행이 완료되면, 자신의 본명 브랜치를 원격 저장소에 푸시(Push)합니다.(`main` 브랜치에 푸시하지 않도록 꼭 주의하세요, `git push origin KDTX_ParkYoungWoong`)
-1. 저장소에서 `main` 브랜치를 대상으로 Pull Request 생성하면, 과제 제출이 완료됩니다!(E.g, `main` <== `KDTX_ParkYoungWoong`)
-
-- `main` 혹은 다른 사람의 브랜치로 절대 병합하지 않도록 주의하세요!
-- Pull Request에서 보이는 설명을 다른 사람들이 이해하기 쉽도록 꼼꼼하게 작성하세요!
-- Pull Request에서 과제 제출 후 절대 병합(Merge)하지 않도록 주의하세요!
-- 과제 수행 및 제출 과정에서 문제가 발생한 경우, 바로 담당 멘토나 강사에서 얘기하세요!
-
-## API 사용법
-
-모든 API 요청(Request) `headers`에 아래 정보가 꼭 포함돼야 합니다!  
-`username`은 `KDT5_TeamX`와 같이 본명 혹은 팀 이름을 포함해야 합니다!  
-확인할 수 없는 사용자나 팀의 DB 정보는 임의로 삭제될 수 있습니다!
-
-```json
-{
-  "content-type": "application/json",
-  "apikey": "KDT5_nREmPe9B",
-  "username": "KDT5_TeamX"
-}
-```
-
-<hr />
-
-## 인증
-
-'인증' 관련 API는 모두 일반 사용자 전용입니다.
-
-### 회원가입
-
-사용자가 `username`에 종속되어 회원가입합니다.
-
-- 사용자 비밀번호는 암호화해 저장합니다.(관리자는 확인할 수 없습니다!)
-- 프로필 이미지는 1MB 이하여야 합니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/signup
-  \ -X 'POST'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  email: string // 사용자 아이디 (필수!)
-  password: string // 사용자 비밀번호, 8자 이상 (필수!)
-  displayName: string // 사용자 이름, 20자 이하 (필수!)
-  profileImgBase64?: string // 사용자 프로필 이미지(base64) - jpg, jpeg, webp, png, gif, svg
-}
-```
-
-```json
-{
-  "email": "thesecon@gmail.com",
-  "password": "********",
-  "displayName": "ParkYoungWoong",
-  "profileImgBase64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAf...(생략)"
-}
-```
-
-응답 데이터 타입 및 예시:
-
-```ts
-interface ResponseValue {
-  user: { // 회원가입한 사용자 정보
-    email: string // 사용자 아이디
-    displayName: string // 사용자 표시 이름
-    profileImg: string | null // 사용자 프로필 이미지(URL)
-  }
-  accessToken: string // 사용자 접근 토큰
-}
-```
-
-```json
-{
-  "user": {
-    "email": "thesecon@gmail.com",
-    "displayName": "ParkYoungWoong",
-    "profileImg": "https://storage.googleapis.com/heropy-api/vjbtIrh5dGv163442.png"
-  },
-  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlM3WDhpQ...(생략)"
-}
-```
-
-### 로그인
-
-- 발급된 `accessToken`은 24시간 후 만료됩니다.(만료 후 다시 로그인 필요)
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/login
-  \ -X 'POST'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  email: string // 사용자 아이디 (필수!)
-  password: string // 사용자 비밀번호 (필수!)
-}
-```
-
-```json
-{
-  "email": "thesecon@gmail.com",
-  "password": "********"
-}
-```
-
-응답 데이터 타입 및 예시:
-
-```ts
-interface ResponseValue {
-  user: { // 회원가입한 사용자 정보
-    email: string // 사용자 아이디
-    displayName: string // 사용자 표시 이름
-    profileImg: string | null // 사용자 프로필 이미지(URL)
-  }
-  accessToken: string // 사용자 접근 토큰
-}
-```
-
-```json
-{
-  "user": {
-    "email": "thesecon@gmail.com",
-    "displayName": "ParkYoungWoong",
-    "profileImg": "https://storage.googleapis.com/heropy-api/vAKjlJ-Gx5v163442.png"
-  },
-  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlQS3I...(생략)"
-}
-```
-
-### 인증 확인
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/me
-  \ -X 'POST'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
-
-요청 데이터 타입 및 예시:
-
-- 없음
-
-응답 데이터 타입 및 예시:
-
-```ts
-interface ResponseValue {
-  email: string // 사용자 아이디
-  displayName: string // 사용자 표시 이름
-  profileImg: string | null // 사용자 프로필 이미지(URL)
-}
-```
-
-```json
-{
-  "email": "thesecon@gmail.com",
-  "displayName": "ParkYoungWoong",
-  "profileImg": "https://storage.googleapis.com/heropy-api/vAKjlJ-Gx5v163442.png"
-}
-```
-
-### 로그아웃
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/logout
-  \ -X 'POST'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
-
-요청 데이터 타입 및 예시:
-
-- 없음
-
-응답 데이터 타입 및 예시:
-
-```ts
-type ResponseValue = true // 로그아웃 처리 상태
-```
-
-### 사용자 정보 수정
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/user
-  \ -X 'PUT'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  displayName?: string // 새로운 표시 이름
-  profileImgBase64?: string // 사용자 프로필 이미지(base64) - jpg, jpeg, webp, png, gif, svg
-  oldPassword?: string // 기존 비밀번호
-  newPassword?: string // 새로운 비밀번호
-}
-```
-
-```json
-{
-  "oldPassword": "********",
-  "newPassword": "**********"
-}
-```
-
-응답 데이터 타입 및 예시:
-
-```ts
-interface ResponseValue {
-  email: string // 사용자 아이디
-  displayName: string // 사용자 표시 이름
-  profileImg: string | null // 사용자 프로필 이미지(URL)
-}
-```
-
-```json
-{
-  "email": "thesecon@gmail.com",
-  "displayName": "ParkYoungWoong",
-  "profileImg": "https://storage.googleapis.com/heropy-api/vAKjlJ-Gx5v163442.png"
-}
-```
-
-### 사용자 목록 조회
-
-- 관리자 전용 API입니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/users
-  \ -X 'GET'
-  \ -H 'masterKey: true'
-```
-
-요청 데이터 타입 및 예시:
-
-- 없음
-
-응답 데이터 타입 및 예시:
-
-```ts
-type ResponseValue = User[]
-
-interface User {
-  email: string // 사용자 아이디
-  displayName: string // 사용자 표시 이름
-  profileImg: string // 사용자 프로필 이미지 URL
-}
-```
-
-```json
-[
-  {
-    "email": "thesecon@gmail.com",
-    "displayName": "HEROPY",
-    "profileImg": null
-  },
-  {
-    "email": "neo@zillinks.com",
-    "displayName": "박영웅",
-    "profileImg": "https://storage.googleapis.com/heropy-api/Z_una7lyijv074804.png"
-  },
-  {
-    "email": "test@test.com",
-    "displayName": "관리자",
-    "profileImg": "https://storage.googleapis.com/heropy-api/ZXcXjwsB7nv121507.png"
-  }
-]
-```
-
-<hr />
-
-## 계좌
-
-'계좌' 관련 API는 모두 일반 사용자 전용입니다.
-
-### 선택 가능한 은행 목록 조회
-
-- 은행 당 하나의 계좌만 허용됩니다.
-- 사용자가 계좌를 추가하면, 해당 은행 정보 `disabled` 속성이 `true`로 변경됩니다.
-- 은행 정보 `digits` 속성의 숫자를 모두 더하면 각 은행의 유효한 계좌번호 길이가 됩니다.
-- `[3, 2, 4, 3]` => 123-12-1234-123
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/account/banks
-  \ -X 'GET'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
-
-요청 데이터 타입 및 예시:
-
-- 없음
-
-응답 데이터 타입 및 예시:
-
-```ts
-type ResponseValue = Bank[] // 선택 가능한 은행 정보 목록
-
-interface Bank { // 선택 가능한 은행 정보
-  name: string // 은행 이름
-  code: string // 은행 코드
-  digits: number[] // 은행 계좌 자릿수
-  disabled: boolean // 사용자가 추가한 계좌 여부
-}
-```
-
-```json
-[
-  {
-    "name": "KB국민은행",
-    "code": "004",
-    "digits": [3, 2, 4, 3],
-    "disabled": false
-  },
-  {
-    "name": "신한은행",
-    "code": "088",
-    "digits": [3, 3, 6],
-    "disabled": true
-  },
-  {
-    "name": "우리은행",
-    "code": "020",
-    "digits": [4, 3, 6],
-    "disabled": true
-  },
-  {
-    "name": "하나은행",
-    "code": "081",
-    "digits": [3, 6, 5],
-    "disabled": false
-  },
-  {
-    "name": "케이뱅크",
-    "code": "089",
-    "digits": [3, 3, 6],
-    "disabled": false
-  },
-  {
-    "name": "카카오뱅크",
-    "code": "090",
-    "digits": [4, 2, 7],
-    "disabled": false
-  },
-  {
-    "name": "NH농협은행",
-    "code": "011",
-    "digits": [3, 4, 4, 2],
-    "disabled": false
-  }
-]
-```
-
-### 계좌 목록 및 잔액 조회
-
-- 계좌번호는 일부만 노출됩니다. E.g. `"123-XXXX-XXXX-XX"`
-- 잔액의 단위는 '원화(￦)'입니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/account
-  \ -X 'GET'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
-
-요청 데이터 타입 및 예시:
-
-- 없음
-
-응답 데이터 타입 및 예시:
-
-```ts
-interface ResponseValue {
-  totalBalance: number // 사용자 계좌 잔액 총합
-  accounts: Bank[] // 사용자 계좌 정보 목록
-}
-
-interface Bank { // 사용자 계좌 정보
-  id: string // 계좌 ID
-  bankName: string // 은행 이름
-  bankCode: string // 은행 코드
-  accountNumber: string // 계좌 번호
-  balance: number // 계좌 잔액
-}
-```
-
-```json
-{
-  "totalBalance": 5999900,
-  "accounts": [
-    {
-      "id": "jQMfKla8vOIFELA3mAXv",
-      "bankName": "NH농협은행",
-      "bankCode": "011",
-      "accountNumber": "356-XXXX-XXXX-XX",
-      "balance": 2999900
-    },
-    {
-      "id": "wiPgsXvMAmcLw8AuRHIi",
-      "bankName": "KB국민은행",
-      "bankCode": "004",
-      "accountNumber": "123-XX-XXXX-XXX",
-      "balance": 3000000
-    }
-  ]
-}
-```
-
-### 계좌 연결
-
-- 연결된 계좌 잔액에는 자동으로 기본 '3백만원'이 추가됩니다.
-- 요청하는 계좌번호와 전화번호에는 `-` 구분이 없어야 합니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/account 
-  \ -X 'POST'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  bankCode: string // 연결할 은행 코드 (필수!)
-  accountNumber: string // 연결할 계좌번호 (필수!)
-  phoneNumber: string // 사용자 전화번호 (필수!)
-  signature: boolean // 사용자 서명 (필수!)
-}
-```
-
-```json
-{
-  "bankCode": "088",
-  "accountNumber": "123456789012",
-  "phoneNumber": "01012345678",
-  "signature": true
-}
-```
-
-응답 데이터 타입 및 예시:
-
-```ts
-interface ResponseValue { // 연결된 계좌 정보
-  id: string // 계좌 ID
-  bankName: string // 은행 이름
-  bankCode: string // 은행 코드
-  accountNumber: string // 계좌 번호
-  balance: number // 계좌 잔액
-}
-```
-
-```json
-{
-  "id": "1qRFC6Ey5VkSu6nyj5Ba",
-  "bankName": "신한은행",
-  "bankCode": "088",
-  "accountNumber": "123-XXX-XXXXXX",
-  "balance": 3000000
-}
-```
-
-### 계좌 해지
-
-- 해지한 계좌는 다시 연결해도 잔액이 반영되지 않습니다.(기본 금액으로 추가됩니다)
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/account 
-  \ -X 'DELETE'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  accountId: string // 계좌 ID (필수!)
-  signature: boolean // 사용자 서명 (필수!)
-}
-```
-
-```json
-{
-  "accountId": "jQMfKla8vOIFELA3mAXv",
-  "signature": true
-}
-```
-
-응답 데이터 타입 및 예시:
-
-```ts
-type ResponseValue = true  // 계좌 해지 처리 상태
-```
-
-<hr />
-
-## 제품
-
-'제품' 관련 API는 관리자 전용과 일반 사용자 전용으로 구분됩니다.<br>
-공용 API도 있으니 주의하세요!
-
-### 모든 제품 조회
-
-- 관리자 전용 API입니다.
-- 상세 정보가 아닌 기본 정보의 제품 설명은 100자까지만 포함됩니다.
-- 상세 정보가 아닌 기본 정보의 제품 상세 사진은 포함되지 않습니다.
-- 제품 할인율(`discountRate`)은 제품 가격과 직접 관계가 없는 단순 메모 속성입니다. 
-- 제품 할인율이 없는 경우, `0`으로 표시됩니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products 
-  \ -X 'GET'
-  \ -H 'masterKey: true'
-```
-
-요청 데이터 타입 및 예시:
-
-- 없음
-
-응답 데이터 타입 및 예시:
-
-```ts
-type ResponseValue = Product[] // 관리하는 모든 제품의 목록
-
-interface Product { // 제품 정보
-  id: string // 제품 ID
-  title: string // 제품 이름
-  price: number // 제품 가격
-  description: string // 제품 설명(최대 100자)
-  tags: string[] // 제품 태그
-  thumbnail: string | null // 제품 썸네일 이미지(URL)
-  isSoldOut: boolean // 제품 매진 여부
-  discountRate: number // 제품 할인율
-}
-```
-
-```json
-[
-  {
-    "id": "cFmeC7aY5KjZbBAdJE9y",
-    "title": "삼성전자 스마트모니터 M7 S43AM700",
-    "price": 639000,
-    "description": "107.9cm(43인치) / 와이드(16:9) / 평면 / VA / 3840 x 2160(4K UHD) / 픽셀피치: 0.2451mm / 8ms(GTG) / 300cd / 5,00",
-    "tags": [
-      "가전",
-      "모니터",
-      "컴퓨터"
-    ],
-    "thumbnail": "https://storage.googleapis.com/heropy-api/vBAK4MQdH5v195712.png",
-    "isSoldOut": false,
-    "discountRate": 20
-  },
-  {
-    "id": "nbqtQvEivYwEXTDet7YM",
-    "title": "MacBook Pro 16",
-    "price": 3360000,
-    "description": "역대 가장 강력한 MacBook Pro가 등장했습니다. 최초의 프로용 Apple Silicon인 M1 Pro 또는 M1 Max 칩을 탑재해 쏜살같이 빠른 속도는 물론, 획기적인 성",
-    "tags": [
-      "가전",
-      "노트북",
-      "컴퓨터"
-    ],
-    "thumbnail": "https://storage.googleapis.com/heropy-api/vIKMk_jy4Yv195256.png",
-    "isSoldOut": false,
-    "discountRate": 0
-  }
-]
-```
-
-### 전체 거래(판매) 내역
-
-- 관리자 전용 API입니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/all 
-  \ -X 'GET'
-  \ -H 'masterKey: true'
-```
-
-요청 데이터 타입 및 예시:
-
-- 없음
-
-응답 데이터 타입 및 예시:
-
-```ts
-type RequestValue = TransactionDetail[] // 모든 거래 내역의 목록
-
-interface TransactionDetail { // 거래 내역 정보
-  detailId: string // 거래 내역 ID
-  user: { // 거래한 사용자 정보
-    email: string
-    displayName: string
-    profileImg: string | null
-  }
-  account: { // 거래한 사용자의 계좌 정보
-    bankName: string
-    bankCode: string
-    accountNumber: string
-  }
-  product: { // 거래한 제품 정보
-    productId: string
-    title: string
-    price: number
-    description: string
-    tags: string[]
-    thumbnail: string | null
-    discountRate: number
-  }
-  reservation: Reservation | null // 거래한 제품의 예약 정보
-  timePaid: string // 제품을 거래한 시간
-  isCanceled: boolean // 거래 취소 여부
-  done: boolean // 거래 완료 여부
-}
-
-interface Reservation {
-  start: string // 예약 시작 시간
-  end: string // 예약 종료 시간
-  isCanceled: boolean // 예약 취소 여부
-  isExpired: boolean // 예약 만료 여부
-}
-```
-
-```json
-[
-  {
-    "detailId": "dMhfxyrAupQP18OYmywy",
-    "user": {
-      "email": "thesecon@gmail.com",
-      "displayName": "ParkYoungWoong",
-      "profileImg": "https://storage.googleapis.com/heropy-api/vsLRqTlPO5v200111.png"
-    },
-    "account": {
-      "bankName": "KB국민은행",
-      "bankCode": "004",
-      "accountNumber": "123-XX-XXXX-XXX"
-    },
-    "product": {
-      "productId": "cFmeC7aY5KjZbBAdJE9y",
-      "title": "삼성전자 스마트모니터 M7 S43AM700",
-      "price": 639000,
-      "description": "107.9cm(43인치) / 와이드(16:9) / 평면 / VA / 3840 x 2160(4K UHD) / 픽셀피치: 0.2451mm / 8ms(GTG) / 300cd / 5,00",
-      "tags": [
-        "가전",
-        "모니터",
-        "컴퓨터"
-      ],
-      "thumbnail": "https://storage.googleapis.com/heropy-api/vBAK4MQdH5v195712.png",
-      "discountRate": 0
-    },
-    "reservation": null,
-    "timePaid": "2021-11-07T20:01:49.100Z",
-    "isCanceled": false,
-    "done": false
-  }
-]
-```
-
-예약 정보(`reservation`)가 있는 경우:
-
-```json
-[
-  {
-    "reservation": {
-      "start": "2021-11-12T06:00:00.000Z",
-      "end": "2021-11-12T07:00:00.000Z",
-      "isCanceled": false,
-      "isExpired": true
-    }
-  }
-]
-```
-
-### 거래(판매) 내역 완료/취소 및 해제
-
-- 관리자 전용 API입니다.
-- 거래 내역을 취소하면, 예약도 같이 취소됩니다.
-- 거래 내역을 취소 해제하면, 예약도 같이 취소가 해제됩니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/:detailId 
-  \ -X 'PUT'
-  \ -H 'masterKey: true'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  isCanceled?: boolean // 거래 취소 여부 (사용자의 '제품 거래(구매) 취소' 상태와 같습니다)
-  done?: boolean // 거래 완료 여부 (사용자의 '제품 거래(구매) 확정' 상태와 같습니다)
-}
-```
-
-```json
-{
-  "isCanceled": true
-}
-```
-
-응답 데이터 타입 및 예시:
-
-
-```ts
-type ResponseValue = true // 거래 내역 완료/취소 및 해제 처리 상태
-```
-
-### 제품 추가
-
-- 관리자 전용 API입니다.
-- 파일(사진)은 Base64로 요청해야 합니다.
-- 제품 썸네일 사진은 1MB 이하여야 합니다.
-- 제품 상세 사진은 4MB 이하여야 합니다.
-- 제품 할인율(`discountRate`)은 제품 가격과 직접 관계가 없는 단순 메모 속성입니다.
-- 제품 할인율은 `0`~`99` 사이 숫자를 입력하세요. 만약 할인율이 '20%'인 경우, `20`으로 입력해야 합니다.
-- 제품 할인율을 입력하지 않으면, `0`으로 적용됩니다.
-
-```js
-// 할인 전 가격을 계산!
-const priceBeforeDiscount = price * 100 / (100 - discountRate)
-```
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products 
-  \ -X 'POST'
-  \ -H 'masterKey: true'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  title: string // 제품 이름 (필수!)
-  price: number // 제품 가격 (필수!)
-  description: string // 제품 상세 설명 (필수!)
-  tags?: string[] // 제품 태그
-  thumbnailBase64?: string // 제품 썸네일(대표) 사진(base64) - jpg, jpeg, webp, png, gif, svg
-  photoBase64?: string // 제품 상세 사진(base64) - jpg, jpeg, webp, png, gif, svg
-  discountRate?: number // 제품 할인율
-}
-```
-
-```json
-{
-  "title": "MacBook Pro 16",
-  "price": 3360000,
-  "description": "역대 가장 강력한 MacBook Pro가 등장했습니다. 최초의 프로용 Apple Silicon인 M1 Pro 또는 M1 Max 칩을 탑재해 쏜살같이 빠른 속도는 물론, 획기적인 성능과 놀라운 배터리 사용 시간을 자랑하죠. 여기에 시선을 사로잡는 Liquid Retina XDR 디스플레이, Mac 노트북 사상 최고의 카메라 및 오디오 그리고 더할 나위 없이 다양한 포트까지. 기존 그 어떤 카테고리에도 속하지 않는 노트북. 새로운 MacBook Pro는 그야말로 야수입니다.",
-  "tags": [
-    "가전",
-    "노트북",
-    "컴퓨터"
-  ],
-  "thumbnailBase64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUg...(생략)"
-}
-```
-
-응답 데이터 타입 및 예시:
-
-```ts
-interface ResponseValue { // 추가한 제품의 상세 내용
-  id: string // 제품 ID
-  title: string // 제품 이름
-  price: number // 제품 가격
-  description: string // 제품 상세 설명
-  tags: string[] // 제품 태그
-  thumbnail: string | null // 제품 썸네일 이미지(URL)
-  photo: string | null // 제품 상세 이미지(URL)
-  isSoldOut: boolean // 제품 매진 여부
-  discountRate: number // 제품 할인율
-}
-```
-
-```json
-{
-  "id": "nbqtQvEivYwEXTDet7YM",
-  "title": "MacBook Pro 16",
-  "price": 3360000,
-  "description": "역대 가장 강력한 MacBook Pro가 등장했습니다. 최초의 프로용 Apple Silicon인 M1 Pro 또는 M1 Max 칩을 탑재해 쏜살같이 빠른 속도는 물론, 획기적인 성능과 놀라운 배터리 사용 시간을 자랑하죠. 여기에 시선을 사로잡는 Liquid Retina XDR 디스플레이, Mac 노트북 사상 최고의 카메라 및 오디오 그리고 더할 나위 없이 다양한 포트까지. 기존 그 어떤 카테고리에도 속하지 않는 노트북. 새로운 MacBook Pro는 그야말로 야수입니다.",
-  "tags": [
-    "가전",
-    "노트북",
-    "컴퓨터"
-  ],
-  "thumbnail": "https://storage.googleapis.com/heropy-api/vIKMk_jy4Yv195256.png",
-  "photo": "https://storage.googleapis.com/heropy-api/voihKb3NLGcv195257.png",
-  "isSoldOut": false,
-  "discountRate": 0
-}
-```
-
-### 제품 수정
-
-- 관리자 전용 API입니다.
-- 사용자의 구매 내역 확인을 위해, 제품을 실제로는 삭제하지 않고 매진(Sold Out) 처리해야 합니다.
-- 매진은 다시 해제할 수 있습니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/:productId
-  \ -X 'PUT'
-  \ -H 'masterKey: true'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  title?: string // 제품 이름
-  price?: number // 제품 가격
-  description?: string // 제품 상세 설명
-  tags?: string[] // 제품 태그
-  thumbnailBase64?: string // 제품 썸네일(대표) 사진(base64) - jpg, jpeg, webp, png, gif, svg
-  photoBase64?: string // 제품 상세 사진(base64) - jpg, jpeg, webp, png, gif, svg
-  isSoldOut?: boolean // 제품 매진 여부
-  discountRate?: number // 제품 할인율
-}
-```
-
-```json
-{
-  "price": 1500
-}
-```
-
-응답 데이터 타입 및 예시:
-
-```ts
-interface ResponseValue { // 수정한 제품의 상세 내용
-  id: string // 제품 ID
-  title: string // 제품 이름
-  price: number // 제품 가격
-  description: string // 제품 상세 설명
-  tags: string[] // 제품 태그
-  thumbnail: string | null // 제품 썸네일 이미지(URL)
-  photo: string | null // 제품 상세 이미지(URL)
-  isSoldOut: boolean // 제품 매진 여부 
-  discountRate: number // 제품 할인율
-}
-```
-
-```json
-{
-  "id": "nbqtQvEivYwEXTDet7YM",
-  "title": "MacBook Pro 16",
-  "price": 1500,
-  "description": "역대 가장 강력한 MacBook Pro가 등장했습니다. 최초의 프로용 Apple Silicon인 M1 Pro 또는 M1 Max 칩을 탑재해 쏜살같이 빠른 속도는 물론, 획기적인 성능과 놀라운 배터리 사용 시간을 자랑하죠. 여기에 시선을 사로잡는 Liquid Retina XDR 디스플레이, Mac 노트북 사상 최고의 카메라 및 오디오 그리고 더할 나위 없이 다양한 포트까지. 기존 그 어떤 카테고리에도 속하지 않는 노트북. 새로운 MacBook Pro는 그야말로 야수입니다.",
-  "tags": [
-    "가전",
-    "노트북",
-    "컴퓨터"
-  ],
-  "thumbnail": "https://storage.googleapis.com/heropy-api/vIKMk_jy4Yv195256.png",
-  "photo": "https://storage.googleapis.com/heropy-api/voihKb3NLGcv195257.png",
-  "isSoldOut": false,
-  "discountRate": 0
-}
-```
-
-### 제품 삭제
-
-- 관리자 전용 API입니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/:productId
-  \ -X 'DELETE'
-  \ -H 'masterKey: true'
-```
-
-요청 데이터 타입 및 예시:
-
-- 없음
-
-응답 데이터 타입 및 예시:
-
-```ts
-type ResponseValue = true // 제품 삭제 처리 상태
-```
-
-### 단일 제품 상세 조회
+## 프로젝트 소개
 
-- 공용 API입니다.
+> **패스트캠퍼스 프론트엔드 개발 부트캠프 5기**<br />
+> **개발 기간** : 2023. 05. 30 ~ 2023. 07. 01<br />
+> **배포 주소** : [DEMO](https://fe5-team9.github.io/sweethome)
 
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/:productId
-  \ -X 'GET'
-```
-
-요청 데이터 타입 및 예시:
-
-- 없음
-
-응답 데이터 타입 및 예시:
-
-```ts
-interface ResponseValue { // 제품의 상세 내용
-  id: string // 제품 ID
-  title: string // 제품 이름
-  price: number // 제품 가격
-  description: string // 제품 상세 설명
-  tags: string[] // 제품 태그
-  thumbnail: string | null // 제품 썸네일 이미지(URL)
-  photo: string | null // 제품 상세 이미지(URL)
-  isSoldOut: boolean // 제품 매진 여부 
-  reservations: Reservation[] // 제품의 모든 예약 정보 목록
-  discountRate: number // 제품 할인율
-}
-
-interface Reservation {
-  start: string // 예약 시작 시간
-  end: string // 예약 종료 시간
-  isCanceled: boolean // 예약 취소 여부
-  isExpired: boolean // 예약 만료 여부
-}
-```
-
-```json
-{
-  "id": "nbqtQvEivYwEXTDet7YM",
-  "title": "MacBook Pro 16",
-  "price": 3360000,
-  "description": "역대 가장 강력한 MacBook Pro가 등장했습니다. 최초의 프로용 Apple Silicon인 M1 Pro 또는 M1 Max 칩을 탑재해 쏜살같이 빠른 속도는 물론, 획기적인 성능과 놀라운 배터리 사용 시간을 자랑하죠. 여기에 시선을 사로잡는 Liquid Retina XDR 디스플레이, Mac 노트북 사상 최고의 카메라 및 오디오 그리고 더할 나위 없이 다양한 포트까지. 기존 그 어떤 카테고리에도 속하지 않는 노트북. 새로운 MacBook Pro는 그야말로 야수입니다.",
-  "tags": [
-    "가전",
-    "노트북",
-    "컴퓨터"
-  ],
-  "thumbnail": "https://storage.googleapis.com/heropy-api/vIKMk_jy4Yv195256.png",
-  "photo": "https://storage.googleapis.com/heropy-api/voihKb3NLGcv195257.png",
-  "isSoldOut": false,
-  "reservations": [],
-  "discountRate": 0
-}
-```
-
-예약 정보(`reservation`)가 있는 경우:
-
-```json
-{
-  "reservations": [
-    {
-      "reservation": {
-        "start": "2021-11-12T06:00:00.000Z",
-        "end": "2021-11-12T07:00:00.000Z",
-        "isCanceled": false,
-        "isExpired": true
-      }
-    }
-  ] 
-}
-```
-
-### 제품 검색
-
-- 사용자 전용 API입니다.
-- 제품 이름과 태그를 동시에 검색할 수 있고, 'And'(검색한 이름과 태그 모두 포함된 제품) 조건으로 결과를 반환합니다.
-- 제품 이름과 태그 모두 포함하지 않으면, 모든 제품의 결과를 반환합니다.
-- 제품의 기본 정보만 반환합니다.
-- 매진된 제품은 검색되지 않습니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/search
-  \ -X 'POST'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  searchText?: string // 검색할 제품 이름
-  searchTags?: string[] // 검색할 제품 태그
-}
-```
-
-```json
-{
-  "searchText": "삼성전자",
-  "searchTags": ["가전"]
-}
-```
-
-응답 데이터 타입 및 예시:
-
-```ts
-type ResponseValue = Product[] // 관리하는 모든 제품의 목록
-
-interface Product { // 제품 정보
-  id: string // 제품 ID
-  title: string // 제품 이름
-  price: number // 제품 가격
-  description: string // 제품 설명(최대 100자)
-  tags: string[] // 제품 태그
-  thumbnail: string | null // 제품 썸네일 이미지(URL)
-  discountRate: number // 제품 할인율
-}
-```
-
-```json
-[
-  {
-    "id": "cFmeC7aY5KjZbBAdJE9y",
-    "title": "삼성전자 스마트모니터 M7 S43AM700",
-    "price": 639000,
-    "description": "107.9cm(43인치) / 와이드(16:9) / 평면 / VA / 3840 x 2160(4K UHD) / 픽셀피치: 0.2451mm / 8ms(GTG) / 300cd / 5,00",
-    "tags": [
-      "가전",
-      "모니터",
-      "컴퓨터"
-    ],
-    "thumbnail": "https://storage.googleapis.com/heropy-api/vBAK4MQdH5v195712.png",
-    "discountRate": 0
-  }
-]
-```
-
-### 제품 거래(구매) 신청
-
-- 사용자 전용 API입니다.
-- 거래(구매) 신청시 연결된 계좌에서 결제됩니다.
-- 결제할 계좌(ID)를 꼭 선택해야 합니다.(`계좌 목록 및 잔액 조회` API를 사용하세요)
-- 선택한 계좌의 잔액보다 결제 금액이 크면 결제가 처리되지 않습니다.(에러 반환)
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/buy 
-  \ -X 'POST'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  productId: string // 거래할 제품 ID (필수!)
-  accountId: string // 결제할 사용자 계좌 ID (필수!)
-  reservation?: { // 예약 정보(예약 시스템을 사용하는 경우만 필요)
-    start: string // 예약 시작 시간(ISO)
-    end: string // 예약 종료 시간(ISO)
-  }
-}
-```
-
-```js
-const isoString = new Date().toISOString()
-```
-
-```json
-{
-  "productId": "nbqtQvEivYwEXTDet7YM",
-  "accountId": "Mq2KKHk8vlmr6Xkg58Fa",
-  "reservation": {
-    "start": "2021-11-12T06:00:00.000Z",
-    "end": "2021-11-12T07:00:00.000Z"
-  }
-}
-```
-
-응답 데이터 타입 및 예시:
-
-```ts
-type ResponseValue = true // 거래 신청 처리 여부
-```
+<br />
 
-### 제품 거래(구매) 취소
+## 개발자 소개
 
-- 사용자 전용 API입니다.
-- '거래 취소'시 결제한 사용자 계좌로 금액이 환불됩니다.
+| **[김준희](https://github.com/dev-junehee)** | **[송홍빈](https://github.com/hbsongk)** | **[조은상](https://github.com/ChoEun-Sang)** | **[박근우](https://github.com/SpeedGear)** | **[백동은](https://github.com/debeck6)** |
+| :--------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: |
+|<a href="https://github.com/dev-junehee"><img src="https://avatars.githubusercontent.com/u/116873887?v=4" width=150px alt="김준희" /> | <a href="https://github.com/hbsongk"><img src="https://avatars.githubusercontent.com/u/68498323?v=4" width=150px alt="송홍빈" /> | <a href="https://github.com/ChoEun-Sang"><img src="https://avatars.githubusercontent.com/u/128155681?v=4" width=150px alt="조은상" /> | <a href="https://github.com/SpeedGear"><img src="https://avatars.githubusercontent.com/u/128351787?v=4" width=150px alt="박근우" /> | <a href="https://github.com/debeck6"><img src="https://avatars.githubusercontent.com/u/128360222?v=4" width=150px alt="백동은" /> |
+|회원가입<br>About 페이지<br>상품 페이지<br>장바구니 페이지<br>결제 페이지<br>관리자 페이지<br>Footer|로그인/로그아웃<br>검색 기능<br>메인 페이지<br>상품 페이지<br>장바구니 페이지<br>결제 페이지<br>Header|회원가입<br>로그인 인증<br>마이페이지<br>상품 페이지<br>장바구니 페이지<br>결제 페이지<br>관리자 페이지|디자인 참여|디자인 참여|
 
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/cancel 
-  \ -X 'POST'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  detailId: string // 취소할 제품의 거래 내역 ID
-}
-```
-
-```json
-{
-  "detailId": "dMhfxyrAupQP18OYmywy"
-}
-```
-
-응답 데이터 타입 및 예시:
-
-```ts
-type ResponseValue = true // 거래 취소 처리 여부
-```
-
-### 제품 거래(구매) 확정
-
-- 사용자 전용 API입니다.
-- '거래(구매) 확정' 후에는 '거래 취소'를 할 수 없습니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/ok 
-  \ -X 'POST'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
-
-요청 데이터 타입 및 예시:
-
-```ts
-interface RequestBody {
-  detailId: string // 거래(구매) 확정할 제품의 거래 내역 ID
-}
-```
+<br />
 
-```json
-{
-  "detailId": "dMhfxyrAupQP18OYmywy"
-}
-```
-
-응답 데이터 타입 및 예시:
-
-```ts
-type ResponseValue = true // 거래(구매) 확정 처리 여부
-```
-
-### 제품 전체 거래(구매) 내역
-
-- 사용자 전용 API입니다.
-- 거래 내역의 기본 정보만 포함됩니다.
-
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/details 
-  \ -X 'GET'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
+## 사용기술 및 개발환경
 
-요청 데이터 타입 및 예시:
-
-- 없음
-
-응답 데이터 타입 및 예시:
-
-```ts
-type RequestValue = TransactionDetail[] // 모든 거래 내역의 목록
-
-interface TransactionDetail { // 거래 내역 정보
-  detailId: string // 거래 내역 ID
-  product: { // 거래한 제품 정보
-    productId: string
-    title: string
-    price: number
-    description: string
-    tags: string[]
-    thumbnail: string | null
-    discountRate: number // 제품 할인율
-  }
-  reservation: Reservation | null // 거래한 제품의 예약 정보
-  timePaid: string // 제품을 거래한 시간
-  isCanceled: boolean // 거래 취소 여부
-  done: boolean // 거래 완료 여부
-}
-
-interface Reservation {
-  start: string // 예약 시작 시간
-  end: string // 예약 종료 시간
-  isCanceled: boolean // 예약 취소 여부
-  isExpired: boolean // 예약 만료 여부
-}
-```
-
-```json
-[
-  {
-    "detailId": "9jAoagzrZBkSWI5NctEB",
-    "product": {
-      "productId": "nbqtQvEivYwEXTDet7YM",
-      "title": "MacBook Pro 16",
-      "price": 3360000,
-      "description": "역대 가장 강력한 MacBook Pro가 등장했습니다. 최초의 프로용 Apple Silicon인 M1 Pro 또는 M1 Max 칩을 탑재해 쏜살같이 빠른 속도는 물론, 획기적인 성",
-      "tags": [
-        "가전",
-        "노트북",
-        "컴퓨터"
-      ],
-      "thumbnail": "https://storage.googleapis.com/heropy-api/vIKMk_jy4Yv195256.png",
-      "discountRate": 0
-    },
-    "reservation": null,
-    "timePaid": "2021-11-07T20:17:32.112Z",
-    "isCanceled": true,
-    "done": false
-  },
-  {
-    "detailId": "dMhfxyrAupQP18OYmywy",
-    "product": {
-      "productId": "cFmeC7aY5KjZbBAdJE9y",
-      "title": "삼성전자 스마트모니터 M7 S43AM700",
-      "price": 639000,
-      "description": "107.9cm(43인치) / 와이드(16:9) / 평면 / VA / 3840 x 2160(4K UHD) / 픽셀피치: 0.2451mm / 8ms(GTG) / 300cd / 5,00",
-      "tags": [
-        "가전",
-        "모니터",
-        "컴퓨터"
-      ],
-      "thumbnail": "https://storage.googleapis.com/heropy-api/vBAK4MQdH5v195712.png",
-      "discountRate": 0
-    },
-    "reservation": {
-      "start": "2021-11-12T06:00:00.000Z",
-      "end": "2021-11-12T07:00:00.000Z",
-      "isCanceled": false,
-      "isExpired": true
-    },
-    "timePaid": "2021-11-07T20:01:49.100Z",
-    "isCanceled": false,
-    "done": true
-  }
-]
-```
-
-### 단일 제품 상세 거래(구매) 내역
+### Development
 
-- 사용자 전용 API입니다.
+<p>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white" />
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" />
+<img src="https://img.shields.io/badge/Sass-CC6699?style=flat&logo=Sass&logoColor=white" />
+<br />
+<img src="https://img.shields.io/badge/React Router-CA4245?style=flat&logo=React Router&logoColor=white" />
+<img src="https://img.shields.io/badge/React Hook Form-EC5990?style=flat&logo=ReactHookForm&logoColor=white" />
+<img src="https://img.shields.io/badge/Redux-764ABC?style=flat&logo=Redux&logoColor=white" />
+</p>
 
-```curl
-curl https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/detail 
-  \ -X 'POST'
-  \ -H 'Authorization: Bearer <accessToken>'
-```
-
-요청 데이터 타입 및 예시:
+### Config
 
-```ts
-interface RequestBody {
-  detailId: string // 상세 내용을 확인할 거래(구매) 내역 ID
-}
-```
+<p>
+<img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=Vite&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/npm-CB3837?style=flat&logo=npm&logoColor=white"/></a>
+</p>
+
+### Deployment
+
+<img src="https://img.shields.io/badge/GitHub Pages-181717?style=flat&logo=GitHub Pages&logoColor=white"/></a>
+
+### Environment
+
+<p>
+<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=Visual Studio Code&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=Git&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white"/></a>
+</p>
+
+### Cowork Tools
+<p>
+<img src="https://img.shields.io/badge/Slack-4A154B?style=flat&logo=Slack&logoColor=white" />
+<img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white" />
+<img src="https://img.shields.io/badge/Google Sheets-34A853?style=flat&logo=Google Sheets&logoColor=white" />
+<img src="https://img.shields.io/badge/Google Meet-00897B?style=flat&logo=Google Meet&logoColor=white" />
+<img src="https://img.shields.io/badge/Zoom-2D8CFF?style=flat&logo=Zoom&logoColor=white" />
+</p>
+
+<br />
+
+### 전체 화면 구성
+| **메인 페이지** | **About 페이지** |
+| :--------------------------------------------: | :--------------------------------------------: | 
+| <img src="public/assets/README/01_main.png" width=360px alt="메인" /> | <img src="public/assets/README/02_about.png" width=360px alt="어바웃" /> |
+
+| **상품 목록 페이지** | **상품 상세 페이지** |
+| :--------------------------------------------: | :--------------------------------------------: | 
+| <img src="public/assets/README/03_shop.png" width=360px alt="상품 목록" /> | <img src="public/assets/README/04_shopdetail.png" width=360px alt="상품 상세" /> |
+
+| **장바구니 페이지** | **결제 페이지** |
+| :--------------------------------------------: | :--------------------------------------------: | 
+| <img src="public/assets/README/05_cart.png" width=360px alt="장바구니" /> | <img src="public/assets/README/06_buy.png" width=360px alt="결제" />
+
+| **마이 페이지 (주문 내역 관리)** | **마이 페이지 (주문 내역 상세)** |
+| :--------------------------------------------: | :--------------------------------------------: |
+| <img src="public/assets/README/07_mypage_order.png" width=360px alt="마이페이지 주문 내역" /> | <img src="public/assets/README/08_mypage_orderdetail.png" width=360px alt="마이페이지 주문 상세" />
+
+| **마이 페이지 (계좌 관리)** | **마이 페이지 (계좌 등록 모달)** |
+| :--------------------------------------------: | :--------------------------------------------: | 
+| <img src="public/assets/README/09_mypage_account.png" width=360px alt="마이페이지 계좌 관리" /> | <img src="public/assets/README/10_mypage_account_modal.png" width=360px alt="마이페이지 계좌 등록 모달" />
 
-```json
-{
-  "detailId": "dMhfxyrAupQP18OYmywy"
-}
-```
+| **마이 페이지 (계좌 확인/삭제)** | **마이 페이지 (비밀번호 재확인)** |
+| :--------------------------------------------: | :--------------------------------------------: | 
+| <img src="public/assets/README/11_mypage_accountlist.png" width=360px alt="마이페이지 계좌 확인/삭제" /> | <img src="public/assets/README/12_mypage_info.png" width=360px alt="마이페이지 비밀번호 재확인" />
 
-응답 데이터 타입 및 예시:
-
-```ts
-interface TransactionDetail { // 상세 거래 정보
-  detailId: string // 거래 내역 ID
-  account: { // 거래한 사용자의 계좌 정보
-    bankName: string
-    bankCode: string
-    accountNumber: string
-  }
-  product: { // 거래한 제품 정보
-    productId: string
-    title: string
-    price: number
-    description: string
-    tags: string[]
-    thumbnail: string | null
-    photo: string | null
-    discountRate: number // 제품 할인율
-  }
-  reservation: Reservation | null // 거래한 제품의 예약 정보
-  timePaid: string // 제품을 거래한 시간
-  isCanceled: boolean // 거래 취소 여부
-  done: boolean // 거래 완료 여부
-}
-
-interface Reservation {
-  start: string // 예약 시작 시간
-  end: string // 예약 종료 시간
-  isCanceled: boolean // 예약 취소 여부
-  isExpired: boolean // 예약 만료 여부
-}
-```
+| **마이 페이지 (개인정보 수정)** | **관리자 페이지 (사용자 관리)** |
+| :--------------------------------------------: | :--------------------------------------------: | 
+| <img src="public/assets/README/13_mypage_infochange.png" width=360px alt="마이페이지 개인정보 수정" /> | <img src="public/assets/README/14_admin_user.png" width=360px alt="b관리자페이지 사용자 관리uy" />
 
-```json
-{
-  "detailId": "dMhfxyrAupQP18OYmywy",
-  "account": {
-    "bankName": "KB국민은행",
-    "bankCode": "004",
-    "accountNumber": "123-XX-XXXX-XXX"
-  },
-  "product": {
-    "productId": "cFmeC7aY5KjZbBAdJE9y",
-    "title": "삼성전자 스마트모니터 M7 S43AM700",
-    "price": 639000,
-    "description": "107.9cm(43인치) / 와이드(16:9) / 평면 / VA / 3840 x 2160(4K UHD) / 픽셀피치: 0.2451mm / 8ms(GTG) / 300cd / 5,000:1 / 최대 주사율: 60Hz / HDMI 2.0 / USB Type-C / 플리커 프리 / 블루라이트 차단 / 게임모드 지원 / 스피커 / 리모컨 / USB허브 / Wi-Fi(무선) / 스마트TV / 블루투스 / 틸트(상하) / 200 x 200mm / HDR / HDR10 / 10.6kg 기획전 차세대 게임 라이프 PS5 매력분석 관련기사 큐소닉, 43인치 4K UHD 스마트 모니터 ‘삼성전자 M7 S43AM700’ 출시 및 할인 행사 사용기 삼성 스마트모니터 m7 s43am700",
-    "tags": [
-      "가전",
-      "모니터",
-      "컴퓨터"
-    ],
-    "thumbnail": "https://storage.googleapis.com/heropy-api/vBAK4MQdH5v195712.png",
-    "photo": "https://storage.googleapis.com/heropy-api/vVLP-ox_zSDv195712.jpg",
-    "discountRate": 0
-  },
-  "reservation": null,
-  "timePaid": "2021-11-07T20:01:49.100Z",
-  "isCanceled": false,
-  "done": true
-}
+| **관리자 페이지 (상품 관리)** | **관리자 페이지 (주문 내역 관리)** |
+| :--------------------------------------------: | :--------------------------------------------: | 
+| <img src="public/assets/README/15_admin_product.png" width=360px alt="관리자 페이지 상품 관리" /> | <img src="public/assets/README/16_admin_orderlist.png" width=360px alt="관리자 페이지 주문 내역 관리" />
+
+| **회원가입 페이지** | **로그인 페이지** |
+| :--------------------------------------------: | :--------------------------------------------: | 
+| <img src="public/assets/README/0_signup.png" width=360px alt="회원가입" /> | <img src="public/assets/README/0_login.png" width=360px alt="로그인" />
+
+| **검색창** | **로딩 스피너** |
+| :--------------------------------------------: | :--------------------------------------------: | 
+| <img src="public/assets/README/0_search.png" width=360px alt="검색창" /> | <img src="public/assets/README/0_loading.png" width=360px alt="로딩" />
+
+<br />
+
+## 프로젝트 상세 기능
+
+### Layout
+- React-Router-Dom의 outlet 중첩 라우팅을 활용한 레이아웃 구성
+- Redux를 사용한 전역 상태 관리
+- 재사용을 높이기 위한 세부 컴포넌트 구성
+- 더 나은 UX를 위한 로딩 스피너 추가
+### Head
+- 카테고리 (Navbar) : useNavigate, NavLink를 활용한 페이지 라우터 관리
+- 제품 검색 기능 : useState, useNavigate, ChangeEvent를 활용한 검색 기능 구현
+
+### 메인 페이지 (Home)
+- 이미지 슬라이더 : React-slider를 활용한 메인 페이지 이미지 슬라이더 구현
+
+### 상품 페이지 (Shop)
+- 상품 목록 페이지 : productItem 컴포넌트로 재사용성을 높이고 MouseEvent와 useState를 활용한 카테고리 필터 구현
+- 상품 상세 페이지 : useParams를 활용한 상품 상세 정보 조회(ID), Redux를 활용한 장바구니 기능 구현
+- 장바구니 담기 기능 : Redux, useDispatch, useSelector, useNavigate, useParams를 활용한 장바구니 상태 관리 구현
+- 결제 페이지 : useNavigate, Redux를 활용한 페이지 라우팅, 데이터 전달 구현
+
+### 장바구니 페이지 (Cart)
+- 장바구니 목록 조회 : Redux, useSelector, useNavigate를 활용한 장바구니 상태 관리 구현
+- 전체/선택 상품 구매 : Redux를 활용하여 상품 선택 유무에 따른 조건부 렌더링 구현
+  
+### 결제 페이지 (Buy)
+- 결제 기능 : Redux를 활용한 결제 상세 정보 출력 및 사용자 계좌 유무에 따른 조건부 렌더링 구현
+
+### 마이페이지 (Mypage)
+- 주문 내역 조회
+  - 상품 구매 취소 : State 변화에 따른 조건부 렌더링 구현
+  - 상품 구매 확정 : State 변화에 따른 조건부 렌더링 구현
+  - 상세 정보 조회 : 주문 시간(최신순)에 따른 상품 구매 내역 정렬 구현
+- 계좌 관리
+  - 전체 계좌 조회
+  - 계좌 등록 : Modal을 통한 계좌 등록, 은행 선택시 은행 코드 자동 입력 구현, 자리수에 따른 여러 개의 input 상태 관리
+  - 계좌 삭제 : 컴포넌트를 활용한 등록 계좌 리스트 출력, 등록 계좌 여부에 따라 조건부 렌더링 구현
+- 개인 정보 수정: 비밀번호 재확인 기능 구현, React-Hook-form을 통한 코드 단순화 및 유효성 검사 구현
+
+### 관리자 페이지 (Admin)
+- 전체 사용자 목록 조회
+- 상품 관리
+  - 전체 상품 목록 조회
+  - 상품 등록 : Select 컴포넌트를 이용한 상품 태그 등록 구현
+  - 상품 삭제 : React-icons 활용한 삭제 버튼 생성
+  - 상품 정보 수정 : React-icons, Modal 컴포넌트를 통한 상품 정보 수정 및 기존 정보 확인 기능 구현
+- 주문 내역 관리
+  - 전체 거래 내역 조회
+  - 거래 취소 : State 변화에 따른 조건부 렌더링 구현
+  - 거래 확정 : State 변화에 따른 조건부 렌더링 구현
+  
+### 인증 & 인가
+- 회원가입 : React-Hook-Form을 이용한 비제어 컴포넌트 관리 및 유효성 검사 구현
+- 로그인 : useState를 통해 로그인 기능 구현
+- 로그인 인증 : App.tsx에서 useEffect를 이용한 모든 하위 페이지 로그인 인증 구현
+- 로그아웃 : Redux를 사용해 Header 로그아웃 UI 구현
+
+<br />
+
+## 프로젝트 테스트
+
+### clone project
+
+```bash
+$ git clone git@github.com:FE5-TEAM9/sweethome.git
+```
+
+### go to project
+
+```bash
+$ cd sweethome
+```
+
+### install npm
+
+```bash
+$ npm install
+```
+
+### start project
+
+```bash
+$ npm run dev
 ```

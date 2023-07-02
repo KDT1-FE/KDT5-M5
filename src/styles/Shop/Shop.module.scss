@@ -1,0 +1,49 @@
+@import '../common/colors.scss';
+@import '../common/fonts.scss';
+
+.shop {
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+
+  .menuWrap {
+    margin: 50px;
+
+    .menu {
+      display: flex;
+
+      input {
+        width: 130px;
+        height: 48px;
+        border: 1px solid $base-color-taupe;
+        border-radius: 38px;
+        background-color: $base-color-lightgray;
+        margin-right: 10px;
+        font-family: "Pretendard";
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        
+        .active {
+          background-color: #fadad8;
+        }
+
+        &:nth-child(4) {
+          margin-right: 0;
+        }
+      }
+
+
+    }
+  }
+  
+  .productListWrap{
+    .productList {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 20px;
+    }
+  }
+}

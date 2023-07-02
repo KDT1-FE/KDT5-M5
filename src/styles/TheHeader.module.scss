@@ -1,0 +1,124 @@
+@import "./common/colors.scss";
+@import "./common/fonts.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100px;
+  border-bottom: solid 0.8px $base-color-gray;
+  padding-left: 40px;
+
+  .container {
+    position: relative;
+    display: flex;
+    width: 90%;
+    max-width: 1440px;
+    min-width: 1250px;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      height: 50px;
+      margin-left: 70px;
+      margin-right: 70px;
+      font-family: $font-logo;
+      font-size: $font-logo-size;
+    }
+
+    .navbar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 50px;
+      right: 400px;
+      font-family: $font-nav;
+      font-size: $font-nav-size;
+      font-weight: $font-nav-weight;
+
+      ul {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        list-style: none;
+
+        .menu {
+          font-family: $font-nav;
+          font-size: $font-nav-size;
+          font-weight: 100;
+        }
+
+        .active {
+          color: $point-color-mint;
+        }
+      }
+    }
+
+    .subNav {
+      position: absolute;
+      right: 0px;
+      height: 70px;
+      margin-right: 70px;
+
+      .user {
+        font-family: $font-login;
+        font-size: $font-login-size;
+        font-weight: $font-login-weight;
+        margin-bottom: 12px;
+
+        .userLogin {
+          cursor: pointer;
+        }
+
+        .userLogout {
+          cursor: pointer;
+          margin-left: 40px;
+        }
+
+        .userSignUp {
+          margin-left: 20px;
+          &::before {
+            content: "|";
+            margin-right: 20px;
+          }
+        }
+      }
+
+      .icons {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        
+        .mypage,  
+        .shoppingbag {
+          font-size: 20px;
+        }
+        
+        .search {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .searchIcon {
+            cursor: pointer;
+            width: 20px;
+            height: 24px;
+            transform: scale(1.3);
+          }
+        }
+      }
+    }
+  }
+}

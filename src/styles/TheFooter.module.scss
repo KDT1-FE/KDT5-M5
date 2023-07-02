@@ -1,0 +1,86 @@
+@import './common/colors.scss';
+@import './common/fonts.scss';
+
+* {
+  margin: 0; 
+  padding: 0;
+  color: $font-color;
+  font-family: 'Pretendard-Regular';
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // position: fixed;
+  // bottom: 0;
+  width: 100vw;
+  height: 150px;
+  background-color: $base-color-lightgray;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 1440px;
+    margin-top: 20px;
+
+    ul {
+      display: flex;
+      flex-shrink: 0;
+      justify-content: space-evenly;
+      gap: 60px;
+
+      .logo {
+        width: 200px;
+
+        h1 {
+          font-family: $font-logo;
+          font-size: $font-logo-size;
+        }
+      }
+  
+      .company,
+      .bank,
+      .customer {
+        div {
+          display: flex;
+          flex-direction: column;
+          font-size: 12px;
+  
+          h2 {
+            font-weight: 700;
+            margin-bottom: 10px;
+          }
+
+          span {
+            line-height: 1.6em;
+          }
+        }
+      }
+
+      .tel {
+        div {
+          display: flex;
+          flex-direction: column;
+          font-size: 12px;
+  
+          h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+          }
+
+          span {
+            line-height: 1.6em;
+          }
+        }
+      }
+      @media (min-width: 1300px) {
+        gap: 100px;
+      }
+    }
+  }
+}
