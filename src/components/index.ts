@@ -1,0 +1,6 @@
+export * from 'components/App'
+export * from 'components/admin'
+export * from 'components/mypage'
+export * from 'components/product'
+export * from 'components/main'
+export * from 'components/common'

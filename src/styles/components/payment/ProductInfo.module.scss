@@ -1,0 +1,48 @@
+@import 'src/styles/abstracts/variables';
+
+.container {
+  margin: 0 0 5px;
+  padding: 32px;
+  background-color: $color-primary;
+  width: 900px;
+  box-sizing: border-box;
+
+  h3 {
+    font-weight: 600;
+    padding-bottom: 20px;
+    color: $color-payment-titles;
+    font-size: 19px;
+    letter-spacing: -1px;
+  }
+  .wrapper {
+    display: flex;
+    margin-bottom: 5px;
+    img {
+      width: 90px;
+      aspect-ratio: 1 / 1;
+      border: 2px solid $color-border;
+    }
+
+    .product {
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
+      .title {
+        padding-top: 5px;
+        height: 25px;
+        font-size: 14px;
+      }
+      .quantity {
+        padding-top: 5px;
+        height: 25px;
+        font-size: 14px;
+        color: $color-black-6;
+      }
+      .price {
+        padding-top: 5px;
+        height: 25px;
+        font-size: 15px;
+      }
+    }
+  }
+}

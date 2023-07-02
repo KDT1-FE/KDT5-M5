@@ -1,0 +1,68 @@
+@import 'src/styles/abstracts/variables';
+
+.modalbackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index:3;
+}
+
+.modal {
+  background-color: $color-primary;
+  width: 500px;
+  height: 250px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  position:relative;
+  z-index:4;
+
+  .title {
+    background-color: $color-black-0;
+    width: 500px;
+    height: 60px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    span {
+      color: $color-primary;
+      font-size: 20px;
+      font-weight: 400;
+      text-align: left;
+      line-height: 60px;
+    }
+  }
+
+  .content {
+    margin-top: 40px;
+    font-size: 20px;
+    flex-grow: 1;
+    white-space: pre-line;
+    text-align: center;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 20px;
+    padding: 0 20px 20px 0;
+  }
+
+  .button {
+    background-color: $color-black-D9;
+    width: 70px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}

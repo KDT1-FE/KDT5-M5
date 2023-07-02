@@ -1,0 +1,239 @@
+@import 'src/styles/common.scss';
+
+.product-detail {
+  a {
+    text-decoration: none;
+    color: $color-black-0;
+  }
+
+  .detailInner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    gap: 50px;
+
+    .image {
+      .skeleton {
+        @include skeleton;
+        @include size(580px, 580px);
+      }
+
+      img {
+        width: 580px;
+        height: 580px;
+      }
+    }
+
+    .info {
+      width: 580px;
+      height: 580px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+
+      .title {
+        border-top: 2px solid $color-black-0;
+        border-bottom: 1px solid $color-border;
+        display: block;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.5;
+        padding: 20px 0;
+
+        .skeleton {
+          @include skeleton;
+          @include size(250px, 24px);
+        }
+      }
+
+      .price {
+        font-size: 12px;
+        margin: 10px 0;
+        display: block;
+        line-height: 3;
+
+        .discount-price {
+          font-size: 13px;
+          font-weight: 800;
+          color: $color-price;
+        }
+
+        .infoInner {
+          display: flex;
+
+          .infoleft {
+            text-align: left;
+            width: 15%;
+          }
+
+          .skeleton {
+            @include skeleton;
+            @include size(100px, 16px);
+            margin: 10px 0;
+          }
+        }
+      }
+
+      .quantity {
+        border-top: 1px solid $color-border;
+        border-bottom: 1px solid $color-border;
+        padding: 10px;
+        font-size: 13px;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        gap: 20px;
+
+        .quantityControl {
+          display: flex;
+        }
+
+        input {
+          width: 35px;
+          height: 35px;
+          box-sizing: border-box;
+          font-size: 12px;
+          text-align: center;
+          border: 1px solid gray;
+
+          &:disabled {
+            background-color: $color-primary;
+            color: $color-black-0;
+          }
+        }
+
+        button {
+          width: 35px;
+          height: 35px;
+          box-sizing: border-box;
+          background-color: $color-primary;
+          border: 1px solid gray;
+          font-size: 18px;
+          font-weight: 300;
+        }
+      }
+
+      .totalPrice {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px 0;
+        font-size: 18px;
+        font-weight: 800;
+
+        .skeleton {
+          @include skeleton;
+          @include size(150px, 18px);
+        }
+      }
+
+      .button--now {
+        margin: 20px 0 10px;
+        display: flex;
+        flex-direction: column;
+
+        button,
+        a {
+          height: 50px;
+          background-color: $color-black-0;
+          border: none;
+          color: $color-primary;
+          font-weight: 600;
+          cursor: pointer;
+        }
+      }
+
+      .button--cart {
+        display: flex;
+        gap: 10px;
+
+        button {
+          width: 100%;
+          height: 50px;
+          background-color: $color-primary;
+          border: 1px solid rgb(177, 177, 177);
+          color: $color-black-0;
+          font-weight: 600;
+          cursor: pointer;
+        }
+        button:hover {
+          border: 1px solid $color-black-0;
+        }
+      }
+    }
+  }
+
+  .details {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .inner {
+      width: 1240px;
+
+      img {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+  .etcProducts {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
+    line-height: 1.5;
+    h2 {
+      font-size: 40px;
+      font-weight: 300;
+    }
+    h3 {
+      font-size: 18px;
+      font-weight: 300;
+      color: gray;
+    }
+  }
+
+  .products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+
+    .inner {
+      padding-top: 50px;
+      padding-bottom: 50px;
+      padding-right: 10px;
+      box-sizing: border-box;
+
+      .product {
+        width: 1240px;
+        display: flex;
+        cursor: pointer;
+        flex-wrap: wrap;
+        gap: 20px;
+        animation: fade-in 1s ease;
+        .image {
+          img {
+            width: 295px;
+            height: 295px;
+          }
+        }
+        .title {
+          padding: 10px 0px 0px 0px;
+          font-size: 12px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 295px;
+        }
+        .price {
+          margin: 10px 0px 4px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

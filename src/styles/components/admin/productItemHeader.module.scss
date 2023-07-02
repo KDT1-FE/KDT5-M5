@@ -1,0 +1,45 @@
+@import 'src/styles/common.scss';
+
+div.wrapper {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-admin-border;
+  background-color: $color-primary;
+  margin-top: 40px; // test
+  gap: 10px;
+
+  div {
+    color: $color-black-0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  div.name {
+    width: 30%;
+    margin-left: 40px;
+  }
+
+  div.tag {
+    width: 30%;
+  }
+
+  div.price {
+    width: 10%;
+    text-align: right;
+    margin-right: 5%;
+  }
+
+  div.discount {
+    width: 5%;
+    text-align: right;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+  }
+
+  div.saleStatus {
+    width: 10%;
+    margin-right: 65px;
+    text-align: center;
+  }
+}
