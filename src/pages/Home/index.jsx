@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Banner from '../../components/main/banner'
+import Banner from '../../components/main/Banner'
 import ProductMenu from '../../components/main/ProductMenu'
 
 const Home = () => {
