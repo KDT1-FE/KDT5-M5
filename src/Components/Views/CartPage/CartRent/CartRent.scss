@@ -1,0 +1,127 @@
+@mixin CartNameStyle {
+  height: auto;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+}
+
+.RentPageTable {
+  width: inherit;
+  height: 45px;
+  background-color: #f6e4cc;
+  position: absolute;
+  border-radius: 10px 10px 0px 0px;
+
+  .Rent-LableBox {
+    width: 40px;
+    height: 40px;
+    margin-left: 50px;
+    margin-top: 5px;
+    position: absolute;
+    font-size: 30px;
+  }
+
+  .Rental-Namebox {
+    @include CartNameStyle;
+    left: 230px;
+  }
+
+  .RentDay {
+    @include CartNameStyle;
+    left: 520px;
+  }
+  
+  .Renatal-Price {
+    @include CartNameStyle;
+    right: 370px;
+  }
+
+  .DeleteDay {
+    @include CartNameStyle;
+    right: 120px;
+  }
+}
+
+.Rental-ItemsContainer {
+  width: 1300px;
+  top: 50px;
+  position: relative;
+  border-radius: 0px 0px 10px 10px;
+  background-color: white;
+  max-height: 450px; /* 스크롤 영역의 최대 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤 생성 */
+
+  .Rental-ItemContainer {
+    width: 1182px;
+    padding-bottom: 5px;
+    position: relative;
+    margin-top: 20px;
+    border-bottom: 2px solid rgb(208, 203, 185);
+    .Rental-CheckContainer {
+      width: 60px;
+      height: 40px;
+      position: absolute;
+      top: 45px;
+      left: 30px;
+    }
+
+    .ImageBox {
+      width: 100px;
+      position: relative;
+      bottom: 5px;
+      margin-left: 120px;
+
+      img {
+        width: inherit;
+        height: auto;
+      }
+    }
+
+    .Rental-TextInner {
+      width: 150px;
+      height: 100px;
+      position: absolute;
+      top: 25px;
+      left: 260px;
+      font-size: 20px;
+    }
+
+    .Rental-PriceInner {
+      width: 100px;
+      position: absolute;
+      top: 50px;
+      right: 320px;
+      font-size: 18px;
+    }
+
+    .Rental-RentDay {
+      width: 100px;
+      height: 40px;
+      position: absolute;
+      top: 50px;
+      left: 540px;
+      font-size: 18px;
+    }
+
+    .RentButtonBox {
+      width: 60px;
+      position: absolute;
+      top: 40px;
+      right: 90px;
+
+      button {
+        display: block;
+        width: 60px;
+        height: 30px;
+        margin-top: 10px;
+        background-color: rgb(227, 165, 117);
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        font-size: 14px;
+      }
+    }
+  }
+}
