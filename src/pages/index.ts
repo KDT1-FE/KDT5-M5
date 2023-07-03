@@ -1,0 +1,6 @@
+export * from 'pages/login'
+export * from 'pages/product'
+export * from 'pages/mypage'
+export * from 'pages/payment'
+export * from 'pages/admin'
+export * from 'pages/Home'

@@ -1,0 +1,67 @@
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+@mixin inputBox {
+  min-width: 100px;
+  height: 40px;
+  border: 1px solid #e0e0e0;
+  padding: 0px 10px;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    border: 1px solid #1e1e1e;
+  }
+}
+
+@mixin skeleton {
+  border-radius: 8px;
+  height: 20px;
+  background: linear-gradient(
+    120deg,
+    #e5e5e5 30%,
+    #f0f0f0 38%,
+    #f0f0f0 40%,
+    #e5e5e5 48%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  animation: skeleton-loading 1s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@mixin colley-checkbox {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 1px solid $color-black-0;
+  cursor: pointer;
+  &::after {
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    content: '';
+    display: none;
+    height: 40%;
+    left: 40%;
+    position: relative;
+    top: 20%;
+    transform: rotate(45deg);
+    width: 15%;
+  }
+  &:checked {
+    background-color: $color-black-0;
+  }
+  &:checked::after {
+    display: block;
+  }
+}
