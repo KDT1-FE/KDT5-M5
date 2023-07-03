@@ -2,7 +2,7 @@
 
 # Colley
 ### 🔗 배포주소
-[Colley](taem2colley.netlify.app)
+[Colley](team2colley.netlify.app)
 
 ### 📄 프로젝트 소개
 거래 API를 활용한 온라인 쇼핑몰입니다.
