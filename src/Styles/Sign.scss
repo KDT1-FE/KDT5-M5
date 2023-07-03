@@ -1,0 +1,30 @@
+@import './common.scss';
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  width: 500px;
+  justify-content: center;
+  &__input {
+    border: none;
+    padding-left: 30px;
+    border-radius: 25px;
+    height: 50px;
+    box-shadow: $inner-shadow;
+  }
+}
+.btn__sign {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  justify-content: center;
+}
+.title {
+  font-size: 30px;
+  margin-bottom: 60px;
+  color: $main-br-1;
+}
